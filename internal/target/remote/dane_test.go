@@ -99,7 +99,7 @@ func parsePEMCert(blob string) *x509.Certificate {
 func singleTlsaRecord(usage, matchType, selector uint8, cert string) dns.TLSA {
 	return dns.TLSA{
 		Hdr: dns.RR_Header{
-			Name:   "maddy.test.",
+			Name:   "mailcoin.test.",
 			Class:  dns.ClassINET,
 			Rrtype: dns.TypeTLSA,
 			Ttl:    9999,

@@ -26,8 +26,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/exterrors"
 	"go.uber.org/zap"
+	"mailcoin/framework/exterrors"
 )
 
 // Logger is the structure that writes formatted output to the underlying

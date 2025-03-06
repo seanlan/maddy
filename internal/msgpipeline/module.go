@@ -19,9 +19,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package msgpipeline
 
 import (
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 type Module struct {

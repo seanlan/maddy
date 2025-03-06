@@ -6,10 +6,10 @@ package libdns
 import (
 	"fmt"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/libdns/gandi"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 func init() {

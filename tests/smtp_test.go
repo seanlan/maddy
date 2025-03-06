@@ -30,7 +30,7 @@ import (
 	"testing"
 
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 func TestCheckRequireTLS(tt *testing.T) {
@@ -40,7 +40,7 @@ func TestCheckRequireTLS(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls self_signed
 
 			defer_sender_reject no
@@ -57,13 +57,13 @@ func TestCheckRequireTLS(tt *testing.T) {
 	conn := t.Conn("smtp")
 	defer conn.Close()
 	conn.SMTPNegotation("localhost", nil, nil)
-	conn.Writeln("MAIL FROM:<testing@two.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@two.mailcoin.test>")
 	conn.ExpectPattern("550 5.7.1 *")
 	conn.Writeln("STARTTLS")
 	conn.ExpectPattern("220 *")
 	conn.TLS()
 	conn.SMTPNegotation("localhost", nil, nil)
-	conn.Writeln("MAIL FROM:<testing@two.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@two.mailcoin.test>")
 	conn.ExpectPattern("250 *")
 	conn.Writeln("QUIT")
 	conn.ExpectPattern("221 *")
@@ -73,14 +73,14 @@ func TestProxyProtocolTrustedSource(tt *testing.T) {
 	tt.Parallel()
 	t := tests.NewT(tt)
 	t.DNS(map[string]mockdns.Zone{
-		"one.maddy.test.": {
+		"one.mailcoin.test.": {
 			TXT: []string{"v=spf1 ip4:127.0.0.17 -all"},
 		},
 	})
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			proxy_protocol {
@@ -107,7 +107,7 @@ func TestProxyProtocolTrustedSource(tt *testing.T) {
 	defer conn.Close()
 	conn.Writeln(fmt.Sprintf("PROXY TCP4 127.0.0.17 %s 12345 %d", tests.DefaultSourceIP.String(), t.Port("smtp")))
 	conn.SMTPNegotation("localhost", nil, nil)
-	conn.Writeln("MAIL FROM:<testing@one.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@one.mailcoin.test>")
 	conn.ExpectPattern("250 *")
 	conn.Writeln("QUIT")
 	conn.ExpectPattern("221 *")
@@ -117,14 +117,14 @@ func TestProxyProtocolUntrustedSource(tt *testing.T) {
 	tt.Parallel()
 	t := tests.NewT(tt)
 	t.DNS(map[string]mockdns.Zone{
-		"one.maddy.test.": {
+		"one.mailcoin.test.": {
 			TXT: []string{"v=spf1 ip4:127.0.0.17 -all"},
 		},
 	})
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			proxy_protocol {
@@ -151,7 +151,7 @@ func TestProxyProtocolUntrustedSource(tt *testing.T) {
 	defer conn.Close()
 	conn.Writeln(fmt.Sprintf("PROXY TCP4 127.0.0.17 %s 12345 %d", tests.DefaultSourceIP.String(), t.Port("smtp")))
 	conn.SMTPNegotation("localhost", nil, nil)
-	conn.Writeln("MAIL FROM:<testing@one.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@one.mailcoin.test>")
 	conn.ExpectPattern("550 *")
 	conn.Writeln("QUIT")
 	conn.ExpectPattern("221 *")
@@ -161,32 +161,32 @@ func TestCheckSPF(tt *testing.T) {
 	tt.Parallel()
 	t := tests.NewT(tt)
 	t.DNS(map[string]mockdns.Zone{
-		"none.maddy.test.": {
+		"none.mailcoin.test.": {
 			TXT: []string{},
 		},
-		"pass.maddy.test.": {
+		"pass.mailcoin.test.": {
 			TXT: []string{"v=spf1 +all"},
 		},
-		"neutral.maddy.test.": {
+		"neutral.mailcoin.test.": {
 			TXT: []string{"v=spf1 ?all"},
 		},
-		"fail.maddy.test.": {
+		"fail.mailcoin.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"softfail.maddy.test.": {
+		"softfail.mailcoin.test.": {
 			TXT: []string{"v=spf1 ~all"},
 		},
-		"permerr.maddy.test.": {
+		"permerr.mailcoin.test.": {
 			TXT: []string{"v=spf1 something_clever"},
 		},
-		"temperr.maddy.test.": {
+		"temperr.mailcoin.test.": {
 			Err: errors.New("IANA forgot to resign the root zone"),
 		},
 	})
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			defer_sender_reject no
@@ -211,39 +211,39 @@ func TestCheckSPF(tt *testing.T) {
 
 	conn := t.Conn("smtp")
 	defer conn.Close()
-	conn.SMTPNegotation("fail.maddy.test", nil, nil)
+	conn.SMTPNegotation("fail.mailcoin.test", nil, nil)
 
-	conn.Writeln("MAIL FROM:<testing@pass.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@pass.mailcoin.test>")
 	conn.ExpectPattern("250 *")
 	conn.Writeln("RSET")
 	conn.ExpectPattern("250 *")
 
-	// Actually checks fail.maddy.test.
+	// Actually checks fail.mailcoin.test.
 	conn.Writeln("MAIL FROM:<>")
 	conn.ExpectPattern("552 5.7.0 *")
 
-	conn.SMTPNegotation("pass.maddy.test", nil, nil)
+	conn.SMTPNegotation("pass.mailcoin.test", nil, nil)
 
 	conn.Writeln("MAIL FROM:<>")
 	conn.ExpectPattern("250 *")
 
-	conn.Writeln("MAIL FROM:<testing@none.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@none.mailcoin.test>")
 	conn.ExpectPattern("551 5.7.0 *")
 
 	// Also check the default enhanced code is meaningful.
-	conn.Writeln("MAIL FROM:<testing@neutral.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@neutral.mailcoin.test>")
 	conn.ExpectPattern("550 5.7.23 *")
 
-	conn.Writeln("MAIL FROM:<testing@fail.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@fail.mailcoin.test>")
 	conn.ExpectPattern("552 5.7.0 *")
 
-	conn.Writeln("MAIL FROM:<testing@softfail.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@softfail.mailcoin.test>")
 	conn.ExpectPattern("553 5.7.0 *")
 
-	conn.Writeln("MAIL FROM:<testing@permerr.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@permerr.mailcoin.test>")
 	conn.ExpectPattern("554 5.7.0 *")
 
-	conn.Writeln("MAIL FROM:<testing@temperr.maddy.test>")
+	conn.Writeln("MAIL FROM:<testing@temperr.mailcoin.test>")
 	conn.ExpectPattern("455 4.7.0 *")
 
 	conn.Writeln("QUIT")
@@ -254,38 +254,38 @@ func TestSPF_DMARCDefer(tt *testing.T) {
 	tt.Parallel()
 	t := tests.NewT(tt)
 	t.DNS(map[string]mockdns.Zone{
-		"subdomain.maddy-dmarc.test.": {
+		"subdomain.mailcoin-dmarc.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"maddy-dmarc.test.": {
+		"mailcoin-dmarc.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"_dmarc.maddy-dmarc.test.": {
+		"_dmarc.mailcoin-dmarc.test.": {
 			TXT: []string{"v=DMARC1; p=reject; sp=none"},
 		},
-		"subdomain.maddy-dmarc2.test.": {
+		"subdomain.mailcoin-dmarc2.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"maddy-dmarc2.test.": {
+		"mailcoin-dmarc2.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"_dmarc.maddy-dmarc2.test.": {
+		"_dmarc.mailcoin-dmarc2.test.": {
 			TXT: []string{"v=DMARC1; p=reject"},
 		},
-		"maddy-no-dmarc.test.": {
+		"mailcoin-no-dmarc.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"maddy-dmarc-lookup-fail.test.": {
+		"mailcoin-dmarc-lookup-fail.test.": {
 			TXT: []string{"v=spf1 -all"},
 		},
-		"_dmarc.maddy-dmarc-lookup-fail.test.": {
+		"_dmarc.mailcoin-dmarc-lookup-fail.test.": {
 			Err: errors.New("nop"),
 		},
 	})
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			defer_sender_reject no
@@ -317,7 +317,7 @@ func TestSPF_DMARCDefer(tt *testing.T) {
 
 		conn.Writeln("MAIL FROM:<" + fromEnv + ">")
 		conn.ExpectPattern("250 *")
-		conn.Writeln("RCPT TO:<testing@maddy.test>")
+		conn.Writeln("RCPT TO:<testing@mailcoin.test>")
 		conn.ExpectPattern("250 *")
 		conn.Writeln("DATA")
 		conn.ExpectPattern("354 *")
@@ -328,18 +328,18 @@ func TestSPF_DMARCDefer(tt *testing.T) {
 		conn.ExpectPattern(bodyRespPattern)
 	}
 
-	msg("test@subdomain.maddy-dmarc.test", "test@subdomain.maddy-dmarc.test", "550 *")
+	msg("test@subdomain.mailcoin-dmarc.test", "test@subdomain.mailcoin-dmarc.test", "550 *")
 
 	// Malformed From domain, DMARC cannot work so use only SPF.
-	msg("test@subdomain.maddy-dmarc.test", "", "550 *")
+	msg("test@subdomain.mailcoin-dmarc.test", "", "550 *")
 
-	msg("test@subdomain.maddy-dmarc.test", "maddy-dmarc-lookup-fail.test", "550 *")
+	msg("test@subdomain.mailcoin-dmarc.test", "mailcoin-dmarc-lookup-fail.test", "550 *")
 
 	// No actual DMARC check is done but SPF check results are not applied.
-	msg("test@maddy-dmarc.test", "test@maddy-dmarc.test", "250 *")
-	msg("test@maddy-dmarc2.test", "test@maddy-dmarc2.test", "250 *")
+	msg("test@mailcoin-dmarc.test", "test@mailcoin-dmarc.test", "250 *")
+	msg("test@mailcoin-dmarc2.test", "test@mailcoin-dmarc2.test", "250 *")
 
-	msg("test@maddy-no-dmarc.test", "test@maddy-no-dmarc.test", "550 *")
+	msg("test@mailcoin-no-dmarc.test", "test@mailcoin-no-dmarc.test", "550 *")
 
 	conn.Writeln("QUIT")
 	conn.ExpectPattern("221 *")
@@ -359,7 +359,7 @@ func TestDNSBLConfig(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			defer_sender_reject no
@@ -408,7 +408,7 @@ func TestDNSBLConfig2(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			defer_sender_reject no
@@ -450,7 +450,7 @@ func TestCheckAuthorizeSender(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			auth dummy
@@ -492,7 +492,7 @@ func TestCheckAuthorizeSender(tt *testing.T) {
 	defer t.Close()
 
 	c := t.Conn("smtp")
-	c.SMTPNegotation("client.maddy.test", nil, nil)
+	c.SMTPNegotation("client.mailcoin.test", nil, nil)
 	c.SMTPPlainAuth("test-user2", "1", true)
 	c.Writeln("MAIL FROM:<test@example1.org>")
 	c.ExpectPattern("5*") // rejected - user is not test-user1
@@ -503,7 +503,7 @@ func TestCheckAuthorizeSender(tt *testing.T) {
 	c.Close()
 
 	c = t.Conn("smtp")
-	c.SMTPNegotation("client.maddy.test", nil, nil)
+	c.SMTPNegotation("client.mailcoin.test", nil, nil)
 	c.SMTPPlainAuth("test-user1", "1", true)
 	c.Writeln("MAIL FROM:<test2@example2.org>")
 	c.ExpectPattern("5*") // rejected - user is not test-user2
@@ -521,7 +521,7 @@ func TestCheckCommand(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			check {
@@ -542,7 +542,7 @@ func TestCheckCommand(tt *testing.T) {
 	// Note: Internally, messages are handled using LF line endings, being
 	// converted CRLF only when transfered over Internet protocols.
 	expectedMsg := "From: <testing@sender.test>\n" +
-		"To: <testing@maddy.test>\n" +
+		"To: <testing@mailcoin.test>\n" +
 		"Subject: Hi there!\n" +
 		"\n" +
 		"Nice to meet you!\n"
@@ -550,12 +550,12 @@ func TestCheckCommand(tt *testing.T) {
 		// Fairly trivial SMTP transaction.
 		conn.Writeln("MAIL FROM:<" + from + ">")
 		conn.ExpectPattern("250 *")
-		conn.Writeln("RCPT TO:<testing@maddy.test>")
+		conn.Writeln("RCPT TO:<testing@mailcoin.test>")
 		conn.ExpectPattern("250 *")
 		conn.Writeln("DATA")
 		conn.ExpectPattern("354 *")
 		conn.Writeln("From: <testing@sender.test>")
-		conn.Writeln("To: <testing@maddy.test>")
+		conn.Writeln("To: <testing@mailcoin.test>")
 		conn.Writeln("Subject: Hi there!")
 		conn.Writeln("")
 		conn.Writeln("Nice to meet you!")
@@ -565,7 +565,7 @@ func TestCheckCommand(tt *testing.T) {
 	t.Subtest("Message dump", func(t *tests.T) {
 		conn := conn.Rebind(t)
 
-		submitMsg(conn, "testing@maddy.test")
+		submitMsg(conn, "testing@mailcoin.test")
 		conn.ExpectPattern("250 *")
 
 		msgPath := filepath.Join(t.StateDir(), "msg")
@@ -585,7 +585,7 @@ func TestCheckCommand(tt *testing.T) {
 	t.Subtest("Message dump + Add header", func(t *tests.T) {
 		conn := conn.Rebind(t)
 
-		submitMsg(conn, "testing+addHeader@maddy.test")
+		submitMsg(conn, "testing+addHeader@mailcoin.test")
 		conn.ExpectPattern("250 *")
 
 		msgPath := filepath.Join(t.StateDir(), "msg")
@@ -606,7 +606,7 @@ func TestCheckCommand(tt *testing.T) {
 	t.Subtest("Body reject", func(t *tests.T) {
 		conn := conn.Rebind(t)
 
-		submitMsg(conn, "testing+reject@maddy.test")
+		submitMsg(conn, "testing+reject@mailcoin.test")
 		conn.ExpectPattern("550 *")
 
 		msgPath := filepath.Join(t.StateDir(), "msg")
@@ -635,7 +635,7 @@ func TestHeaderSizeConstraint(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 			deliver_to dummy
 			max_header_size 1K
@@ -647,14 +647,14 @@ func TestHeaderSizeConstraint(tt *testing.T) {
 	conn := t.Conn("smtp")
 	defer conn.Close()
 	conn.SMTPNegotation("localhost", nil, nil)
-	conn.Writeln("MAIL FROM:<testsender@maddy.test>")
+	conn.Writeln("MAIL FROM:<testsender@mailcoin.test>")
 	conn.ExpectPattern("250 *")
-	conn.Writeln("RCPT TO:<testing@maddy.test>")
+	conn.Writeln("RCPT TO:<testing@mailcoin.test>")
 	conn.ExpectPattern("250 *")
 	conn.Writeln("DATA")
 	conn.ExpectPattern("354 *")
 	conn.Writeln("From: <testing@sender.test>")
-	conn.Writeln("To: <testing@maddy.test>")
+	conn.Writeln("To: <testing@mailcoin.test>")
 	conn.Writeln("Subject: " + strings.Repeat("A", 2*1024))
 	conn.Writeln("")
 	conn.Writeln("Hi")

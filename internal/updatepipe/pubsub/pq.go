@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/log"
 	"github.com/lib/pq"
+	"mailcoin/framework/log"
 )
 
 type Msg struct {

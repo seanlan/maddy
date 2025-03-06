@@ -24,13 +24,13 @@ import (
 	"runtime/trace"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/target"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/target"
 )
 
 type (

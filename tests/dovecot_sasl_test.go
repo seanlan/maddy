@@ -38,7 +38,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 var DovecotExecutable string
@@ -149,7 +149,7 @@ func runDovecot(t *testing.T) (string, *exec.Cmd) {
 
 			// One of messages printed near completing initialization.
 			if strings.Contains(line, "starting up for imap") {
-				time.Sleep(500*time.Millisecond)
+				time.Sleep(500 * time.Millisecond)
 				ready <- struct{}{}
 			}
 
@@ -186,7 +186,7 @@ func TestDovecotSASLClient(tt *testing.T) {
 	t.Env("DOVECOT_SASL_SOCK=" + filepath.Join(dovecotDir, "run", "auth-client"))
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 			auth dovecot_sasl unix://{env:DOVECOT_SASL_SOCK}
 			deliver_to dummy

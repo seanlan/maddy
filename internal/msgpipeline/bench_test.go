@@ -22,8 +22,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 func BenchmarkMsgPipelineSimple(b *testing.B) {

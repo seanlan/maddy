@@ -23,10 +23,10 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/foxcpp/maddy/framework/dns"
 	"golang.org/x/net/idna"
 	"golang.org/x/text/secure/precis"
 	"golang.org/x/text/unicode/norm"
+	"mailcoin/framework/dns"
 )
 
 // ForLookup transforms the local-part of the address into a canonical form

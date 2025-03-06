@@ -23,8 +23,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/config"
+	"mailcoin/internal/testutils"
 )
 
 func testReplaceAddr(t *testing.T, modName string) {

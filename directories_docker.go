@@ -7,5 +7,5 @@ var (
 	ConfigDirectory         = "/data"
 	DefaultStateDirectory   = "/data"
 	DefaultRuntimeDirectory = "/tmp"
-	DefaultLibexecDirectory = "/usr/lib/maddy"
+	DefaultLibexecDirectory = "/usr/lib/mailcoin"
 )

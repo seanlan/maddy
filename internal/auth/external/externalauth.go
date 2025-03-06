@@ -24,10 +24,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth"
 )
 
 type ExternalAuth struct {
@@ -78,7 +78,7 @@ func (ea *ExternalAuth) Init(cfg *config.Map) error {
 	if ea.helperPath != "" {
 		ea.Log.Debugln("using helper:", ea.helperPath)
 	} else {
-		ea.helperPath = filepath.Join(config.LibexecDirectory, "maddy-auth-helper")
+		ea.helperPath = filepath.Join(config.LibexecDirectory, "mailcoin-auth-helper")
 	}
 	if _, err := os.Stat(ea.helperPath); err != nil {
 		return fmt.Errorf("%s doesn't exist", ea.helperPath)

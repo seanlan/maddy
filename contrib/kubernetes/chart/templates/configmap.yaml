@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{include "maddy.fullname" .}}
-  labels: {{- include "maddy.labels" . | nindent 4}}
+  name: {{include "mailcoin.fullname" .}}
+  labels: {{- include "mailcoin.labels" . | nindent 4}}
 data:
   maddy.conf: |
-{{ tpl (.Files.Get "files/maddy.conf") . | printf "%s" | indent 4 }}
+{{ tpl (.Files.Get "files/mailcoin.conf") . | printf "%s" | indent 4 }}
   aliases: |
 {{ tpl (.Files.Get "files/aliases") . | printf "%s" | indent 4 }}

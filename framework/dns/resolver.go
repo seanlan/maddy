@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// Package dns defines interfaces used by maddy modules to perform DNS
+// Package dns defines interfaces used by mailcoin modules to perform DNS
 // lookups.
 //
 // Currently, there is only Resolver interface which is implemented
@@ -30,7 +30,7 @@ import (
 	"strings"
 )
 
-// Resolver is an interface that describes DNS-related methods used by maddy.
+// Resolver is an interface that describes DNS-related methods used by mailcoin.
 //
 // It is implemented by dns.DefaultResolver(). Methods behave the same way.
 type Resolver interface {

@@ -24,7 +24,7 @@ package tests_test
 import (
 	"testing"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 func TestReplaceAddr_Rcpt(tt *testing.T) {
@@ -39,15 +39,15 @@ func TestReplaceAddr_Rcpt(tt *testing.T) {
 
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("client.maddy.test", nil, nil)
-			c.Writeln("MAIL FROM:<a@maddy.test>")
+			c.SMTPNegotation("client.mailcoin.test", nil, nil)
+			c.Writeln("MAIL FROM:<a@mailcoin.test>")
 			c.ExpectPattern("250 *")
-			c.Writeln("RCPT TO:<a@maddy.test>")
+			c.Writeln("RCPT TO:<a@mailcoin.test>")
 			c.ExpectPattern("250 *")
 			c.Writeln("DATA")
 			c.ExpectPattern("354 *")
-			c.Writeln("From: <from@maddy.test>")
-			c.Writeln("To: <to@maddy.test>")
+			c.Writeln("From: <from@mailcoin.test>")
+			c.Writeln("To: <to@mailcoin.test>")
 			c.Writeln("Subject: Hello!")
 			c.Writeln("")
 			c.Writeln("Hello!")
@@ -59,19 +59,19 @@ func TestReplaceAddr_Rcpt(tt *testing.T) {
 	}
 
 	test("inline", `
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 				modify {
 					replace_rcpt static {
-						entry a@maddy.test b@maddy.test
+						entry a@mailcoin.test b@mailcoin.test
 					}
 				}
-				destination a@maddy.test {
+				destination a@mailcoin.test {
 					reject
 				}
-				destination b@maddy.test {
+				destination b@mailcoin.test {
 					deliver_to dummy
 				}
 				default_destination {
@@ -79,19 +79,19 @@ func TestReplaceAddr_Rcpt(tt *testing.T) {
 				}
 			}`)
 	test("inline qualified", `
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 				modify {
 					modify.replace_rcpt static {
-						entry a@maddy.test b@maddy.test
+						entry a@mailcoin.test b@mailcoin.test
 					}
 				}
-				destination a@maddy.test {
+				destination a@mailcoin.test {
 					reject
 				}
-				destination b@maddy.test {
+				destination b@mailcoin.test {
 					deliver_to dummy
 				}
 				default_destination {
@@ -101,12 +101,12 @@ func TestReplaceAddr_Rcpt(tt *testing.T) {
 
 	// FIXME: Not implemented
 	// test("external", `
-	//		hostname mx.maddy.test
+	//		hostname mx.mailcoin.test
 	//		tls off
 
 	//		modify.replace_rcpt local_aliases {
 	//			table static {
-	//				entry a@maddy.test b@maddy.test
+	//				entry a@mailcoin.test b@mailcoin.test
 	//			}
 	//		}
 
@@ -114,11 +114,11 @@ func TestReplaceAddr_Rcpt(tt *testing.T) {
 	//			modify {
 	//				&local_aliases
 	//			}
-	//			source a@maddy.test {
-	//				destination a@maddy.test {
+	//			source a@mailcoin.test {
+	//				destination a@mailcoin.test {
 	//					reject
 	//				}
-	//				destination b@maddy.test {
+	//				destination b@mailcoin.test {
 	//					deliver_to dummy
 	//				}
 	//				default_destination {
@@ -143,15 +143,15 @@ func TestReplaceAddr_Sender(tt *testing.T) {
 
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("client.maddy.test", nil, nil)
-			c.Writeln("MAIL FROM:<a@maddy.test>")
+			c.SMTPNegotation("client.mailcoin.test", nil, nil)
+			c.Writeln("MAIL FROM:<a@mailcoin.test>")
 			c.ExpectPattern("250 *")
-			c.Writeln("RCPT TO:<a@maddy.test>")
+			c.Writeln("RCPT TO:<a@mailcoin.test>")
 			c.ExpectPattern("250 *")
 			c.Writeln("DATA")
 			c.ExpectPattern("354 *")
-			c.Writeln("From: <from@maddy.test>")
-			c.Writeln("To: <to@maddy.test>")
+			c.Writeln("From: <from@mailcoin.test>")
+			c.Writeln("To: <to@mailcoin.test>")
 			c.Writeln("Subject: Hello!")
 			c.Writeln("")
 			c.Writeln("Hello!")
@@ -163,20 +163,20 @@ func TestReplaceAddr_Sender(tt *testing.T) {
 	}
 
 	test("inline", `
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 				modify {
 					replace_sender static {
-						entry a@maddy.test b@maddy.test
+						entry a@mailcoin.test b@mailcoin.test
 					}
 				}
-				source a@maddy.test {
+				source a@mailcoin.test {
 					reject
 				}
-				source b@maddy.test {
-					destination a@maddy.test {
+				source b@mailcoin.test {
+					destination a@mailcoin.test {
 						deliver_to dummy
 					}
 					default_destination {
@@ -188,20 +188,20 @@ func TestReplaceAddr_Sender(tt *testing.T) {
 				}
 			}`)
 	test("inline qualified", `
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 				modify {
 					modify.replace_sender static {
-						entry a@maddy.test b@maddy.test
+						entry a@mailcoin.test b@mailcoin.test
 					}
 				}
-				source a@maddy.test {
+				source a@mailcoin.test {
 					reject
 				}
-				source b@maddy.test {
-					destination a@maddy.test {
+				source b@mailcoin.test {
+					destination a@mailcoin.test {
 						deliver_to dummy
 					}
 					default_destination {
@@ -214,12 +214,12 @@ func TestReplaceAddr_Sender(tt *testing.T) {
 			}`)
 	// FIXME: Not implemented
 	// test("external", `
-	//		hostname mx.maddy.test
+	//		hostname mx.mailcoin.test
 	//		tls off
 
 	//		modify.replace_sender local_aliases {
 	//			table static {
-	//				entry a@maddy.test b@maddy.test
+	//				entry a@mailcoin.test b@mailcoin.test
 	//			}
 	//		}
 
@@ -227,11 +227,11 @@ func TestReplaceAddr_Sender(tt *testing.T) {
 	//			modify {
 	//				&local_aliases
 	//			}
-	//			source a@maddy.test {
+	//			source a@mailcoin.test {
 	//				reject
 	//			}
-	//			source b@maddy.test {
-	//				destination a@maddy.test {
+	//			source b@mailcoin.test {
+	//				destination a@mailcoin.test {
 	//					deliver_to dummy
 	//				}
 	//				default_destination {

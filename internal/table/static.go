@@ -21,8 +21,8 @@ package table
 import (
 	"context"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	"mailcoin/framework/module"
 )
 
 type Static struct {

@@ -25,7 +25,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 // Smoke test to ensure message delivery is handled correctly.
@@ -51,7 +51,7 @@ func TestImapsqlDelivery(tt *testing.T) {
 		}
 
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname maddy.test
+			hostname mailcoin.test
 			tls off
 
 			deliver_to &test_store
@@ -63,7 +63,7 @@ func TestImapsqlDelivery(tt *testing.T) {
 	imapConn := t.Conn("imap")
 	defer imapConn.Close()
 	imapConn.ExpectPattern(`\* OK *`)
-	imapConn.Writeln(". LOGIN testusr@maddy.test 1234")
+	imapConn.Writeln(". LOGIN testusr@mailcoin.test 1234")
 	imapConn.ExpectPattern(". OK *")
 	imapConn.Writeln(". SELECT INBOX")
 	imapConn.ExpectPattern(`\* *`)
@@ -77,14 +77,14 @@ func TestImapsqlDelivery(tt *testing.T) {
 	smtpConn := t.Conn("smtp")
 	defer smtpConn.Close()
 	smtpConn.SMTPNegotation("localhost", nil, nil)
-	smtpConn.Writeln("MAIL FROM:<sender@maddy.test>")
+	smtpConn.Writeln("MAIL FROM:<sender@mailcoin.test>")
 	smtpConn.ExpectPattern("2*")
-	smtpConn.Writeln("RCPT TO:<testusr@maddy.test>")
+	smtpConn.Writeln("RCPT TO:<testusr@mailcoin.test>")
 	smtpConn.ExpectPattern("2*")
 	smtpConn.Writeln("DATA")
 	smtpConn.ExpectPattern("354 *")
-	smtpConn.Writeln("From: <sender@maddy.test>")
-	smtpConn.Writeln("To: <testusr@maddy.test>")
+	smtpConn.Writeln("From: <sender@mailcoin.test>")
+	smtpConn.Writeln("To: <testusr@mailcoin.test>")
 	smtpConn.Writeln("Subject: Hi!")
 	smtpConn.Writeln("")
 	smtpConn.Writeln("Hi!")
@@ -100,13 +100,13 @@ func TestImapsqlDelivery(tt *testing.T) {
 
 	imapConn.Writeln(". FETCH 1 (BODY.PEEK[])")
 	imapConn.ExpectPattern(`\* 1 FETCH (BODY\[\] {*}*`)
-	imapConn.Expect(`Delivered-To: testusr@maddy.test`)
-	imapConn.Expect(`Return-Path: <sender@maddy.test>`)
-	imapConn.ExpectPattern(`Received: from localhost (client.maddy.test \[` + tests.DefaultSourceIP.String() + `\]) by maddy.test`)
-	imapConn.ExpectPattern(` (envelope-sender <sender@maddy.test>) with ESMTP id *; *`)
+	imapConn.Expect(`Delivered-To: testusr@mailcoin.test`)
+	imapConn.Expect(`Return-Path: <sender@mailcoin.test>`)
+	imapConn.ExpectPattern(`Received: from localhost (client.mailcoin.test \[` + tests.DefaultSourceIP.String() + `\]) by mailcoin.test`)
+	imapConn.ExpectPattern(` (envelope-sender <sender@mailcoin.test>) with ESMTP id *; *`)
 	imapConn.ExpectPattern(` *`)
-	imapConn.Expect("From: <sender@maddy.test>")
-	imapConn.Expect("To: <testusr@maddy.test>")
+	imapConn.Expect("From: <sender@mailcoin.test>")
+	imapConn.Expect("To: <testusr@mailcoin.test>")
 	imapConn.Expect("Subject: Hi!")
 	imapConn.Expect("")
 	imapConn.Expect("Hi!")
@@ -138,7 +138,7 @@ func TestImapsqlDeliveryMap(tt *testing.T) {
 		}
 
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname maddy.test
+			hostname mailcoin.test
 			tls off
 
 			deliver_to &test_store
@@ -164,14 +164,14 @@ func TestImapsqlDeliveryMap(tt *testing.T) {
 	smtpConn := t.Conn("smtp")
 	defer smtpConn.Close()
 	smtpConn.SMTPNegotation("localhost", nil, nil)
-	smtpConn.Writeln("MAIL FROM:<sender@maddy.test>")
+	smtpConn.Writeln("MAIL FROM:<sender@mailcoin.test>")
 	smtpConn.ExpectPattern("2*")
-	smtpConn.Writeln("RCPT TO:<testusr@maddy.test>")
+	smtpConn.Writeln("RCPT TO:<testusr@mailcoin.test>")
 	smtpConn.ExpectPattern("2*")
 	smtpConn.Writeln("DATA")
 	smtpConn.ExpectPattern("354 *")
-	smtpConn.Writeln("From: <sender@maddy.test>")
-	smtpConn.Writeln("To: <testusr@maddy.test>")
+	smtpConn.Writeln("From: <sender@mailcoin.test>")
+	smtpConn.Writeln("To: <testusr@mailcoin.test>")
 	smtpConn.Writeln("Subject: Hi!")
 	smtpConn.Writeln("")
 	smtpConn.Writeln("Hi!")
@@ -195,7 +195,7 @@ func TestImapsqlAuthMap(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		storage.imapsql test_store {
-			auth_map regexp "(.*)" "$1@maddy.test"
+			auth_map regexp "(.*)" "$1@mailcoin.test"
 			auth_normalize precis
 
 			driver sqlite3
@@ -210,7 +210,7 @@ func TestImapsqlAuthMap(tt *testing.T) {
 		}
 
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname maddy.test
+			hostname mailcoin.test
 			tls off
 
 			deliver_to &test_store
@@ -236,14 +236,14 @@ func TestImapsqlAuthMap(tt *testing.T) {
 	smtpConn := t.Conn("smtp")
 	defer smtpConn.Close()
 	smtpConn.SMTPNegotation("localhost", nil, nil)
-	smtpConn.Writeln("MAIL FROM:<sender@maddy.test>")
+	smtpConn.Writeln("MAIL FROM:<sender@mailcoin.test>")
 	smtpConn.ExpectPattern("2*")
-	smtpConn.Writeln("RCPT TO:<testusr@maddy.test>")
+	smtpConn.Writeln("RCPT TO:<testusr@mailcoin.test>")
 	smtpConn.ExpectPattern("2*")
 	smtpConn.Writeln("DATA")
 	smtpConn.ExpectPattern("354 *")
-	smtpConn.Writeln("From: <sender@maddy.test>")
-	smtpConn.Writeln("To: <testusr@maddy.test>")
+	smtpConn.Writeln("From: <sender@mailcoin.test>")
+	smtpConn.Writeln("To: <testusr@mailcoin.test>")
 	smtpConn.Writeln("Subject: Hi!")
 	smtpConn.Writeln("")
 	smtpConn.Writeln("Hi!")

@@ -27,8 +27,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/config"
+	"mailcoin/internal/testutils"
 )
 
 func TestSQL(t *testing.T) {

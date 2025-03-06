@@ -21,7 +21,7 @@ package msgpipeline
 import (
 	"fmt"
 
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/module"
 )
 
 // objectName returns a new that is usable to identify the used external

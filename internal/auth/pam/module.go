@@ -24,10 +24,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth/external"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth/external"
 )
 
 type Auth struct {
@@ -67,9 +67,9 @@ func (a *Auth) Init(cfg *config.Map) error {
 	}
 
 	if a.useHelper {
-		a.helperPath = filepath.Join(config.LibexecDirectory, "maddy-pam-helper")
+		a.helperPath = filepath.Join(config.LibexecDirectory, "mailcoin-pam-helper")
 		if _, err := os.Stat(a.helperPath); err != nil {
-			return fmt.Errorf("pam: no helper binary (maddy-pam-helper) found in %s", config.LibexecDirectory)
+			return fmt.Errorf("pam: no helper binary (mailcoin-pam-helper) found in %s", config.LibexecDirectory)
 		}
 	}
 

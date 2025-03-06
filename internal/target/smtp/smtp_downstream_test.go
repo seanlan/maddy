@@ -27,9 +27,9 @@ import (
 	"testing"
 
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/internal/testutils"
 )
 
 var testPort string
@@ -260,7 +260,7 @@ func TestDownstreamDelivery_StartTLS_NoFallback(t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
-	remoteSmtpPort := flag.String("test.smtpport", "random", "(maddy) SMTP port to use for connections in tests")
+	remoteSmtpPort := flag.String("test.smtpport", "random", "(mailcoin) SMTP port to use for connections in tests")
 	flag.Parse()
 
 	if *remoteSmtpPort == "random" {

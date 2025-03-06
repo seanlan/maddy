@@ -26,8 +26,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
 )
 
 // handleSignals function creates and listens on OS signals channel.

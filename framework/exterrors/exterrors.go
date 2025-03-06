@@ -17,6 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 // Package errors defines error-handling and primitives
-// used across maddy, notably to pass additional error
+// used across mailcoin, notably to pass additional error
 // information across module boundaries.
 package exterrors

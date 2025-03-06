@@ -21,9 +21,9 @@ package table
 import (
 	"context"
 
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/module"
 )
 
 type Chain struct {

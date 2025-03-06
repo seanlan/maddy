@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/emersion/go-sasl"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/module"
 )
 
 type mockAuth struct {

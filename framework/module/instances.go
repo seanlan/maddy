@@ -22,9 +22,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
+	"mailcoin/framework/config"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
 )
 
 var (

@@ -32,14 +32,14 @@ import (
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
 	"github.com/foxcpp/go-mtasts"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/limits"
-	"github.com/foxcpp/maddy/internal/smtpconn/pool"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
+	"mailcoin/internal/limits"
+	"mailcoin/internal/smtpconn/pool"
+	"mailcoin/internal/testutils"
 )
 
 // .invalid TLD is used here to make sure if there is something wrong about
@@ -1015,7 +1015,7 @@ func TestRemoteDelivery_TLS_FallbackPlaintext(t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
-	remoteSmtpPort := flag.String("test.smtpport", "random", "(maddy) SMTP port to use for connections in tests")
+	remoteSmtpPort := flag.String("test.smtpport", "random", "(mailcoin) SMTP port to use for connections in tests")
 	flag.Parse()
 
 	if *remoteSmtpPort == "random" {

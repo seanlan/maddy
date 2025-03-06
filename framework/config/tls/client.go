@@ -24,8 +24,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
 )
 
 func TLSClientBlock(_ *config.Map, node config.Node) (interface{}, error) {

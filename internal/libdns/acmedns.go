@@ -4,9 +4,9 @@
 package libdns
 
 import (
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/libdns/acmedns"
+	"mailcoin/framework/config"
+	"mailcoin/framework/module"
 )
 
 func init() {

@@ -28,12 +28,12 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-milter"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/target"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/target"
 )
 
 const modName = "check.milter"
@@ -242,7 +242,7 @@ func (s *state) CheckConnection(ctx context.Context) module.CheckResult {
 
 	if !s.session.ProtocolOption(milter.OptNoConnect) {
 		if err := s.session.Macros(milter.CodeConn,
-			"daemon_name", "maddy",
+			"daemon_name", "mailcoin",
 			"if_name", "unknown",
 			"if_addr", "0.0.0.0",
 			// TODO: $j

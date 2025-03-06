@@ -21,9 +21,9 @@ package table
 import (
 	"context"
 
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/address"
+	"mailcoin/framework/config"
+	"mailcoin/framework/module"
 )
 
 type EmailLocalpart struct {

@@ -41,14 +41,14 @@ import (
 	"github.com/emersion/go-imap/backend"
 	mess "github.com/foxcpp/go-imap-mess"
 	imapsql "github.com/foxcpp/go-imap-sql"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/authz"
-	"github.com/foxcpp/maddy/internal/updatepipe"
-	"github.com/foxcpp/maddy/internal/updatepipe/pubsub"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/authz"
+	"mailcoin/internal/updatepipe"
+	"mailcoin/internal/updatepipe/pubsub"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
@@ -413,7 +413,7 @@ func (store *Storage) Close() error {
 
 	// Wait for 'updates replicate' goroutine to actually stop so we will send
 	// all updates before shutting down (this is especially important for
-	// maddy subcommands).
+	// mailcoin subcommands).
 	if store.updPipe != nil {
 		close(store.outboundUpds)
 		<-store.updPushStop

@@ -29,9 +29,9 @@ import (
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
 	"github.com/foxcpp/go-mtasts"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 func TestRemoteDelivery_AuthMX_MTASTS(t *testing.T) {

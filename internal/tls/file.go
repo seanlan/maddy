@@ -22,14 +22,16 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 type FileLoader struct {
@@ -70,8 +72,18 @@ func (f *FileLoader) Init(cfg *config.Map) error {
 		return errors.New("tls.loader.file: odd amount of arguments")
 	}
 	for i := 0; i < len(f.inlineArgs); i += 2 {
-		f.certPaths = append(f.certPaths, f.inlineArgs[i])
-		f.keyPaths = append(f.keyPaths, f.inlineArgs[i+1])
+		//f.certPaths = append(f.certPaths, f.inlineArgs[i])
+		//f.keyPaths = append(f.keyPaths, f.inlineArgs[i+1])
+		if strings.HasPrefix(f.inlineArgs[i], "/") {
+			f.certPaths = append(f.certPaths, f.inlineArgs[i])
+		} else {
+			f.certPaths = append(f.certPaths, filepath.Join(os.Getenv("MAILCOIN_WORK_DIR"), f.inlineArgs[i]))
+		}
+		if strings.HasPrefix(f.inlineArgs[i+1], "/") {
+			f.keyPaths = append(f.keyPaths, f.inlineArgs[i+1])
+		} else {
+			f.keyPaths = append(f.keyPaths, filepath.Join(os.Getenv("MAILCOIN_WORK_DIR"), f.inlineArgs[i+1]))
+		}
 	}
 
 	for _, certPath := range f.certPaths {

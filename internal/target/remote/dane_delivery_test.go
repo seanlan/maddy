@@ -25,10 +25,10 @@ import (
 	"testing"
 
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
 	miekgdns "github.com/miekg/dns"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 func targetWithExtResolver(t *testing.T, zones map[string]mockdns.Zone) (*mockdns.Server, *Target) {

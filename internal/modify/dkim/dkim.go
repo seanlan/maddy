@@ -31,15 +31,15 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-msgauth/dkim"
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/target"
 	"golang.org/x/net/idna"
+	"mailcoin/framework/address"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/target"
 )
 
 const Day = 86400 * time.Second

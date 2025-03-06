@@ -20,7 +20,7 @@ package module
 
 import (
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
+	"mailcoin/framework/buffer"
 )
 
 // IMAPFilter is interface used by modules that want to modify IMAP-specific message

@@ -23,11 +23,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/module"
 	"golang.org/x/crypto/bcrypt"
 	"golang.org/x/text/secure/precis"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/module"
 )
 
 type Auth struct {

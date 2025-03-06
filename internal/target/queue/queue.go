@@ -76,15 +76,15 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/dsn"
-	"github.com/foxcpp/maddy/internal/msgpipeline"
-	"github.com/foxcpp/maddy/internal/target"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/dsn"
+	"mailcoin/internal/msgpipeline"
+	"mailcoin/internal/target"
 )
 
 // partialError describes state of partially successful message delivery.
@@ -142,7 +142,7 @@ type Queue struct {
 	// after init, it will be actually delivered 15 seconds
 	// after start-up.
 	//
-	// This delay is added to make that if maddy is killed shortly
+	// This delay is added to make that if mailcoin is killed shortly
 	// after start-up for whatever reason it will not affect the queue.
 	postInitDelay time.Duration
 

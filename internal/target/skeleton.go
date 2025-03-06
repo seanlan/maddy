@@ -27,10 +27,10 @@ import (
 	"context"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 const modName = "target.target_name"

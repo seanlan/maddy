@@ -23,7 +23,7 @@ import (
 )
 
 // These methods wrap corresponding go-imap-sql methods, but also apply
-// maddy-specific credentials rules.
+// mailcoin-specific credentials rules.
 
 func (store *Storage) ListIMAPAccts() ([]string, error) {
 	return store.Back.ListUsers()

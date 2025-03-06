@@ -26,7 +26,7 @@ import (
 	"testing"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
+	"mailcoin/framework/buffer"
 )
 
 func BodyFromStr(t *testing.T, literal string) (textproto.Header, buffer.MemoryBuffer) {

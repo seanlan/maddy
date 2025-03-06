@@ -5,7 +5,7 @@ import (
 	"io"
 
 	imapsql "github.com/foxcpp/go-imap-sql"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/module"
 )
 
 type ExtBlob struct {

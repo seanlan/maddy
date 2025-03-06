@@ -26,7 +26,7 @@ import (
 // Dir is a wrapper for os.MkdirTemp that
 // fails the test on errors.
 func Dir(t *testing.T) string {
-	dir, err := os.MkdirTemp("", "maddy-tests-")
+	dir, err := os.MkdirTemp("", "mailcoin-tests-")
 	if err != nil {
 		t.Fatalf("can't create test dir: %v", err)
 	}

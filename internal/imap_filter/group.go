@@ -20,11 +20,11 @@ package imap_filter
 
 import (
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 // Group wraps multiple modifiers and runs them serially.

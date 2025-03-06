@@ -57,6 +57,6 @@ func (s syslogOut) Close() error {
 //
 // Returned log.Output object is goroutine-safe.
 func SyslogOutput() (Output, error) {
-	w, err := syslog.New(syslog.LOG_MAIL|syslog.LOG_INFO, "maddy")
+	w, err := syslog.New(syslog.LOG_MAIL|syslog.LOG_INFO, "mailcoin")
 	return syslogOut{w}, err
 }

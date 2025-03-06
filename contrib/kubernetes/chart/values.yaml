@@ -1,11 +1,11 @@
-# Default values for maddy.
+# Default values for mailcoin.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1 # Multiple replicas are not supported, please don't change this.
 
 image:
-  repository: foxcpp/maddy
+  repository: foxcpp/mailcoin
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -38,8 +38,8 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
-# Set externalPIs to your public IP(s) of the node running maddy. In case of multiple nodes, you need to set tolerations
-# and taints in order to run maddy on the exact node.
+# Set externalPIs to your public IP(s) of the node running mailcoin. In case of multiple nodes, you need to set tolerations
+# and taints in order to run mailcoin on the exact node.
 service:
   type: NodePort
   # externalIPs:

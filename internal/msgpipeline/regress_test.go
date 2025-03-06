@@ -21,8 +21,8 @@ package msgpipeline
 import (
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 func TestMsgPipeline_Issue161(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/foxcpp/maddy/framework/log"
 	"github.com/urfave/cli/v2"
+	"mailcoin/framework/log"
 )
 
 var app *cli.App
@@ -24,7 +24,7 @@ databases used by it (all other subcommands).
 	app.Authors = []*cli.Author{
 		{
 			Name:  "Maddy Mail Server maintainers & contributors",
-			Email: "~foxcpp/maddy@lists.sr.ht",
+			Email: "~foxcpp/mailcoin@lists.sr.ht",
 		},
 	}
 	app.ExitErrHandler = func(c *cli.Context, err error) {
@@ -67,11 +67,11 @@ func AddSubcommand(cmd *cli.Command) {
 	app.Commands = append(app.Commands, cmd)
 
 	if cmd.Name == "run" {
-		// Backward compatibility hack to start the server as just ./maddy
+		// Backward compatibility hack to start the server as just ./mailcoin
 		// Needs to be done here so we will register all known flags with
 		// stdlib before Run is called.
 		app.Action = func(c *cli.Context) error {
-			log.Println("WARNING: Starting server not via 'maddy run' is deprecated and will stop working in the next version")
+			log.Println("WARNING: Starting server not via 'mailcoin run' is deprecated and will stop working in the next version")
 			return cmd.Action(c)
 		}
 		app.Flags = append(app.Flags, cmd.Flags...)
@@ -79,7 +79,7 @@ func AddSubcommand(cmd *cli.Command) {
 }
 
 // RunWithoutExit is like Run but returns exit code instead of calling os.Exit
-// To be used in maddy.cover.
+// To be used in mailcoin.cover.
 func RunWithoutExit() int {
 	code := 0
 
@@ -96,10 +96,10 @@ func RunWithoutExit() int {
 func Run() {
 	mapStdlibFlags(app)
 
-	// Actual entry point is registered in maddy.go.
+	// Actual entry point is registered in mailcoin.go.
 
 	// Print help when called via maddyctl executable. To be removed
-	// once backward compatibility hack for 'maddy run' is removed too.
+	// once backward compatibility hack for 'mailcoin run' is removed too.
 	if strings.Contains(os.Args[0], "maddyctl") && len(os.Args) == 1 {
 		if err := app.Run([]string{os.Args[0], "help"}); err != nil {
 			log.DefaultLogger.Error("app.Run failed", err)

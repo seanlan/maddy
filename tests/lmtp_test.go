@@ -26,8 +26,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/foxcpp/maddy/internal/testutils"
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/internal/testutils"
+	"mailcoin/tests"
 )
 
 func TestLMTPServer_Is_Actually_LMTP(tt *testing.T) {
@@ -38,7 +38,7 @@ func TestLMTPServer_Is_Actually_LMTP(tt *testing.T) {
 	t.Port("lmtp")
 	t.Config(`
 		lmtp tcp://127.0.0.1:{env:TEST_PORT_lmtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 			deliver_to dummy
 		}`)
@@ -48,7 +48,7 @@ func TestLMTPServer_Is_Actually_LMTP(tt *testing.T) {
 	c := t.Conn("lmtp")
 	defer c.Close()
 
-	c.Writeln("LHLO client.maddy.test")
+	c.Writeln("LHLO client.mailcoin.test")
 	c.ExpectPattern("220 *")
 capsloop:
 	for {
@@ -65,22 +65,22 @@ capsloop:
 		}
 	}
 
-	c.Writeln("MAIL FROM:<from@maddy.test>")
+	c.Writeln("MAIL FROM:<from@mailcoin.test>")
 	c.ExpectPattern("250 *")
-	c.Writeln("RCPT TO:<to1@maddy.test>")
+	c.Writeln("RCPT TO:<to1@mailcoin.test>")
 	c.ExpectPattern("250 *")
-	c.Writeln("RCPT TO:<to2@maddy.test>")
+	c.Writeln("RCPT TO:<to2@mailcoin.test>")
 	c.ExpectPattern("250 *")
 	c.Writeln("DATA")
 	c.ExpectPattern("354 *")
-	c.Writeln("From: <from@maddy.test>")
-	c.Writeln("To: <to@maddy.test>")
+	c.Writeln("From: <from@mailcoin.test>")
+	c.Writeln("To: <to@mailcoin.test>")
 	c.Writeln("Subject: Hello!")
 	c.Writeln("")
 	c.Writeln("Hello!")
 	c.Writeln(".")
-	c.ExpectPattern("250 2.0.0 <to1@maddy.test> OK: queued")
-	c.ExpectPattern("250 2.0.0 <to2@maddy.test> OK: queued")
+	c.ExpectPattern("250 2.0.0 <to1@mailcoin.test> OK: queued")
+	c.ExpectPattern("250 2.0.0 <to2@mailcoin.test> OK: queued")
 	c.Writeln("QUIT")
 	c.ExpectPattern("221 *")
 }
@@ -91,7 +91,7 @@ func TestLMTPClient_Is_Actually_LMTP(tt *testing.T) {
 	t.Port("smtp")
 	tgtPort := t.Port("target")
 	t.Config(`
-		hostname mx.maddy.test
+		hostname mx.mailcoin.test
 		tls off
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 			deliver_to lmtp tcp://127.0.0.1:{env:TEST_PORT_target}
@@ -106,17 +106,17 @@ func TestLMTPClient_Is_Actually_LMTP(tt *testing.T) {
 
 	c := t.Conn("smtp")
 	defer c.Close()
-	c.SMTPNegotation("client.maddy.test", nil, nil)
-	c.Writeln("MAIL FROM:<from@maddy.test>")
+	c.SMTPNegotation("client.mailcoin.test", nil, nil)
+	c.Writeln("MAIL FROM:<from@mailcoin.test>")
 	c.ExpectPattern("250 *")
-	c.Writeln("RCPT TO:<to1@maddy.test>")
+	c.Writeln("RCPT TO:<to1@mailcoin.test>")
 	c.ExpectPattern("250 *")
-	c.Writeln("RCPT TO:<to2@maddy.test>")
+	c.Writeln("RCPT TO:<to2@mailcoin.test>")
 	c.ExpectPattern("250 *")
 	c.Writeln("DATA")
 	c.ExpectPattern("354 *")
-	c.Writeln("From: <from@maddy.test>")
-	c.Writeln("To: <to@maddy.test>")
+	c.Writeln("From: <from@mailcoin.test>")
+	c.Writeln("To: <to@mailcoin.test>")
 	c.Writeln("Subject: Hello!")
 	c.Writeln("")
 	c.Writeln("Hello!")
@@ -136,7 +136,7 @@ func TestLMTPClient_Issue308(tt *testing.T) {
 	t.Port("smtp")
 	tgtPort := t.Port("target")
 	t.Config(`
-		hostname mx.maddy.test
+		hostname mx.mailcoin.test
 		tls off
 
 		target.lmtp local_mailboxes {
@@ -156,17 +156,17 @@ func TestLMTPClient_Issue308(tt *testing.T) {
 
 	c := t.Conn("smtp")
 	defer c.Close()
-	c.SMTPNegotation("client.maddy.test", nil, nil)
-	c.Writeln("MAIL FROM:<from@maddy.test>")
+	c.SMTPNegotation("client.mailcoin.test", nil, nil)
+	c.Writeln("MAIL FROM:<from@mailcoin.test>")
 	c.ExpectPattern("250 *")
-	c.Writeln("RCPT TO:<to1@maddy.test>")
+	c.Writeln("RCPT TO:<to1@mailcoin.test>")
 	c.ExpectPattern("250 *")
-	c.Writeln("RCPT TO:<to2@maddy.test>")
+	c.Writeln("RCPT TO:<to2@mailcoin.test>")
 	c.ExpectPattern("250 *")
 	c.Writeln("DATA")
 	c.ExpectPattern("354 *")
-	c.Writeln("From: <from@maddy.test>")
-	c.Writeln("To: <to@maddy.test>")
+	c.Writeln("From: <from@mailcoin.test>")
+	c.Writeln("To: <to@mailcoin.test>")
 	c.Writeln("Subject: Hello!")
 	c.Writeln("")
 	c.Writeln("Hello!")

@@ -29,9 +29,9 @@ import (
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-msgauth/authres"
 	"github.com/emersion/go-msgauth/dmarc"
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/dns"
 	"golang.org/x/net/publicsuffix"
+	"mailcoin/framework/address"
+	"mailcoin/framework/dns"
 )
 
 // FetchRecord looks up the DMARC record relevant for the RFC5322.From domain.

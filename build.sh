@@ -111,7 +111,7 @@ build() {
 	mkdir -p "${builddir}"
 	echo "-- Version: ${version}" >&2
 	if [ "$(go env CC)" = "" ]; then
-        echo '-- [!] No C compiler available. maddy will be built without SQLite3 support and default configuration will be unusable.' >&2
+        echo '-- [!] No C compiler available. mailcoin will be built without SQLite3 support and default configuration will be unusable.' >&2
     fi
 
 	if [ "$static" -eq 1 ]; then
@@ -119,11 +119,11 @@ build() {
 		# This is literally impossible to specify this line of arguments as part of ${GOFLAGS}
 		# using only POSIX sh features (and even with Bash extensions I can't figure it out).
 		go build -trimpath -buildmode pie -tags "$tags osusergo netgo static_build" \
-			-ldflags "-extldflags '-fno-PIC -static' -X \"github.com/foxcpp/maddy.Version=${version}\"" \
-			-o "${builddir}/maddy" ${GOFLAGS} ./cmd/maddy
+			-ldflags "-extldflags '-fno-PIC -static' -X \"mailcoin.Version=${version}\"" \
+			-o "${builddir}/maddy" ${GOFLAGS} ./cmd/mailcoin
 	else
 		echo "-- Building main server executable..." >&2
-		go build -tags "$tags" -trimpath -ldflags="-X \"github.com/foxcpp/maddy.Version=${version}\"" -o "${builddir}/maddy" ${GOFLAGS} ./cmd/maddy
+		go build -tags "$tags" -trimpath -ldflags="-X \"mailcoin.Version=${version}\"" -o "${builddir}/maddy" ${GOFLAGS} ./cmd/mailcoin
 	fi
 
 	build_man_pages
@@ -132,7 +132,7 @@ build() {
 
 	mkdir -p "${builddir}/systemd"
 	cp dist/systemd/*.service "${builddir}/systemd/"
-	cp maddy.conf "${builddir}/maddy.conf"
+	cp mailcoin.conf "${builddir}/maddy.conf"
 }
 
 install() {
@@ -140,17 +140,17 @@ install() {
 
 	command install -m 0755 -d "${destdir}/${prefix}/bin/"
 	command install -m 0755 "${builddir}/maddy" "${destdir}/${prefix}/bin/"
-	command ln -sf maddy "${destdir}/${prefix}/bin/maddyctl"
+	command ln -sf mailcoin "${destdir}/${prefix}/bin/maddyctl"
 	command install -m 0755 -d "${configdir}"
 
 
 	# We do not want to overwrite existing configuration.
 	# If the file exists, then save it with .default suffix and warn user.
 	if [ ! -e "${configdir}/maddy.conf" ]; then
-		command install -m 0644 ./maddy.conf "${configdir}/maddy.conf"
+		command install -m 0644 ./mailcoin.conf "${configdir}/maddy.conf"
 	else
 		echo "-- [!] Configuration file ${configdir}/maddy.conf exists, saving to ${configdir}/maddy.conf.default" >&2
-		command install -m 0644 ./maddy.conf "${configdir}/maddy.conf.default"
+		command install -m 0644 ./mailcoin.conf "${configdir}/maddy.conf.default"
 	fi
 
 	# Attempt to install systemd units only for Linux.

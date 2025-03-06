@@ -43,7 +43,7 @@ auth.pam local_authdb {
 
 TL;DR
 ```
-git clone https://github.com/foxcpp/maddy
+git clone https://mailcoin
 cd maddy/cmd/maddy-pam-helper
 gcc pam.c main.c -lpam -o maddy-pam-helper
 ```

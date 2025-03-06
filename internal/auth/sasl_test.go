@@ -23,8 +23,8 @@ import (
 	"net"
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 type mockAuth struct {

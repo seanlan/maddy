@@ -13,7 +13,7 @@ In order to run maddy properly, you need to have TLS secret under name maddy pre
 certificate, you can create it by the following command:
 
 ```sh
-kubectl create secret tls maddy --cert=fullchain.pem --key=privkey.pem
+kubectl create secret tls mailcoin --cert=fullchain.pem --key=privkey.pem
 ```
 
 If you use cert-manager, just create the secret under name maddy.
@@ -59,7 +59,7 @@ be set.
 ## Installing the chart
 
 ```sh
-helm upgrade --install maddy ./chart --set service.externapIPs[0]=1.2.3.4
+helm upgrade --install mailcoin ./chart --set service.externapIPs[0]=1.2.3.4
 ```
 
 1.2.3.4 is your public IP of the node.

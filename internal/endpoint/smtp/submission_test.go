@@ -25,7 +25,7 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/module"
 )
 
 func init() {

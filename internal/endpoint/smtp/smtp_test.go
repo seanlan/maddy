@@ -31,12 +31,12 @@ import (
 	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth"
-	"github.com/foxcpp/maddy/internal/msgpipeline"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth"
+	"mailcoin/internal/msgpipeline"
+	"mailcoin/internal/testutils"
 )
 
 var testPort string
@@ -579,7 +579,7 @@ func TestSMTPDelivery_SubmissionAuthOK(t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
-	remoteSmtpPort := flag.String("test.smtpport", "random", "(maddy) SMTP port to use for connections in tests")
+	remoteSmtpPort := flag.String("test.smtpport", "random", "(mailcoin) SMTP port to use for connections in tests")
 	flag.Parse()
 
 	if *remoteSmtpPort == "random" {

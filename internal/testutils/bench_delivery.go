@@ -30,8 +30,8 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/module"
 )
 
 // Empirically observed "around average" values.

@@ -21,7 +21,7 @@ package milter
 import (
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/config"
+	"mailcoin/framework/config"
 )
 
 func TestAcceptValidEndpoints(t *testing.T) {

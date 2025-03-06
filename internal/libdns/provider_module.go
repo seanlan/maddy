@@ -1,8 +1,8 @@
 package libdns
 
 import (
-	"github.com/foxcpp/maddy/framework/config"
 	"github.com/libdns/libdns"
+	"mailcoin/framework/config"
 )
 
 type ProviderModule struct {

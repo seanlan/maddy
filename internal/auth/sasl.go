@@ -25,12 +25,12 @@ import (
 	"net"
 
 	"github.com/emersion/go-sasl"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth/sasllogin"
-	"github.com/foxcpp/maddy/internal/authz"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth/sasllogin"
+	"mailcoin/internal/authz"
 )
 
 var (
@@ -39,7 +39,7 @@ var (
 )
 
 // SASLAuth is a wrapper that initializes sasl.Server using authenticators that
-// call maddy module objects.
+// call mailcoin module objects.
 //
 // It also handles username translation using auth_map and auth_map_normalize
 // (AuthMap and AuthMapNormalize should be set).

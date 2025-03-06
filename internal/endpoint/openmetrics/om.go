@@ -25,10 +25,10 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 const modName = "openmetrics"

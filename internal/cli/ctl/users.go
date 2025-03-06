@@ -24,12 +24,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth/pass_table"
-	maddycli "github.com/foxcpp/maddy/internal/cli"
-	clitools2 "github.com/foxcpp/maddy/internal/cli/clitools"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/crypto/bcrypt"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth/pass_table"
+	maddycli "mailcoin/internal/cli"
+	clitools2 "mailcoin/internal/cli/clitools"
 )
 
 func init() {
@@ -37,14 +37,14 @@ func init() {
 		&cli.Command{
 			Name:  "creds",
 			Usage: "Local credentials management",
-			Description: `These commands manipulate credential databases used by 
-maddy mail server.
+			Description: `These commands manipulate credential databases used by
+mailcoin mail server.
 
-Corresponding credential database should be defined in maddy.conf as
+Corresponding credential database should be defined in mailcoin.conf as
 a top-level config block. By default the block name should be local_authdb (
 can be changed using --cfg-block argument for subcommands).
 
-Note that it is not enough to create user credentials in order to grant 
+Note that it is not enough to create user credentials in order to grant
 IMAP access - IMAP account should be also created using 'imap-acct create' subcommand.
 `,
 			Subcommands: []*cli.Command{
@@ -74,7 +74,7 @@ IMAP access - IMAP account should be also created using 'imap-acct create' subco
 					Description: `Reads password from stdin.
 
 If configuration block uses auth.pass_table, then hash algorithm can be configured
-using command flags. Otherwise, these options cannot be used. 
+using command flags. Otherwise, these options cannot be used.
 `,
 					ArgsUsage: "USERNAME",
 					Flags: []cli.Flag{

@@ -6,7 +6,7 @@ package tests_test
 import (
 	"testing"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 func TestIMAPEndpointAuthMap(tt *testing.T) {

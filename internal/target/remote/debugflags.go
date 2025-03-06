@@ -22,8 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package remote
 
 import (
-	maddycli "github.com/foxcpp/maddy/internal/cli"
 	"github.com/urfave/cli/v2"
+	maddycli "mailcoin/internal/cli"
 )
 
 func init() {

@@ -27,12 +27,12 @@ import (
 
 	"github.com/emersion/go-sasl"
 	dovecotsasl "github.com/foxcpp/go-dovecot-sasl"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth"
-	"github.com/foxcpp/maddy/internal/authz"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth"
+	"mailcoin/internal/authz"
 )
 
 const modName = "dovecot_sasld"

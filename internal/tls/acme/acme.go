@@ -7,11 +7,11 @@ import (
 	"path/filepath"
 
 	"github.com/caddyserver/certmagic"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 const modName = "tls.loader.acme"

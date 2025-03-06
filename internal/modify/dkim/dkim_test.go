@@ -30,10 +30,10 @@ import (
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-msgauth/dkim"
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 func newTestModifier(t *testing.T, dir, keyAlgo string, domains []string) *Modifier {
@@ -178,47 +178,47 @@ func TestGenerateSignVerify(t *testing.T) {
 	for _, algo := range [2]string{"rsa2048", "ed25519"} {
 		for _, hdrCanon := range [2]dkim.Canonicalization{dkim.CanonicalizationSimple, dkim.CanonicalizationRelaxed} {
 			for _, bodyCanon := range [2]dkim.Canonicalization{dkim.CanonicalizationSimple, dkim.CanonicalizationRelaxed} {
-				test([]string{"maddy.test"}, "test@maddy.test", []string{"maddy.test"}, algo, hdrCanon, bodyCanon, false)
-				test([]string{"maddy.test"}, "test@maddy.test", []string{"maddy.test"}, algo, hdrCanon, bodyCanon, true)
+				test([]string{"mailcoin.test"}, "test@mailcoin.test", []string{"mailcoin.test"}, algo, hdrCanon, bodyCanon, false)
+				test([]string{"mailcoin.test"}, "test@mailcoin.test", []string{"mailcoin.test"}, algo, hdrCanon, bodyCanon, true)
 			}
 		}
 	}
 
 	// Key selection tests
 	test(
-		[]string{"maddy.test"}, // Generated keys.
-		"test@maddy.test",      // Envelope sender.
-		[]string{"maddy.test"}, // Expected signature domains.
+		[]string{"mailcoin.test"}, // Generated keys.
+		"test@mailcoin.test",      // Envelope sender.
+		[]string{"mailcoin.test"}, // Expected signature domains.
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 	test(
-		[]string{"maddy.test"},
-		"test@unrelated.maddy.test",
+		[]string{"mailcoin.test"},
+		"test@unrelated.mailcoin.test",
 		[]string{},
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 	test(
-		[]string{"maddy.test", "related.maddy.test"},
-		"test@related.maddy.test",
-		[]string{"related.maddy.test"},
+		[]string{"mailcoin.test", "related.mailcoin.test"},
+		"test@related.mailcoin.test",
+		[]string{"related.mailcoin.test"},
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 	test(
-		[]string{"fallback.maddy.test", "maddy.test"},
+		[]string{"fallback.mailcoin.test", "mailcoin.test"},
 		"postmaster",
-		[]string{"fallback.maddy.test"},
+		[]string{"fallback.mailcoin.test"},
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 	test(
-		[]string{"fallback.maddy.test", "maddy.test"},
+		[]string{"fallback.mailcoin.test", "mailcoin.test"},
 		"",
-		[]string{"fallback.maddy.test"},
+		[]string{"fallback.mailcoin.test"},
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 	test(
-		[]string{"another.maddy.test", "another.maddy.test", "maddy.test"},
-		"test@another.maddy.test",
-		[]string{"another.maddy.test"},
+		[]string{"another.mailcoin.test", "another.mailcoin.test", "mailcoin.test"},
+		"test@another.mailcoin.test",
+		[]string{"another.mailcoin.test"},
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 	test(
-		[]string{"another.maddy.test", "another.maddy.test", "maddy.test"},
+		[]string{"another.mailcoin.test", "another.mailcoin.test", "mailcoin.test"},
 		"",
-		[]string{"another.maddy.test"},
+		[]string{"another.mailcoin.test"},
 		"ed25519", dkim.CanonicalizationRelaxed, dkim.CanonicalizationRelaxed, false)
 }
 

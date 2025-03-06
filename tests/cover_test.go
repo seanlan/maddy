@@ -25,10 +25,10 @@ package tests
 Go toolchain lacks the ability to instrument arbitrary executables with
 coverage counters.
 
-This file wraps the maddy executable into a minimal layer of "test" logic to
+This file wraps the mailcoin executable into a minimal layer of "test" logic to
 make 'go test' work for it and produce the coverage report.
 
-Use ./build_cover.sh to compile it into ./maddy.cover.
+Use ./build_cover.sh to compile it into ./mailcoin.cover.
 
 References:
 https://stackoverflow.com/questions/43381335/how-to-capture-code-coverage-from-a-go-binary
@@ -42,16 +42,16 @@ import (
 	"os"
 	"testing"
 
-	_ "github.com/foxcpp/maddy"                  // To register run command
-	_ "github.com/foxcpp/maddy/internal/cli/ctl" // To register other CLI commands.
+	_ "mailcoin"                  // To register run command
+	_ "mailcoin/internal/cli/ctl" // To register other CLI commands.
 
-	maddycli "github.com/foxcpp/maddy/internal/cli"
+	maddycli "mailcoin/internal/cli"
 )
 
 func TestMain(m *testing.M) {
 	// -test.* flags are registered somewhere in init() in "testing" (?).
 
-	// maddy.Run changes the working directory, we need to change it back so
+	// mailcoin.Run changes the working directory, we need to change it back so
 	// -test.coverprofile writes out profile in the right location.
 	wd, err := os.Getwd()
 	if err != nil {
@@ -59,7 +59,7 @@ func TestMain(m *testing.M) {
 	}
 
 	// Skip flag parsing and make flag.Parse no-op so when
-	// m.Run calls it it will not error out on maddy flags.
+	// m.Run calls it it will not error out on mailcoin flags.
 	args := os.Args
 	os.Args = []string{"command"}
 	flag.Parse()

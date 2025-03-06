@@ -23,7 +23,7 @@ import "github.com/prometheus/client_golang/prometheus"
 var (
 	checkReject = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "check",
 			Name:      "reject",
 			Help:      "Number of times a check returned 'reject' result (may be more than processed messages if check does so on per-recipient basis)",
@@ -32,7 +32,7 @@ var (
 	)
 	checkQuarantined = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "check",
 			Name:      "quarantined",
 			Help:      "Number of times a check returned 'quarantine' result (may be more than processed messages if check does so on per-recipient basis)",

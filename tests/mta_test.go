@@ -27,8 +27,8 @@ import (
 	"testing"
 
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/internal/testutils"
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/internal/testutils"
+	"mailcoin/tests"
 )
 
 func TestMTA_Outbound(tt *testing.T) {
@@ -44,7 +44,7 @@ func TestMTA_Outbound(tt *testing.T) {
 	t.Port("smtp")
 	tgtPort := t.Port("remote_smtp")
 	t.Config(`
-		hostname mx.maddy.test
+		hostname mx.mailcoin.test
 		tls off
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 			deliver_to remote
@@ -57,8 +57,8 @@ func TestMTA_Outbound(tt *testing.T) {
 
 	c := t.Conn("smtp")
 	defer c.Close()
-	c.SMTPNegotation("client.maddy.test", nil, nil)
-	c.Writeln("MAIL FROM:<from@maddy.test>")
+	c.SMTPNegotation("client.mailcoin.test", nil, nil)
+	c.Writeln("MAIL FROM:<from@mailcoin.test>")
 	c.ExpectPattern("250 *")
 	c.Writeln("RCPT TO:<to1@example.invalid>")
 	c.ExpectPattern("250 *")
@@ -66,8 +66,8 @@ func TestMTA_Outbound(tt *testing.T) {
 	c.ExpectPattern("250 *")
 	c.Writeln("DATA")
 	c.ExpectPattern("354 *")
-	c.Writeln("From: <from@maddy.test>")
-	c.Writeln("To: <to@maddy.test>")
+	c.Writeln("From: <from@mailcoin.test>")
+	c.Writeln("To: <to@mailcoin.test>")
 	c.Writeln("Subject: Hello!")
 	c.Writeln("")
 	c.Writeln("Hello!")
@@ -92,7 +92,7 @@ func TestIssue321(tt *testing.T) {
 	t.Port("smtp")
 	tgtPort := t.Port("remote_smtp")
 	t.Config(`
-		hostname mx.maddy.test
+		hostname mx.mailcoin.test
 		tls off
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
 			deliver_to remote {
@@ -110,8 +110,8 @@ func TestIssue321(tt *testing.T) {
 
 	c := t.Conn("smtp")
 	defer c.Close()
-	c.SMTPNegotation("client.maddy.test", nil, nil)
-	c.Writeln("MAIL FROM:<from@maddy.test>")
+	c.SMTPNegotation("client.mailcoin.test", nil, nil)
+	c.Writeln("MAIL FROM:<from@mailcoin.test>")
 	c.ExpectPattern("250 *")
 	c.Writeln("RCPT TO:<to1@example.invalid>")
 	c.ExpectPattern("250 *")
@@ -119,8 +119,8 @@ func TestIssue321(tt *testing.T) {
 	c.ExpectPattern("250 *")
 	c.Writeln("DATA")
 	c.ExpectPattern("354 *")
-	c.Writeln("From: <from@maddy.test>")
-	c.Writeln("To: <to@maddy.test>")
+	c.Writeln("From: <from@mailcoin.test>")
+	c.Writeln("To: <to@mailcoin.test>")
 	c.Writeln("Subject: Hello!")
 	c.Writeln("")
 	c.Writeln("Hello!")

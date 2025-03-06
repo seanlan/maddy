@@ -20,9 +20,9 @@ package smtp_downstream
 
 import (
 	"github.com/emersion/go-sasl"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
 )
 
 type saslClientFactory = func(msgMeta *module.MsgMetadata) (sasl.Client, error)

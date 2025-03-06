@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "maddy.fullname" . }}
+  name: {{ include "mailcoin.fullname" . }}
   labels:
-    {{- include "maddy.labels" . | nindent 4 }}
+    {{- include "mailcoin.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "maddy.selectorLabels" . | nindent 6 }}
+      {{- include "mailcoin.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
-        checksum/config: {{ tpl (.Files.Get "files/maddy.conf") . | printf "%s" | sha256sum }}
+        checksum/config: {{ tpl (.Files.Get "files/mailcoin.conf") . | printf "%s" | sha256sum }}
         checksum/aliases: {{ tpl (.Files.Get "files/aliases") . | printf "%s" | sha256sum }}
     {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "maddy.selectorLabels" . | nindent 8 }}
+        {{- include "mailcoin.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "maddy.serviceAccountName" . }}
+      serviceAccountName: {{ include "mailcoin.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
@@ -36,7 +36,7 @@ spec:
           command:
             - sh
             - -c
-            - cp /tmp/maddy/* /data/.
+            - cp /tmp/mailcoin/* /data/.
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
@@ -46,7 +46,7 @@ spec:
               subPath: {{ .Values.persistence.subPath }}
               {{- end }}
             - name: config
-              mountPath: /tmp/maddy
+              mountPath: /tmp/mailcoin
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -80,25 +80,25 @@ spec:
               subPath: {{ .Values.persistence.subPath }}
               {{- end }}
             - name: tls
-              mountPath: /etc/maddy/certs/fullchain.pem
+              mountPath: /etc/mailcoin/certs/fullchain.pem
               subPath: tls.crt
             - name: tls
-              mountPath: /etc/maddy/certs/privkey.pem
+              mountPath: /etc/mailcoin/certs/privkey.pem
               subPath: tls.key
       volumes:
         - name: data
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: {{ default (include "maddy.fullname" .) .Values.persistence.existingClaim }}
+            claimName: {{ default (include "mailcoin.fullname" .) .Values.persistence.existingClaim }}
           {{- else }}
           emptyDir: {}
           {{- end }}
         - name: config
           configMap:
-            name: {{include "maddy.fullname" .}}
+            name: {{include "mailcoin.fullname" .}}
         - name: tls
           secret:
-            secretName: {{include "maddy.fullname" .}}
+            secretName: {{include "mailcoin.fullname" .}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

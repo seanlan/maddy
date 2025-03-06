@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 func floodSmtp(c *tests.Conn, commands, expectedPatterns []string, iterations int) {
@@ -48,7 +48,7 @@ func TestSMTPFlood_FullMsg_NoLimits_1Conn(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			deliver_to dummy
@@ -58,12 +58,12 @@ func TestSMTPFlood_FullMsg_NoLimits_1Conn(tt *testing.T) {
 
 	c := t.Conn("smtp")
 	defer c.Close()
-	c.SMTPNegotation("helo.maddy.test", nil, nil)
+	c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 	floodSmtp(&c, []string{
-		"MAIL FROM:<from@maddy.test>",
-		"RCPT TO:<to@maddy.test>",
+		"MAIL FROM:<from@mailcoin.test>",
+		"RCPT TO:<to@mailcoin.test>",
 		"DATA",
-		"From: <from@maddy.test>",
+		"From: <from@mailcoin.test>",
 		"",
 		"Heya!",
 		".",
@@ -86,7 +86,7 @@ func TestSMTPFlood_FullMsg_NoLimits_10Conns(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			deliver_to dummy
@@ -101,12 +101,12 @@ func TestSMTPFlood_FullMsg_NoLimits_10Conns(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"DATA",
-				"From: <from@maddy.test>",
+				"From: <from@mailcoin.test>",
 				"",
 				"Heya!",
 				".",
@@ -134,7 +134,7 @@ func TestSMTPFlood_EnvelopeAbort_NoLimits_10Conns(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			deliver_to dummy
@@ -149,10 +149,10 @@ func TestSMTPFlood_EnvelopeAbort_NoLimits_10Conns(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"RSET",
 			}, []string{
 				"250 *",
@@ -174,7 +174,7 @@ func TestSMTPFlood_EnvelopeAbort_Ratelimited(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			limits {
@@ -200,10 +200,10 @@ func TestSMTPFlood_EnvelopeAbort_Ratelimited(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"RSET",
 			}, []string{
 				"250 *",
@@ -235,7 +235,7 @@ func TestSMTPFlood_FullMsg_Ratelimited_PerSource(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			defer_sender_reject false
@@ -263,12 +263,12 @@ func TestSMTPFlood_FullMsg_Ratelimited_PerSource(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@1.maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@1.mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"DATA",
-				"From: <from@1.maddy.test>",
+				"From: <from@1.mailcoin.test>",
 				"",
 				"Heya!",
 				".",
@@ -290,12 +290,12 @@ func TestSMTPFlood_FullMsg_Ratelimited_PerSource(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn("smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@2.maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@2.mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"DATA",
-				"From: <from@1.maddy.test>",
+				"From: <from@1.mailcoin.test>",
 				"",
 				"Heya!",
 				".",
@@ -334,7 +334,7 @@ func TestSMTPFlood_EnvelopeAbort_Ratelimited_PerIP(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			defer_sender_reject false
@@ -362,10 +362,10 @@ func TestSMTPFlood_EnvelopeAbort_Ratelimited_PerIP(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn4("127.0.0.1", "smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"RSET",
 			}, []string{
 				"250 *",
@@ -381,10 +381,10 @@ func TestSMTPFlood_EnvelopeAbort_Ratelimited_PerIP(tt *testing.T) {
 			defer wg.Done()
 			c := t.Conn4("127.0.0.2", "smtp")
 			defer c.Close()
-			c.SMTPNegotation("helo.maddy.test", nil, nil)
+			c.SMTPNegotation("helo.mailcoin.test", nil, nil)
 			floodSmtp(&c, []string{
-				"MAIL FROM:<from@maddy.test>",
-				"RCPT TO:<to@maddy.test>",
+				"MAIL FROM:<from@mailcoin.test>",
+				"RCPT TO:<to@mailcoin.test>",
 				"RSET",
 			}, []string{
 				"250 *",

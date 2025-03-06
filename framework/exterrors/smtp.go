@@ -32,7 +32,7 @@ func (ec EnhancedCode) FormatLog() string {
 
 // SMTPError type is a copy of emersion/go-smtp.SMTPError type
 // that extends it with Fields method for logging and reporting
-// in maddy. It should be used instead of the go-smtp library type for all
+// in mailcoin. It should be used instead of the go-smtp library type for all
 // errors.
 type SMTPError struct {
 	// SMTP status code. Most of these codes are overly generic and are barely

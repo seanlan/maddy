@@ -23,7 +23,7 @@ _testmain.go
 *.out
 
 # Compiled binaries
-cmd/maddy/maddy
+cmd/mailcoin/maddy
 cmd/maddy-*-helper/maddy-*-helper
 /maddy
 
@@ -38,8 +38,8 @@ docs/man/*.5
 
 # Some directories that may be created during test-runs
 # in repo directory.
-cmd/maddy/*mtasts-cache
-cmd/maddy/*queue
+cmd/mailcoin/*mtasts-cache
+cmd/mailcoin/*queue
 
 build/
 

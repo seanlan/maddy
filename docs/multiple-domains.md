@@ -96,10 +96,10 @@ $(local_domains) = example.org example.com
 Create accounts as:
 
 ```shell
-maddy creds create user@example.org
-maddy imap-acct create user@example.org
-maddy creds create user@example.com
-maddy imap-acct create user@example.com
+mailcoin creds create user@example.org
+mailcoin imap-acct create user@example.org
+mailcoin creds create user@example.com
+mailcoin imap-acct create user@example.com
 ```
 
 **"user@example.org" and "user@example.com" have same credentials but
@@ -113,9 +113,9 @@ auth_map email_localpart
 
 Create accounts as:
 ```shell
-maddy creds create user
-maddy imap-acct create user@example.org
-maddy imap-acct create user@example.com
+mailcoin creds create user
+mailcoin imap-acct create user@example.org
+mailcoin imap-acct create user@example.com
 ```
 
 **"user@example.org", "user@example.com", "user" have same credentials and same
@@ -152,6 +152,6 @@ mailboxes.**
 
 Create accounts as:
 ```shell
-maddy creds create user
-maddy imap-acct create user
+mailcoin creds create user
+mailcoin imap-acct create user
 ```

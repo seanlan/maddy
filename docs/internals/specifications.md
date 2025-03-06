@@ -124,7 +124,7 @@ details.
 - [RFC 5782] - DNS Blacklists and Whitelists
 
 
-[GH 188]: https://github.com/foxcpp/maddy/issues/188
+[GH 188]: https://mailcoin/issues/188
 
 [RFC 2822]: https://tools.ietf.org/html/rfc2822
 [RFC 2045]: https://tools.ietf.org/html/rfc2045

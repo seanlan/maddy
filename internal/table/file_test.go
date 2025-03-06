@@ -24,15 +24,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/config"
+	"mailcoin/internal/testutils"
 )
 
 func TestReadFile(t *testing.T) {
 	test := func(file string, expected map[string][]string) {
 		t.Helper()
 
-		f, err := os.CreateTemp("", "maddy-tests-")
+		f, err := os.CreateTemp("", "mailcoin-tests-")
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -87,7 +87,7 @@ func TestFileReload(t *testing.T) {
 
 	const file = `cat: dog`
 
-	f, err := os.CreateTemp("", "maddy-tests-")
+	f, err := os.CreateTemp("", "mailcoin-tests-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +138,7 @@ func TestFileReload_Broken(t *testing.T) {
 
 	const file = `cat: dog`
 
-	f, err := os.CreateTemp("", "maddy-tests-")
+	f, err := os.CreateTemp("", "mailcoin-tests-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +184,7 @@ func TestFileReload_Removed(t *testing.T) {
 
 	const file = `cat: dog`
 
-	f, err := os.CreateTemp("", "maddy-tests-")
+	f, err := os.CreateTemp("", "mailcoin-tests-")
 	if err != nil {
 		t.Fatal(err)
 	}

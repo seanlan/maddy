@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/log"
 	"github.com/miekg/dns"
+	"mailcoin/framework/log"
 )
 
 type TestSrvAction int
@@ -157,7 +157,7 @@ func TestExtResolver_AuthLookupIPAddr(t *testing.T) {
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
 
-			actualAd, actualAddrs, actualErr := res.AuthLookupIPAddr(ctx, "maddy.test")
+			actualAd, actualAddrs, actualErr := res.AuthLookupIPAddr(ctx, "mailcoin.test")
 			if (actualErr != nil) != err {
 				t.Fatal("actualErr:", actualErr, "expectedErr:", err)
 			}

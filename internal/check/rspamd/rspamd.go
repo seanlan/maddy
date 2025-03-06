@@ -31,14 +31,14 @@ import (
 	"strings"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	tls2 "github.com/foxcpp/maddy/framework/config/tls"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/target"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	tls2 "mailcoin/framework/config/tls"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/target"
 )
 
 const modName = "check.rspamd"
@@ -99,7 +99,7 @@ func (c *Check) Init(cfg *config.Map) error {
 	}, tls2.TLSClientBlock, &tlsConfig)
 	cfg.String("api_path", false, false, c.apiPath, &c.apiPath)
 	cfg.String("settings_id", false, false, "", &c.settingsID)
-	cfg.String("tag", false, false, "maddy", &c.tag)
+	cfg.String("tag", false, false, "mailcoin", &c.tag)
 	cfg.String("hostname", true, false, "", &c.mtaName)
 	cfg.Custom("io_error_action", false, false,
 		func() (interface{}, error) {
@@ -228,8 +228,8 @@ func (s *state) CheckBody(ctx context.Context, hdr textproto.Header, body buffer
 	}
 
 	r.Header.Add("Pass", "all") // TODO: does that need to be configurable?
-	// TODO: include version (needs maddy.Version moved somewhere to break circular dependency)
-	r.Header.Add("User-Agent", "maddy")
+	// TODO: include version (needs mailcoin.Version moved somewhere to break circular dependency)
+	r.Header.Add("User-Agent", "mailcoin")
 	if s.c.tag != "" {
 		r.Header.Add("MTA-Tag", s.c.tag)
 	}

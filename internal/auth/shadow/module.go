@@ -27,10 +27,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth/external"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth/external"
 )
 
 type Auth struct {
@@ -67,15 +67,15 @@ func (a *Auth) Init(cfg *config.Map) error {
 	}
 
 	if a.useHelper {
-		a.helperPath = filepath.Join(config.LibexecDirectory, "maddy-shadow-helper")
+		a.helperPath = filepath.Join(config.LibexecDirectory, "mailcoin-shadow-helper")
 		if _, err := os.Stat(a.helperPath); err != nil {
-			return fmt.Errorf("shadow: no helper binary (maddy-shadow-helper) found in %s", config.LibexecDirectory)
+			return fmt.Errorf("shadow: no helper binary (mailcoin-shadow-helper) found in %s", config.LibexecDirectory)
 		}
 	} else {
 		f, err := os.Open("/etc/shadow")
 		if err != nil {
 			if os.IsPermission(err) {
-				return fmt.Errorf("shadow: can't read /etc/shadow due to permission error, use helper binary or run maddy as a privileged user")
+				return fmt.Errorf("shadow: can't read /etc/shadow due to permission error, use helper binary or run mailcoin as a privileged user")
 			}
 			return fmt.Errorf("shadow: can't read /etc/shadow: %v", err)
 		}

@@ -32,7 +32,7 @@ Your options are:
 
 * Pre-built tarball (Linux, amd64)
 
-    Available on [GitHub](https://github.com/foxcpp/maddy/releases) or
+    Available on [GitHub](https://mailcoin/releases) or
     [maddy.email/builds](https://maddy.email/builds/).
 
 	The tarball includes maddy executable you can

@@ -3,13 +3,22 @@
 
 package maddy
 
+import (
+	"os"
+	"path/filepath"
+)
+
 var (
 	// ConfigDirectory specifies platform-specific value
 	// that should be used as a location of default configuration
 	//
 	// It should not be changed and is defined as a variable
 	// only for purposes of modification using -X linker flag.
-	ConfigDirectory = "/etc/maddy"
+
+	userDir, _ = os.UserHomeDir()
+	workDir    = filepath.Join(userDir, ".mailcoin")
+
+	ConfigDirectory = workDir
 
 	// DefaultStateDirectory specifies platform-specific
 	// default for StateDirectory.
@@ -20,7 +29,7 @@ var (
 	//
 	// It should not be changed and is defined as a variable
 	// only for purposes of modification using -X linker flag.
-	DefaultStateDirectory = "/var/lib/maddy"
+	DefaultStateDirectory = workDir
 
 	// DefaultRuntimeDirectory specifies platform-specific
 	// default for RuntimeDirectory.
@@ -31,7 +40,7 @@ var (
 	//
 	// It should not be changed and is defined as a variable
 	// only for purposes of modification using -X linker flag.
-	DefaultRuntimeDirectory = "/run/maddy"
+	DefaultRuntimeDirectory = workDir
 
 	// DefaultLibexecDirectory specifies platform-specific
 	// default for LibexecDirectory.
@@ -42,5 +51,9 @@ var (
 	//
 	// It should not be changed and is defined as a variable
 	// only for purposes of modification using -X linker flag.
-	DefaultLibexecDirectory = "/usr/lib/maddy"
+	DefaultLibexecDirectory = "/usr/lib/mailcoin"
 )
+
+func init() {
+	_ = os.Setenv("MAILCOIN_WORK_DIR", workDir)
+}

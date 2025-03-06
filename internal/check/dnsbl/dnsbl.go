@@ -27,15 +27,15 @@ import (
 	"sync"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/target"
 	"golang.org/x/sync/errgroup"
+	"mailcoin/framework/address"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/target"
 )
 
 type List struct {

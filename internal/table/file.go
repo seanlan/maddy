@@ -28,10 +28,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 const FileModName = "table.file"

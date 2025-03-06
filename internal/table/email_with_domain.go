@@ -22,10 +22,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/address"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 type EmailWithDomain struct {

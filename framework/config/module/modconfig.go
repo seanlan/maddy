@@ -32,11 +32,11 @@ import (
 	"reflect"
 	"strings"
 
-	parser "github.com/foxcpp/maddy/framework/cfgparser"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	parser "mailcoin/framework/cfgparser"
+	"mailcoin/framework/config"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 // createInlineModule is a helper function for config matchers that can create inline modules.

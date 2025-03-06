@@ -29,10 +29,10 @@ import (
 
 	"github.com/emersion/go-imap"
 	imapsql "github.com/foxcpp/go-imap-sql"
-	"github.com/foxcpp/maddy/framework/module"
-	maddycli "github.com/foxcpp/maddy/internal/cli"
-	clitools2 "github.com/foxcpp/maddy/internal/cli/clitools"
 	"github.com/urfave/cli/v2"
+	"mailcoin/framework/module"
+	maddycli "mailcoin/internal/cli"
+	clitools2 "mailcoin/internal/cli/clitools"
 )
 
 func init() {

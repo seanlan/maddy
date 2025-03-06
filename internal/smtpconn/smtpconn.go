@@ -39,14 +39,14 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
+	"mailcoin/framework/address"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
 )
 
 // The C object represents the SMTP connection and is a wrapper around
-// go-smtp.Client with additional maddy-specific logic.
+// go-smtp.Client with additional mailcoin-specific logic.
 //
 // Currently, the C object represents one session and cannot be reused.
 type C struct {

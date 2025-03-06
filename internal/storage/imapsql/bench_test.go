@@ -25,7 +25,7 @@ import (
 	"time"
 
 	imapsql "github.com/foxcpp/go-imap-sql"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/internal/testutils"
 )
 
 var (

@@ -23,7 +23,7 @@ import "github.com/prometheus/client_golang/prometheus"
 var (
 	startedSMTPTransactions = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "smtp",
 			Name:      "started_transactions",
 			Help:      "Amount of SMTP trasanactions started",
@@ -32,7 +32,7 @@ var (
 	)
 	completedSMTPTransactions = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "smtp",
 			Name:      "smtp_completed_transactions",
 			Help:      "Amount of SMTP trasanactions successfully completed",
@@ -41,7 +41,7 @@ var (
 	)
 	abortedSMTPTransactions = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "smtp",
 			Name:      "aborted_transactions",
 			Help:      "Amount of SMTP trasanactions aborted",
@@ -51,7 +51,7 @@ var (
 
 	ratelimitDefers = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "smtp",
 			Name:      "ratelimit_deferred",
 			Help:      "Messages rejected with 4xx code due to ratelimiting",
@@ -60,7 +60,7 @@ var (
 	)
 	failedLogins = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "smtp",
 			Name:      "failed_logins",
 			Help:      "AUTH command failures",
@@ -69,7 +69,7 @@ var (
 	)
 	failedCmds = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "maddy",
+			Namespace: "mailcoin",
 			Subsystem: "smtp",
 			Name:      "failed_commands",
 			Help:      "Failed transaction commands (MAIL, RCPT, DATA)",

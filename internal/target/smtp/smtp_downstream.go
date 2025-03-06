@@ -36,15 +36,15 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	tls2 "github.com/foxcpp/maddy/framework/config/tls"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/smtpconn"
-	"github.com/foxcpp/maddy/internal/target"
 	"golang.org/x/net/idna"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	tls2 "mailcoin/framework/config/tls"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/smtpconn"
+	"mailcoin/internal/target"
 )
 
 type Downstream struct {

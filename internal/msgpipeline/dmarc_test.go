@@ -32,10 +32,10 @@ import (
 	"github.com/emersion/go-msgauth/authres"
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 func doTestDelivery(t *testing.T, tgt module.DeliveryTarget, from string, to []string, hdr string) (string, error) {

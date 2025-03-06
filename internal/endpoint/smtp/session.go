@@ -33,13 +33,13 @@ import (
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/address"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/auth"
+	"mailcoin/framework/address"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/auth"
 )
 
 func limitReader(r io.Reader, n int64, err error) *limitedReader {

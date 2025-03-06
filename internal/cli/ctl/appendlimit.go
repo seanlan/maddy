@@ -22,8 +22,8 @@ import (
 	"fmt"
 
 	imapbackend "github.com/emersion/go-imap/backend"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/urfave/cli/v2"
+	"mailcoin/framework/module"
 )
 
 // Copied from go-imap-backend-tests.

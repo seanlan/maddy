@@ -3,8 +3,8 @@ package authz
 import (
 	"strings"
 
-	"github.com/foxcpp/maddy/framework/address"
 	"golang.org/x/text/secure/precis"
+	"mailcoin/framework/address"
 )
 
 type NormalizeFunc func(string) (string, error)

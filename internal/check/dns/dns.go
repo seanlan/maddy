@@ -21,12 +21,12 @@ package dns
 import (
 	"strings"
 
-	"github.com/foxcpp/maddy/framework/address"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/dns"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/check"
+	"mailcoin/framework/address"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/dns"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
+	"mailcoin/internal/check"
 )
 
 func requireMatchingRDNS(ctx check.StatelessCheckContext) module.CheckResult {

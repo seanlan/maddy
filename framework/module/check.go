@@ -23,7 +23,7 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-msgauth/authres"
-	"github.com/foxcpp/maddy/framework/buffer"
+	"mailcoin/framework/buffer"
 )
 
 // Check is the module interface that is meant for read-only (with the

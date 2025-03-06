@@ -24,13 +24,13 @@ import (
 	"io"
 	"os"
 
-	"github.com/foxcpp/maddy"
-	parser "github.com/foxcpp/maddy/framework/cfgparser"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/updatepipe"
 	"github.com/urfave/cli/v2"
+	"mailcoin"
+	parser "mailcoin/framework/cfgparser"
+	"mailcoin/framework/config"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/module"
+	"mailcoin/internal/updatepipe"
 )
 
 func closeIfNeeded(i interface{}) {

@@ -26,7 +26,7 @@ single 1 GiB of RAM and disk space.
 
 ## How to setup a catchall address?
 
-https://github.com/foxcpp/maddy/issues/243#issuecomment-655694512
+https://mailcoin/issues/243#issuecomment-655694512
 
 ## maddy command prints a "permission denied" error
 

@@ -23,11 +23,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/foxcpp/maddy/internal/auth/pass_table"
-	maddycli "github.com/foxcpp/maddy/internal/cli"
-	clitools2 "github.com/foxcpp/maddy/internal/cli/clitools"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/crypto/bcrypt"
+	"mailcoin/internal/auth/pass_table"
+	maddycli "mailcoin/internal/cli"
+	clitools2 "mailcoin/internal/cli/clitools"
 )
 
 func init() {

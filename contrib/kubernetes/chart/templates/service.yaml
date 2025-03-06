@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "maddy.fullname" . }}
+  name: {{ include "mailcoin.fullname" . }}
   labels:
-    {{- include "maddy.labels" . | nindent 4 }}
+    {{- include "mailcoin.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -20,7 +20,7 @@ spec:
       protocol: TCP
       name: starttls
   selector:
-    {{- include "maddy.selectorLabels" . | nindent 4 }}
+    {{- include "mailcoin.selectorLabels" . | nindent 4 }}
   {{- with .Values.service.externalIPs }}
   externalIPs:
   {{- toYaml . | nindent 6 }}

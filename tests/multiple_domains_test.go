@@ -23,7 +23,7 @@ package tests_test
 import (
 	"testing"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 // Test cases based on https://maddy.email/multiple-domains/
@@ -36,7 +36,7 @@ func TestMultipleDomains_SeparateNamespace(tt *testing.T) {
 	t.Port("imap")
 	t.Config(`
 		tls off
-		hostname test.maddy.email
+		hostname test.mailcoin.email
 
 		auth.pass_table local_authdb {
 			table sql_table {
@@ -61,19 +61,19 @@ func TestMultipleDomains_SeparateNamespace(tt *testing.T) {
 	`)
 
 	t.MustRunCLIGroup(
-		[]string{"creds", "create", "-p", "user1", "user1@test1.maddy.email"},
-		[]string{"creds", "create", "-p", "user2", "user2@test1.maddy.email"},
-		[]string{"creds", "create", "-p", "user3", "user1@test2.maddy.email"},
-		[]string{"imap-acct", "create", "--no-specialuse", "user1@test1.maddy.email"},
-		[]string{"imap-acct", "create", "--no-specialuse", "user2@test1.maddy.email"},
-		[]string{"imap-acct", "create", "--no-specialuse", "user1@test2.maddy.email"},
+		[]string{"creds", "create", "-p", "user1", "user1@test1.mailcoin.email"},
+		[]string{"creds", "create", "-p", "user2", "user2@test1.mailcoin.email"},
+		[]string{"creds", "create", "-p", "user3", "user1@test2.mailcoin.email"},
+		[]string{"imap-acct", "create", "--no-specialuse", "user1@test1.mailcoin.email"},
+		[]string{"imap-acct", "create", "--no-specialuse", "user2@test1.mailcoin.email"},
+		[]string{"imap-acct", "create", "--no-specialuse", "user1@test2.mailcoin.email"},
 	)
 	t.Run(2)
 
 	user1 := t.Conn("imap")
 	defer user1.Close()
 	user1.ExpectPattern(`\* OK *`)
-	user1.Writeln(`. LOGIN user1@test1.maddy.email user1`)
+	user1.Writeln(`. LOGIN user1@test1.mailcoin.email user1`)
 	user1.ExpectPattern(`. OK *`)
 	user1.Writeln(`. CREATE user1`)
 	user1.ExpectPattern(`. OK *`)
@@ -81,12 +81,12 @@ func TestMultipleDomains_SeparateNamespace(tt *testing.T) {
 	user1SMTP := t.Conn("submission")
 	defer user1SMTP.Close()
 	user1SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user1SMTP.SMTPPlainAuth("user1@test1.maddy.email", "user1", true)
+	user1SMTP.SMTPPlainAuth("user1@test1.mailcoin.email", "user1", true)
 
 	user2 := t.Conn("imap")
 	defer user2.Close()
 	user2.ExpectPattern(`\* OK *`)
-	user2.Writeln(`. LOGIN user2@test1.maddy.email user2`)
+	user2.Writeln(`. LOGIN user2@test1.mailcoin.email user2`)
 	user2.ExpectPattern(`. OK *`)
 	user2.Writeln(`. CREATE user2`)
 	user2.ExpectPattern(`. OK *`)
@@ -94,12 +94,12 @@ func TestMultipleDomains_SeparateNamespace(tt *testing.T) {
 	user2SMTP := t.Conn("submission")
 	defer user2SMTP.Close()
 	user2SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user2SMTP.SMTPPlainAuth("user2@test1.maddy.email", "user2", true)
+	user2SMTP.SMTPPlainAuth("user2@test1.mailcoin.email", "user2", true)
 
 	user3 := t.Conn("imap")
 	defer user3.Close()
 	user3.ExpectPattern(`\* OK *`)
-	user3.Writeln(`. LOGIN user1@test2.maddy.email user3`)
+	user3.Writeln(`. LOGIN user1@test2.mailcoin.email user3`)
 	user3.ExpectPattern(`. OK *`)
 	user3.Writeln(`. CREATE user3`)
 	user3.ExpectPattern(`. OK *`)
@@ -107,7 +107,7 @@ func TestMultipleDomains_SeparateNamespace(tt *testing.T) {
 	user3SMTP := t.Conn("submission")
 	defer user3SMTP.Close()
 	user3SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user3SMTP.SMTPPlainAuth("user1@test2.maddy.email", "user3", true)
+	user3SMTP.SMTPPlainAuth("user1@test2.mailcoin.email", "user3", true)
 
 	user1.Writeln(`. LIST "" "*"`)
 	user1.Expect(`* LIST (\HasNoChildren) "." INBOX`)
@@ -133,7 +133,7 @@ func TestMultipleDomains_SharedCredentials_DistinctMailboxes(tt *testing.T) {
 	t.Port("imap")
 	t.Config(`
 		tls off
-		hostname test.maddy.email
+		hostname test.mailcoin.email
 		auth_map email_localpart
 
 		auth.pass_table local_authdb {
@@ -161,16 +161,16 @@ func TestMultipleDomains_SharedCredentials_DistinctMailboxes(tt *testing.T) {
 	t.MustRunCLIGroup(
 		[]string{"creds", "create", "-p", "user1", "user1"},
 		[]string{"creds", "create", "-p", "user2", "user2"},
-		[]string{"imap-acct", "create", "--no-specialuse", "user1@test1.maddy.email"},
-		[]string{"imap-acct", "create", "--no-specialuse", "user2@test1.maddy.email"},
-		[]string{"imap-acct", "create", "--no-specialuse", "user1@test2.maddy.email"},
+		[]string{"imap-acct", "create", "--no-specialuse", "user1@test1.mailcoin.email"},
+		[]string{"imap-acct", "create", "--no-specialuse", "user2@test1.mailcoin.email"},
+		[]string{"imap-acct", "create", "--no-specialuse", "user1@test2.mailcoin.email"},
 	)
 	t.Run(2)
 
 	user1 := t.Conn("imap")
 	defer user1.Close()
 	user1.ExpectPattern(`\* OK *`)
-	user1.Writeln(`. LOGIN user1@test1.maddy.email user1`)
+	user1.Writeln(`. LOGIN user1@test1.mailcoin.email user1`)
 	user1.ExpectPattern(`. OK *`)
 	user1.Writeln(`. CREATE user1`)
 	user1.ExpectPattern(`. OK *`)
@@ -178,12 +178,12 @@ func TestMultipleDomains_SharedCredentials_DistinctMailboxes(tt *testing.T) {
 	user1SMTP := t.Conn("submission")
 	defer user1SMTP.Close()
 	user1SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user1SMTP.SMTPPlainAuth("user1@test1.maddy.email", "user1", true)
+	user1SMTP.SMTPPlainAuth("user1@test1.mailcoin.email", "user1", true)
 
 	user2 := t.Conn("imap")
 	defer user2.Close()
 	user2.ExpectPattern(`\* OK *`)
-	user2.Writeln(`. LOGIN user2@test1.maddy.email user2`)
+	user2.Writeln(`. LOGIN user2@test1.mailcoin.email user2`)
 	user2.ExpectPattern(`. OK *`)
 	user2.Writeln(`. CREATE user2`)
 	user2.ExpectPattern(`. OK *`)
@@ -191,12 +191,12 @@ func TestMultipleDomains_SharedCredentials_DistinctMailboxes(tt *testing.T) {
 	user2SMTP := t.Conn("submission")
 	defer user2SMTP.Close()
 	user2SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user2SMTP.SMTPPlainAuth("user2@test1.maddy.email", "user2", true)
+	user2SMTP.SMTPPlainAuth("user2@test1.mailcoin.email", "user2", true)
 
 	user3 := t.Conn("imap")
 	defer user3.Close()
 	user3.ExpectPattern(`\* OK *`)
-	user3.Writeln(`. LOGIN user1@test2.maddy.email user1`)
+	user3.Writeln(`. LOGIN user1@test2.mailcoin.email user1`)
 	user3.ExpectPattern(`. OK *`)
 	user3.Writeln(`. CREATE user3`)
 	user3.ExpectPattern(`. OK *`)
@@ -204,7 +204,7 @@ func TestMultipleDomains_SharedCredentials_DistinctMailboxes(tt *testing.T) {
 	user3SMTP := t.Conn("submission")
 	defer user3SMTP.Close()
 	user3SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user3SMTP.SMTPPlainAuth("user1@test2.maddy.email", "user1", true)
+	user3SMTP.SMTPPlainAuth("user1@test2.mailcoin.email", "user1", true)
 
 	user1.Writeln(`. LIST "" "*"`)
 	user1.Expect(`* LIST (\HasNoChildren) "." INBOX`)
@@ -230,7 +230,7 @@ func TestMultipleDomains_SharedCredentials_SharedMailboxes(tt *testing.T) {
 	t.Port("imap")
 	t.Config(`
 		tls off
-		hostname test.maddy.email
+		hostname test.mailcoin.email
 		auth_map email_localpart_optional
 
 		auth.pass_table local_authdb {
@@ -283,7 +283,7 @@ func TestMultipleDomains_SharedCredentials_SharedMailboxes(tt *testing.T) {
 	user2 := t.Conn("imap")
 	defer user2.Close()
 	user2.ExpectPattern(`\* OK *`)
-	user2.Writeln(`. LOGIN user2@test1.maddy.email user2`)
+	user2.Writeln(`. LOGIN user2@test1.mailcoin.email user2`)
 	user2.ExpectPattern(`. OK *`)
 	user2.Writeln(`. CREATE user2`)
 	user2.ExpectPattern(`. OK *`)
@@ -296,7 +296,7 @@ func TestMultipleDomains_SharedCredentials_SharedMailboxes(tt *testing.T) {
 	user12 := t.Conn("imap")
 	defer user12.Close()
 	user12.ExpectPattern(`\* OK *`)
-	user12.Writeln(`. LOGIN user1@test2.maddy.email user1`)
+	user12.Writeln(`. LOGIN user1@test2.mailcoin.email user1`)
 	user12.ExpectPattern(`. OK *`)
 	user12.Writeln(`. CREATE user12`)
 	user12.ExpectPattern(`. OK *`)
@@ -304,7 +304,7 @@ func TestMultipleDomains_SharedCredentials_SharedMailboxes(tt *testing.T) {
 	user13 := t.Conn("imap")
 	defer user13.Close()
 	user13.ExpectPattern(`\* OK *`)
-	user13.Writeln(`. LOGIN user1@test.maddy.email user1`)
+	user13.Writeln(`. LOGIN user1@test.mailcoin.email user1`)
 	user13.ExpectPattern(`. OK *`)
 	user13.Writeln(`. CREATE user13`)
 	user13.ExpectPattern(`. OK *`)
@@ -317,7 +317,7 @@ func TestMultipleDomains_SharedCredentials_SharedMailboxes(tt *testing.T) {
 	user13SMTP := t.Conn("submission")
 	defer user13SMTP.Close()
 	user13SMTP.SMTPNegotation("localhost", []string{"AUTH PLAIN"}, nil)
-	user13SMTP.SMTPPlainAuth("user1@test.maddy.email", "user1", true)
+	user13SMTP.SMTPPlainAuth("user1@test.mailcoin.email", "user1", true)
 
 	user1.Writeln(`. LIST "" "*"`)
 	user1.Expect(`* LIST (\HasNoChildren) "." INBOX`)

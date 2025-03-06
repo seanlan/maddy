@@ -25,12 +25,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/log"
+	"mailcoin/framework/log"
 )
 
 var (
-	debugLog  = flag.Bool("test.debuglog", false, "(maddy) Turn on debug log messages")
-	directLog = flag.Bool("test.directlog", false, "(maddy) Log to stderr instead of test log")
+	debugLog  = flag.Bool("test.debuglog", false, "(mailcoin) Turn on debug log messages")
+	directLog = flag.Bool("test.directlog", false, "(mailcoin) Log to stderr instead of test log")
 )
 
 func Logger(t *testing.T, name string) log.Logger {

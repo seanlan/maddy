@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: If you would like to see a new feature in maddy.
+about: If you would like to see a new feature in mailcoin.
 title: Feature request
 labels: new feature
 assignees: ''

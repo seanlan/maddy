@@ -25,9 +25,9 @@ import (
 	"time"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/google/uuid"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
 )
 
 var (

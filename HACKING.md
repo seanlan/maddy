@@ -63,7 +63,7 @@ initialization path, so they are always initialized directly.
 
 ## Error handling
 
-Familiarize yourself with the `github.com/foxcpp/maddy/framework/exterrors`
+Familiarize yourself with the `mailcoin/framework/exterrors`
 package and make sure you have the following for returned errors:
 - SMTP status information (smtp\_code, smtp\_enchcode, smtp\_msg fields)
   - SMTP message text should contain a generic description of the error
@@ -112,7 +112,7 @@ Here are some guidelines to make sure your check works well:
 - RTFM, docs will tell you about any caveats.
 - Don't share any state _between_ messages, your code will be executed in
   parallel.
-- Use `github.com/foxcpp/maddy/check.FailAction` to select behavior on check
+- Use `mailcoin/check.FailAction` to select behavior on check
   failures. See other checks for examples on how to use it.
 - You can assume that order of check functions execution is as follows:
   `CheckConnection`, `CheckSender`, `CheckRcpt`, `CheckBody`.
@@ -127,4 +127,4 @@ can be modified.
 Structure of the modifier implementation is similar to the structure of check
 implementation, check `modify/replace\_addr.go` for a working example.
 
-[1]: https://github.com/foxcpp/maddy/wiki/Dev:-Comments-on-design
+[1]: https://mailcoin/wiki/Dev:-Comments-on-design

@@ -24,7 +24,7 @@ package tests_test
 import (
 	"testing"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 func TestBasic(tt *testing.T) {
@@ -38,7 +38,7 @@ func TestBasic(tt *testing.T) {
 	t.Port("smtp")
 	t.Config(`
 		smtp tcp://127.0.0.1:{env:TEST_PORT_smtp} {
-			hostname mx.maddy.test
+			hostname mx.mailcoin.test
 			tls off
 
 			deliver_to dummy
@@ -48,7 +48,7 @@ func TestBasic(tt *testing.T) {
 
 	conn := t.Conn("smtp")
 	defer conn.Close()
-	conn.ExpectPattern("220 mx.maddy.test *")
+	conn.ExpectPattern("220 mx.mailcoin.test *")
 	conn.Writeln("EHLO localhost")
 	conn.ExpectPattern("250-*")
 	conn.ExpectPattern("250-PIPELINING")

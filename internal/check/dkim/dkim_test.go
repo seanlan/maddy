@@ -26,11 +26,11 @@ import (
 
 	"github.com/emersion/go-msgauth/authres"
 	"github.com/foxcpp/go-mockdns"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/framework/module"
+	"mailcoin/internal/testutils"
 )
 
 const unsignedMailString = `From: Joe SixPack <joe@football.example.com>

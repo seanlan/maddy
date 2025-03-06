@@ -22,7 +22,7 @@ import (
 	"context"
 
 	"github.com/emersion/go-message/textproto"
-	"github.com/foxcpp/maddy/framework/buffer"
+	"mailcoin/framework/buffer"
 )
 
 // Modifier is the module interface for modules that can mutate the

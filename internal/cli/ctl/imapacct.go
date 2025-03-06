@@ -24,10 +24,10 @@ import (
 	"os"
 
 	"github.com/emersion/go-imap"
-	"github.com/foxcpp/maddy/framework/module"
-	maddycli "github.com/foxcpp/maddy/internal/cli"
-	clitools2 "github.com/foxcpp/maddy/internal/cli/clitools"
 	"github.com/urfave/cli/v2"
+	"mailcoin/framework/module"
+	maddycli "mailcoin/internal/cli"
+	clitools2 "mailcoin/internal/cli/clitools"
 )
 
 func init() {
@@ -36,9 +36,9 @@ func init() {
 			Name:  "imap-acct",
 			Usage: "IMAP storage accounts management",
 			Description: `These subcommands can be used to list/create/delete IMAP storage
-accounts for any storage backend supported by maddy.
+accounts for any storage backend supported by mailcoin.
 
-The corresponding storage backend should be configured in maddy.conf and be
+The corresponding storage backend should be configured in mailcoin.conf and be
 defined in a top-level configuration block. By default, the name of that
 block should be local_mailboxes but this can be changed using --cfg-block
 flag for subcommands.
@@ -197,7 +197,7 @@ type SpecialUseUser interface {
 func imapAcctList(be module.Storage, ctx *cli.Context) error {
 	mbe, ok := be.(module.ManageableStorage)
 	if !ok {
-		return cli.Exit("Error: storage backend does not support accounts management using maddy command", 2)
+		return cli.Exit("Error: storage backend does not support accounts management using mailcoin command", 2)
 	}
 
 	list, err := mbe.ListIMAPAccts()
@@ -218,7 +218,7 @@ func imapAcctList(be module.Storage, ctx *cli.Context) error {
 func imapAcctCreate(be module.Storage, ctx *cli.Context) error {
 	mbe, ok := be.(module.ManageableStorage)
 	if !ok {
-		return cli.Exit("Error: storage backend does not support accounts management using maddy command", 2)
+		return cli.Exit("Error: storage backend does not support accounts management using mailcoin command", 2)
 	}
 
 	username := ctx.Args().First()
@@ -283,7 +283,7 @@ func imapAcctCreate(be module.Storage, ctx *cli.Context) error {
 func imapAcctRemove(be module.Storage, ctx *cli.Context) error {
 	mbe, ok := be.(module.ManageableStorage)
 	if !ok {
-		return cli.Exit("Error: storage backend does not support accounts management using maddy command", 2)
+		return cli.Exit("Error: storage backend does not support accounts management using mailcoin command", 2)
 	}
 
 	username := ctx.Args().First()

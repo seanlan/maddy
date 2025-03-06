@@ -34,7 +34,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/foxcpp/maddy/tests"
+	"mailcoin/tests"
 )
 
 var ChasquidExecutable string

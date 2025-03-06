@@ -42,19 +42,19 @@ jobs:
       - name: "Upload source tree"
         uses: actions/upload-artifact@v4
         with:
-          name: maddy-src.tar.zst
-          path: '~/maddy-src.tar.zst'
+          name: mailcoin-src.tar.zst
+          path: '~/mailcoin-src.tar.zst'
           if-no-files-found: error
       - name: "Upload binary tree"
         uses: actions/upload-artifact@v4
         with:
-          name: maddy-binary.tar.zst
-          path: '~/maddy-x86_64-linux-musl.tar.zst'
+          name: mailcoin-binary.tar.zst
+          path: '~/mailcoin-x86_64-linux-musl.tar.zst'
           if-no-files-found: error
       - name: "Generate artifact attestation"
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: '~/maddy-x86_64-linux-musl.tar.zst'
+          subject-path: '~/mailcoin-x86_64-linux-musl.tar.zst'
   artifact-builder-arm:
     name: "Prepare release artifacts (aarch64)"
     if: github.ref_type == 'tag'
@@ -91,13 +91,13 @@ jobs:
       - name: Upload binary tree
         uses: actions/upload-artifact@v4
         with:
-          name: maddy-binary-aarch64.tar.zst
-          path: maddy-aarch64-linux-musl.tar.zst
+          name: mailcoin-binary-aarch64.tar.zst
+          path: mailcoin-aarch64-linux-musl.tar.zst
           if-no-files-found: error
       - name: "Generate artifact attestation"
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: 'maddy-aarch64-linux-musl.tar.zst'
+          subject-path: 'mailcoin-aarch64-linux-musl.tar.zst'
   docker-builder:
     name: "Build & push Docker image"
     if: github.ref_type == 'tag'
@@ -152,7 +152,7 @@ jobs:
       - name: "Generate container attestation"
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/foxcpp/maddy
+          subject-name: ghcr.io/foxcpp/mailcoin
           subject-digest: ${{ steps.docker.outputs.digest }}
           push-to-registry: true
 

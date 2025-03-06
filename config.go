@@ -24,8 +24,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
 )
 
 /*

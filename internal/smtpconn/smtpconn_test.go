@@ -29,7 +29,7 @@ import (
 var testPort string
 
 func TestMain(m *testing.M) {
-	remoteSmtpPort := flag.String("test.smtpport", "random", "(maddy) SMTP port to use for connections in tests")
+	remoteSmtpPort := flag.String("test.smtpport", "random", "(mailcoin) SMTP port to use for connections in tests")
 	flag.Parse()
 
 	if *remoteSmtpPort == "random" {

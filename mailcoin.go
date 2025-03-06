@@ -29,53 +29,53 @@ import (
 	"runtime/debug"
 
 	"github.com/caddyserver/certmagic"
-	parser "github.com/foxcpp/maddy/framework/cfgparser"
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/config/tls"
-	"github.com/foxcpp/maddy/framework/hooks"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/authz"
-	maddycli "github.com/foxcpp/maddy/internal/cli"
 	"github.com/urfave/cli/v2"
+	parser "mailcoin/framework/cfgparser"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/config/tls"
+	"mailcoin/framework/hooks"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
+	"mailcoin/internal/authz"
+	maddycli "mailcoin/internal/cli"
 
 	// Import packages for side-effect of module registration.
-	_ "github.com/foxcpp/maddy/internal/auth/dovecot_sasl"
-	_ "github.com/foxcpp/maddy/internal/auth/external"
-	_ "github.com/foxcpp/maddy/internal/auth/ldap"
-	_ "github.com/foxcpp/maddy/internal/auth/netauth"
-	_ "github.com/foxcpp/maddy/internal/auth/pam"
-	_ "github.com/foxcpp/maddy/internal/auth/pass_table"
-	_ "github.com/foxcpp/maddy/internal/auth/plain_separate"
-	_ "github.com/foxcpp/maddy/internal/auth/shadow"
-	_ "github.com/foxcpp/maddy/internal/check/authorize_sender"
-	_ "github.com/foxcpp/maddy/internal/check/command"
-	_ "github.com/foxcpp/maddy/internal/check/dkim"
-	_ "github.com/foxcpp/maddy/internal/check/dns"
-	_ "github.com/foxcpp/maddy/internal/check/dnsbl"
-	_ "github.com/foxcpp/maddy/internal/check/milter"
-	_ "github.com/foxcpp/maddy/internal/check/requiretls"
-	_ "github.com/foxcpp/maddy/internal/check/rspamd"
-	_ "github.com/foxcpp/maddy/internal/check/spf"
-	_ "github.com/foxcpp/maddy/internal/endpoint/dovecot_sasld"
-	_ "github.com/foxcpp/maddy/internal/endpoint/imap"
-	_ "github.com/foxcpp/maddy/internal/endpoint/openmetrics"
-	_ "github.com/foxcpp/maddy/internal/endpoint/smtp"
-	_ "github.com/foxcpp/maddy/internal/imap_filter"
-	_ "github.com/foxcpp/maddy/internal/imap_filter/command"
-	_ "github.com/foxcpp/maddy/internal/libdns"
-	_ "github.com/foxcpp/maddy/internal/modify"
-	_ "github.com/foxcpp/maddy/internal/modify/dkim"
-	_ "github.com/foxcpp/maddy/internal/storage/blob/fs"
-	_ "github.com/foxcpp/maddy/internal/storage/blob/s3"
-	_ "github.com/foxcpp/maddy/internal/storage/imapsql"
-	_ "github.com/foxcpp/maddy/internal/table"
-	_ "github.com/foxcpp/maddy/internal/target/queue"
-	_ "github.com/foxcpp/maddy/internal/target/remote"
-	_ "github.com/foxcpp/maddy/internal/target/smtp"
-	_ "github.com/foxcpp/maddy/internal/tls"
-	_ "github.com/foxcpp/maddy/internal/tls/acme"
+	_ "mailcoin/internal/auth/dovecot_sasl"
+	_ "mailcoin/internal/auth/external"
+	_ "mailcoin/internal/auth/ldap"
+	_ "mailcoin/internal/auth/netauth"
+	_ "mailcoin/internal/auth/pam"
+	_ "mailcoin/internal/auth/pass_table"
+	_ "mailcoin/internal/auth/plain_separate"
+	_ "mailcoin/internal/auth/shadow"
+	_ "mailcoin/internal/check/authorize_sender"
+	_ "mailcoin/internal/check/command"
+	_ "mailcoin/internal/check/dkim"
+	_ "mailcoin/internal/check/dns"
+	_ "mailcoin/internal/check/dnsbl"
+	_ "mailcoin/internal/check/milter"
+	_ "mailcoin/internal/check/requiretls"
+	_ "mailcoin/internal/check/rspamd"
+	_ "mailcoin/internal/check/spf"
+	_ "mailcoin/internal/endpoint/dovecot_sasld"
+	_ "mailcoin/internal/endpoint/imap"
+	_ "mailcoin/internal/endpoint/openmetrics"
+	_ "mailcoin/internal/endpoint/smtp"
+	_ "mailcoin/internal/imap_filter"
+	_ "mailcoin/internal/imap_filter/command"
+	_ "mailcoin/internal/libdns"
+	_ "mailcoin/internal/modify"
+	_ "mailcoin/internal/modify/dkim"
+	_ "mailcoin/internal/storage/blob/fs"
+	_ "mailcoin/internal/storage/blob/s3"
+	_ "mailcoin/internal/storage/imapsql"
+	_ "mailcoin/internal/table"
+	_ "mailcoin/internal/target/queue"
+	_ "mailcoin/internal/target/remote"
+	_ "mailcoin/internal/target/smtp"
+	_ "mailcoin/internal/tls"
+	_ "mailcoin/internal/tls/acme"
 )
 
 var (
@@ -96,7 +96,7 @@ default config: %s
 default state_dir: %s
 default runtime_dir: %s`,
 		version, runtime.GOOS, runtime.GOARCH, runtime.Version(),
-		filepath.Join(ConfigDirectory, "maddy.conf"),
+		filepath.Join(ConfigDirectory, "mailcoin.conf"),
 		DefaultStateDirectory,
 		DefaultRuntimeDirectory)
 }
@@ -107,7 +107,7 @@ func init() {
 			Name:    "config",
 			Usage:   "Configuration file to use",
 			EnvVars: []string{"MADDY_CONFIG"},
-			Value:   filepath.Join(ConfigDirectory, "maddy.conf"),
+			Value:   filepath.Join(ConfigDirectory, "mailcoin.conf"),
 		},
 	)
 	maddycli.AddGlobalFlag(&cli.BoolFlag{
@@ -167,14 +167,14 @@ func init() {
 // logging initialization, directives setup, configuration reading. After all that, it
 // calls moduleMain to initialize and run modules.
 func Run(c *cli.Context) error {
-	certmagic.UserAgent = "maddy/" + Version
+	certmagic.UserAgent = "mailcoin/" + Version
 
 	if c.NArg() != 0 {
 		return cli.Exit(fmt.Sprintln("usage:", os.Args[0], "[options]"), 2)
 	}
 
 	if c.Bool("v") {
-		fmt.Println("maddy", BuildInfo())
+		fmt.Println("mailcoin", BuildInfo())
 		return nil
 	}
 
@@ -189,6 +189,7 @@ func Run(c *cli.Context) error {
 
 	os.Setenv("PATH", config.LibexecDirectory+string(filepath.ListSeparator)+os.Getenv("PATH"))
 
+	log.Printf("Starting mailcoin %s \n", Version)
 	f, err := os.Open(c.Path("config"))
 	if err != nil {
 		systemdStatusErr(err)

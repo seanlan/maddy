@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// Package tests provides the framework for integration testing of maddy.
+// Package tests provides the framework for integration testing of mailcoin.
 //
 // The packages core object is tests.T object that encapsulates all test
 // state. It runs the server using test-provided configuration file and acts as
@@ -43,7 +43,7 @@ import (
 )
 
 var (
-	TestBinary  = "./maddy"
+	TestBinary  = "./mailcoin"
 	CoverageOut string
 	DebugLog    bool
 )
@@ -93,7 +93,7 @@ func (t *T) DNS(zones map[string]mockdns.Zone) {
 		zones = map[string]mockdns.Zone{}
 	}
 	if _, ok := zones["100.97.109.127.in-addr.arpa."]; !ok {
-		zones["100.97.109.127.in-addr.arpa."] = mockdns.Zone{PTR: []string{"client.maddy.test."}}
+		zones["100.97.109.127.in-addr.arpa."] = mockdns.Zone{PTR: []string{"client.mailcoin.test."}}
 	}
 
 	if t.dnsServ != nil {
@@ -143,7 +143,7 @@ func (t *T) ensureCanRun() {
 		t.DNS(nil)
 
 		t.Cleanup(func() {
-			// Shutdown the DNS server after maddy to make sure it will not spend time
+			// Shutdown the DNS server after mailcoin to make sure it will not spend time
 			// timing out queries.
 			if err := t.dnsServ.Close(); err != nil {
 				t.Log("Unable to stop the DNS server:", err)
@@ -154,7 +154,7 @@ func (t *T) ensureCanRun() {
 
 	// Setup file system, create statedir, runtimedir, write out config.
 	if t.testDir == "" {
-		testDir, err := os.MkdirTemp("", "maddy-tests-")
+		testDir, err := os.MkdirTemp("", "mailcoin-tests-")
 		if err != nil {
 			t.Fatal("Test configuration failed:", err)
 		}
@@ -182,7 +182,7 @@ func (t *T) ensureCanRun() {
 	configPreable := "state_dir " + filepath.Join(t.testDir, "statedir") + "\n" +
 		"runtime_dir " + filepath.Join(t.testDir, "runtimedir") + "\n\n"
 
-	err := os.WriteFile(filepath.Join(t.testDir, "maddy.conf"), []byte(configPreable+t.cfg), os.ModePerm)
+	err := os.WriteFile(filepath.Join(t.testDir, "mailcoin.conf"), []byte(configPreable+t.cfg), os.ModePerm)
 	if err != nil {
 		t.Fatal("Test configuration failed:", err)
 	}
@@ -195,7 +195,7 @@ func (t *T) buildCmd(additionalArgs ...string) *exec.Cmd {
 		remoteSmtp = strconv.Itoa(int(port))
 	}
 
-	args := []string{"-config", filepath.Join(t.testDir, "maddy.conf"),
+	args := []string{"-config", filepath.Join(t.testDir, "mailcoin.conf"),
 		"-debug.smtpport", remoteSmtp,
 		"-debug.dnsoverride", t.dnsServ.LocalAddr().String(),
 		"-log", "/tmp/test.log"}
@@ -242,7 +242,7 @@ func (t *T) MustRunCLIGroup(args ...[]string) {
 
 			_, err := t.RunCLI(arg...)
 			if err != nil {
-				t.Printf("maddy %v: %v", arg, err)
+				t.Printf("mailcoin %v: %v", arg, err)
 				t.Fail()
 			}
 		}()
@@ -253,7 +253,7 @@ func (t *T) MustRunCLIGroup(args ...[]string) {
 func (t *T) MustRunCLI(args ...string) string {
 	s, err := t.RunCLI(args...)
 	if err != nil {
-		t.Fatalf("maddy %v: %v", args, err)
+		t.Fatalf("mailcoin %v: %v", args, err)
 	}
 	return s
 }
@@ -266,7 +266,7 @@ func (t *T) RunCLI(args ...string) (string, error) {
 	cmd.Stderr = &stderr
 	cmd.Stdout = &stdout
 
-	t.Log("launching maddy", cmd.Args)
+	t.Log("launching mailcoin", cmd.Args)
 	if err := cmd.Run(); err != nil {
 		t.Log("Stderr:", stderr.String())
 		t.Fatal("Test configuration failed:", err)
@@ -288,13 +288,13 @@ func (t *T) Run(waitListeners int) {
 	t.ensureCanRun()
 	cmd := t.buildCmd("run")
 
-	// Capture maddy log and redirect it.
+	// Capture mailcoin log and redirect it.
 	logOut, err := cmd.StderrPipe()
 	if err != nil {
 		t.Fatal("Test configuration failed:", err)
 	}
 
-	t.Log("launching maddy", cmd.Args)
+	t.Log("launching mailcoin", cmd.Args)
 	if err := cmd.Start(); err != nil {
 		t.Fatal("Test configuration failed:", err)
 	}
@@ -315,7 +315,7 @@ func (t *T) Run(waitListeners int) {
 				line += " (test runner>listener wait trigger<)"
 			}
 
-			t.Log("maddy:", line)
+			t.Log("mailcoin:", line)
 		}
 		if err := scnr.Err(); err != nil {
 			t.Log("stderr I/O error:", err)
@@ -478,7 +478,7 @@ func (t *T) Subtest(name string, f func(t *T)) {
 }
 
 func init() {
-	flag.StringVar(&TestBinary, "integration.executable", "./maddy", "executable to test")
-	flag.StringVar(&CoverageOut, "integration.coverprofile", "", "write coverage stats to file (requires special maddy executable)")
-	flag.BoolVar(&DebugLog, "integration.debug", false, "pass -debug to maddy executable")
+	flag.StringVar(&TestBinary, "integration.executable", "./mailcoin", "executable to test")
+	flag.StringVar(&CoverageOut, "integration.coverprofile", "", "write coverage stats to file (requires special mailcoin executable)")
+	flag.BoolVar(&DebugLog, "integration.debug", false, "pass -debug to mailcoin executable")
 }

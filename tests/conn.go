@@ -190,7 +190,7 @@ func (c *Conn) TLS() {
 	c.T.Helper()
 
 	tlsC := tls.Client(c.Conn, &tls.Config{
-		ServerName:         "maddy.test",
+		ServerName:         "mailcoin.test",
 		InsecureSkipVerify: true,
 	})
 	if err := tlsC.Handshake(); err != nil {

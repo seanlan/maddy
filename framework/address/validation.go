@@ -122,7 +122,7 @@ func ValidDomain(domain string) bool {
 	}
 
 	// Length checks are to be applied to A-labels form.
-	// maddy uses U-labels representation across the code (for lookups, etc).
+	// mailcoin uses U-labels representation across the code (for lookups, etc).
 	domainASCII, err := idna.ToASCII(domain)
 	if err != nil {
 		return false

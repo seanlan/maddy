@@ -33,7 +33,7 @@ export PATH="$PWD/go/bin:$PATH"
 
 1. Clone repository
 ```
-$ git clone https://github.com/foxcpp/maddy.git
+$ git clone https://mailcoin.git
 $ cd maddy
 ```
 

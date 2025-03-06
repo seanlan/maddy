@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/hashicorp/go-hclog"
 	"github.com/netauth/netauth/pkg/netauth"
+	"mailcoin/framework/config"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 const modName = "auth.netauth"
@@ -46,7 +46,7 @@ func (a *Auth) Init(cfg *config.Map) error {
 		return err
 	}
 	a.nacl = n
-	a.nacl.SetServiceName("maddy")
+	a.nacl.SetServiceName("mailcoin")
 	cfg.String("require_group", false, false, "", &a.mustGroup)
 	cfg.Bool("debug", true, false, &a.log.Debug)
 	if _, err := cfg.Process(); err != nil {

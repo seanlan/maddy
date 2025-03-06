@@ -24,7 +24,7 @@ var (
 	// preserved between sessions.
 	//
 	// Value of this variable must not change after initialization
-	// in cmd/maddy/main.go.
+	// in cmd/mailcoin/main.go.
 	StateDirectory string
 
 	// RuntimeDirectory contains the path to the directory that
@@ -32,16 +32,16 @@ var (
 	//
 	// It should be preferred over os.TempDir, which is
 	// global and world-readable on most systems, while
-	// RuntimeDirectory can be dedicated for maddy.
+	// RuntimeDirectory can be dedicated for mailcoin.
 	//
 	// Value of this variable must not change after initialization
-	// in cmd/maddy/main.go.
+	// in cmd/mailcoin/main.go.
 	RuntimeDirectory string
 
 	// LibexecDirectory contains the path to the directory
 	// where helper binaries should be searched.
 	//
 	// Value of this variable must not change after initialization
-	// in cmd/maddy/main.go.
+	// in cmd/mailcoin/main.go.
 	LibexecDirectory string
 )

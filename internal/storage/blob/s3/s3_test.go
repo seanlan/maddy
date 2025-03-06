@@ -4,11 +4,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/storage/blob"
 	"github.com/johannesboyne/gofakes3"
 	"github.com/johannesboyne/gofakes3/backend/s3mem"
+	"mailcoin/framework/config"
+	"mailcoin/framework/module"
+	"mailcoin/internal/storage/blob"
 )
 
 func TestFS(t *testing.T) {
@@ -23,7 +23,7 @@ func TestFS(t *testing.T) {
 		faker = gofakes3.New(backend)
 		ts = httptest.NewServer(faker.Server())
 
-		if err := backend.CreateBucket("maddy-test"); err != nil {
+		if err := backend.CreateBucket("mailcoin-test"); err != nil {
 			panic(err)
 		}
 
@@ -48,7 +48,7 @@ func TestFS(t *testing.T) {
 				},
 				{
 					Name: "bucket",
-					Args: []string{"maddy-test"},
+					Args: []string{"mailcoin-test"},
 				},
 			},
 		}))

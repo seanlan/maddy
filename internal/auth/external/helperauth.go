@@ -23,7 +23,7 @@ import (
 	"io"
 	"os/exec"
 
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/module"
 )
 
 func AuthUsingHelper(binaryPath, accountName, password string) error {

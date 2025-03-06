@@ -23,8 +23,8 @@ import (
 	"strings"
 	"testing"
 
-	parser "github.com/foxcpp/maddy/framework/cfgparser"
-	"github.com/foxcpp/maddy/framework/exterrors"
+	parser "mailcoin/framework/cfgparser"
+	"mailcoin/framework/exterrors"
 )
 
 func policyError(code int) error {

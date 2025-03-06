@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/foxcpp/maddy/framework/config"
-	tls2 "github.com/foxcpp/maddy/framework/config/tls"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
 	"github.com/go-ldap/ldap/v3"
+	"mailcoin/framework/config"
+	tls2 "mailcoin/framework/config/tls"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 const modName = "auth.ldap"

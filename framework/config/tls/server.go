@@ -21,10 +21,10 @@ package tls
 import (
 	"crypto/tls"
 
-	"github.com/foxcpp/maddy/framework/config"
-	modconfig "github.com/foxcpp/maddy/framework/config/module"
-	"github.com/foxcpp/maddy/framework/log"
-	"github.com/foxcpp/maddy/framework/module"
+	"mailcoin/framework/config"
+	modconfig "mailcoin/framework/config/module"
+	"mailcoin/framework/log"
+	"mailcoin/framework/module"
 )
 
 type TLSConfig struct {
@@ -70,7 +70,7 @@ func TLSDirective(m *config.Map, node config.Node) (interface{}, error) {
 
 func readTLSBlock(globals map[string]interface{}, blockNode config.Node) (*TLSConfig, error) {
 	baseCfg := tls.Config{
-		// Workaround for issue https://github.com/foxcpp/maddy/issues/730
+		// Workaround for issue https://mailcoin/issues/730
 		SessionTicketsDisabled: true,
 	}
 

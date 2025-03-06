@@ -25,10 +25,10 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/buffer"
-	"github.com/foxcpp/maddy/framework/module"
-	"github.com/foxcpp/maddy/internal/modify"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/buffer"
+	"mailcoin/framework/module"
+	"mailcoin/internal/modify"
+	"mailcoin/internal/testutils"
 )
 
 func TestMsgPipeline_AllToTarget(t *testing.T) {

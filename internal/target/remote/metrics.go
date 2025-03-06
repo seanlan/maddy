@@ -22,7 +22,7 @@ import "github.com/prometheus/client_golang/prometheus"
 
 var mxLevelCnt = prometheus.NewCounterVec(
 	prometheus.CounterOpts{
-		Namespace: "maddy",
+		Namespace: "mailcoin",
 		Subsystem: "remote",
 		Name:      "conns_mx_level",
 		Help:      "Outbound connections established with specific MX security level",
@@ -32,7 +32,7 @@ var mxLevelCnt = prometheus.NewCounterVec(
 
 var tlsLevelCnt = prometheus.NewCounterVec(
 	prometheus.CounterOpts{
-		Namespace: "maddy",
+		Namespace: "mailcoin",
 		Subsystem: "remote",
 		Name:      "conns_tls_level",
 		Help:      "Outbound connections established with specific TLS security level",

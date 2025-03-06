@@ -25,9 +25,9 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/exterrors"
-	"github.com/foxcpp/maddy/internal/testutils"
+	"mailcoin/framework/config"
+	"mailcoin/framework/exterrors"
+	"mailcoin/internal/testutils"
 )
 
 func doTestDelivery(t *testing.T, conn *C, from string, to []string, opts smtp.MailOptions) error {

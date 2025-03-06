@@ -22,9 +22,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/foxcpp/maddy/framework/config"
-	"github.com/foxcpp/maddy/framework/module"
 	_ "github.com/lib/pq"
+	"mailcoin/framework/config"
+	"mailcoin/framework/module"
 )
 
 type SQLTable struct {
