@@ -51,7 +51,7 @@ var (
 	//
 	// It should not be changed and is defined as a variable
 	// only for purposes of modification using -X linker flag.
-	DefaultLibexecDirectory = "/usr/lib/mailcoin"
+	DefaultLibexecDirectory = workDir //"/usr/lib/mailcoin"
 )
 
 func init() {

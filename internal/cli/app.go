@@ -71,7 +71,7 @@ func AddSubcommand(cmd *cli.Command) {
 		// Needs to be done here so we will register all known flags with
 		// stdlib before Run is called.
 		app.Action = func(c *cli.Context) error {
-			log.Println("WARNING: Starting server not via 'mailcoin run' is deprecated and will stop working in the next version")
+			//log.Println("WARNING: Starting server not via 'mailcoin run' is deprecated and will stop working in the next version")
 			return cmd.Action(c)
 		}
 		app.Flags = append(app.Flags, cmd.Flags...)

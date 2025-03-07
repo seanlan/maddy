@@ -289,6 +289,9 @@ func ensureDirectoryWritable(path string) error {
 }
 
 func ReadGlobals(cfg []config.Node) (map[string]interface{}, []config.Node, error) {
+	// don't know what caused the inability to set config Default value of StateDirectory， so I set it here
+	config.StateDirectory = DefaultStateDirectory
+	fmt.Println("don't know what caused the inability to set config Default value of StateDirectory， so I set it here")
 	globals := config.NewMap(nil, config.Node{Children: cfg})
 	globals.String("state_dir", false, false, DefaultStateDirectory, &config.StateDirectory)
 	globals.String("runtime_dir", false, false, DefaultRuntimeDirectory, &config.RuntimeDirectory)
@@ -310,6 +313,7 @@ func ReadGlobals(cfg []config.Node) (map[string]interface{}, []config.Node, erro
 
 func moduleMain(cfg []config.Node) error {
 	globals, modBlocks, err := ReadGlobals(cfg)
+	fmt.Printf("config.StateDirectory: %v\n", config.StateDirectory)
 	if err != nil {
 		return err
 	}
