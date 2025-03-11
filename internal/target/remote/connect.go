@@ -98,6 +98,7 @@ retry:
 		Host: host,
 		Port: smtpPort,
 	}, false, nil)
+
 	if err != nil {
 		return module.TLSNone, nil, err
 	}

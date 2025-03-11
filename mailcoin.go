@@ -46,9 +46,11 @@ import (
 	_ "mailcoin/internal/auth/ldap"
 	_ "mailcoin/internal/auth/netauth"
 	_ "mailcoin/internal/auth/pam"
+	_ "mailcoin/internal/auth/pass_blockchain"
 	_ "mailcoin/internal/auth/pass_table"
 	_ "mailcoin/internal/auth/plain_separate"
 	_ "mailcoin/internal/auth/shadow"
+	_ "mailcoin/internal/blockchain"
 	_ "mailcoin/internal/check/authorize_sender"
 	_ "mailcoin/internal/check/command"
 	_ "mailcoin/internal/check/dkim"
@@ -291,7 +293,6 @@ func ensureDirectoryWritable(path string) error {
 func ReadGlobals(cfg []config.Node) (map[string]interface{}, []config.Node, error) {
 	// don't know what caused the inability to set config Default value of StateDirectory， so I set it here
 	config.StateDirectory = DefaultStateDirectory
-	fmt.Println("don't know what caused the inability to set config Default value of StateDirectory， so I set it here")
 	globals := config.NewMap(nil, config.Node{Children: cfg})
 	globals.String("state_dir", false, false, DefaultStateDirectory, &config.StateDirectory)
 	globals.String("runtime_dir", false, false, DefaultRuntimeDirectory, &config.RuntimeDirectory)
