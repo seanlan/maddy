@@ -16,12 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package maddy
+package mailcoin
 
 import (
 	"errors"
 	"fmt"
 	"io"
+	mailcoincli "mailcoin/internal/cli"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -38,8 +39,6 @@ import (
 	"mailcoin/framework/log"
 	"mailcoin/framework/module"
 	"mailcoin/internal/authz"
-	maddycli "mailcoin/internal/cli"
-
 	// Import packages for side-effect of module registration.
 	_ "mailcoin/internal/auth/dovecot_sasl"
 	_ "mailcoin/internal/auth/external"
@@ -104,7 +103,7 @@ default runtime_dir: %s`,
 }
 
 func init() {
-	maddycli.AddGlobalFlag(
+	mailcoincli.AddGlobalFlag(
 		&cli.PathFlag{
 			Name:    "config",
 			Usage:   "Configuration file to use",
@@ -112,12 +111,12 @@ func init() {
 			Value:   filepath.Join(ConfigDirectory, "mailcoin.conf"),
 		},
 	)
-	maddycli.AddGlobalFlag(&cli.BoolFlag{
+	mailcoincli.AddGlobalFlag(&cli.BoolFlag{
 		Name:        "debug",
 		Usage:       "enable debug logging early",
 		Destination: &log.DefaultLogger.Debug,
 	})
-	maddycli.AddSubcommand(&cli.Command{
+	mailcoincli.AddSubcommand(&cli.Command{
 		Name:  "run",
 		Usage: "Start the server",
 		Flags: []cli.Flag{
@@ -140,7 +139,7 @@ func init() {
 		},
 		Action: Run,
 	})
-	maddycli.AddSubcommand(&cli.Command{
+	mailcoincli.AddSubcommand(&cli.Command{
 		Name:  "version",
 		Usage: "Print version and build metadata, then exit",
 		Action: func(c *cli.Context) error {
@@ -150,15 +149,15 @@ func init() {
 	})
 
 	if enableDebugFlags {
-		maddycli.AddGlobalFlag(&cli.StringFlag{
+		mailcoincli.AddGlobalFlag(&cli.StringFlag{
 			Name:  "debug.pprof",
 			Usage: "enable live profiler HTTP endpoint and listen on the specified address",
 		})
-		maddycli.AddGlobalFlag(&cli.IntFlag{
+		mailcoincli.AddGlobalFlag(&cli.IntFlag{
 			Name:  "debug.blockprofrate",
 			Usage: "set blocking profile rate",
 		})
-		maddycli.AddGlobalFlag(&cli.IntFlag{
+		mailcoincli.AddGlobalFlag(&cli.IntFlag{
 			Name:  "debug.mutexproffract",
 			Usage: "set mutex profile fraction",
 		})

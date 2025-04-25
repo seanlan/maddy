@@ -1,4 +1,4 @@
 testdata/
-cmd/mailcoin/maddy
-maddy
-tests/maddy.cover
+cmd/mailcoin/mailcoin
+mailcoin
+tests/mailcoin.cover

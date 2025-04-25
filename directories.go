@@ -1,7 +1,7 @@
 //go:build !docker
 // +build !docker
 
-package maddy
+package mailcoin
 
 import (
 	"os"

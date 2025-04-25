@@ -39,7 +39,7 @@ func closeIfNeeded(i interface{}) {
 	}
 }
 
-func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *maddy.ModInfo, error) {
+func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailcoin.ModInfo, error) {
 	cfgPath := ctx.String("config")
 	if cfgPath == "" {
 		return nil, nil, cli.Exit("Error: config is required", 2)
@@ -54,17 +54,17 @@ func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *maddy.ModInfo
 		return nil, nil, cli.Exit(fmt.Sprintf("Error: failed to parse config: %v", err), 2)
 	}
 
-	globals, cfgNodes, err := maddy.ReadGlobals(cfgNodes)
+	globals, cfgNodes, err := mailcoin.ReadGlobals(cfgNodes)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	if err := maddy.InitDirs(); err != nil {
+	if err := mailcoin.InitDirs(); err != nil {
 		return nil, nil, err
 	}
 
 	module.NoRun = true
-	_, mods, err := maddy.RegisterModules(globals, cfgNodes)
+	_, mods, err := mailcoin.RegisterModules(globals, cfgNodes)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -74,7 +74,7 @@ func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *maddy.ModInfo
 	if cfgBlock == "" {
 		return nil, nil, cli.Exit("Error: cfg-block is required", 2)
 	}
-	var mod maddy.ModInfo
+	var mod mailcoin.ModInfo
 	for _, m := range mods {
 		if m.Instance.InstanceName() == cfgBlock {
 			mod = m

@@ -1,4 +1,4 @@
-package maddycli
+package mailcoincli
 
 import (
 	"fmt"
