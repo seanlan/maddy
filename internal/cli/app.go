@@ -1,12 +1,12 @@
 package mailcoincli
 
 import (
-	"fmt"
 	"os"
 
 	"mailcoin/framework/log"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/cobra/doc"
 )
 
 var rootCmd *cobra.Command
@@ -27,8 +27,9 @@ databases used by it (all other subcommands).`,
 	generateManCmd := &cobra.Command{
 		Use:    "generate-man",
 		Hidden: true,
+		Short:  "Generate man page",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return fmt.Errorf("generate-man not implemented yet for cobra")
+			return doc.GenManTree(rootCmd, nil, ".")
 		},
 	}
 
@@ -44,13 +45,11 @@ databases used by it (all other subcommands).`,
 }
 
 func AddGlobalStringFlag(name, usage, envVar, defaultValue string, dest *string) {
+	rootCmd.PersistentFlags().StringVarP(dest, name, "", defaultValue, usage)
 	if envVar != "" {
-		rootCmd.PersistentFlags().StringVarP(dest, name, "", defaultValue, usage)
 		if val := os.Getenv(envVar); val != "" {
 			*dest = val
 		}
-	} else {
-		rootCmd.PersistentFlags().StringVarP(dest, name, "", defaultValue, usage)
 	}
 }
 
@@ -67,17 +66,6 @@ func AddSubcommand(cmd *cobra.Command) {
 	}
 }
 
-// Temporary compatibility function - remove after migration
-func AddSubcommandLegacy(cmd interface{}) {
-	// This is a no-op for now to allow compilation
-	// Legacy commands need to be converted to cobra
-}
-
-// AddGlobalFlag provides compatibility with debug flags
-func AddGlobalFlag(flag interface{}) {
-	// This function handles legacy debug flags that are only compiled under special conditions
-	// For now, these are ignored in the cobra migration
-}
 
 // RunWithoutExit is like Run but returns exit code instead of calling os.Exit
 // To be used in mailcoin.cover.

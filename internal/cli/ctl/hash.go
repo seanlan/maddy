@@ -34,10 +34,7 @@ func init() {
 	hashCmd := &cobra.Command{
 		Use:   "hash",
 		Short: "Generate password hashes for use with pass_table",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			ctx := maddycli.NewCobraContext(cmd, args)
-			return hashCommand(ctx)
-		},
+		RunE:  hashCommand,
 	}
 
 	hashCmd.Flags().StringP("password", "p", "", "Use PASSWORD instead of reading password from stdin\n\t\tWARNING: Provided only for debugging convenience. Don't leave your passwords in shell history!")
@@ -50,8 +47,8 @@ func init() {
 	maddycli.AddSubcommand(hashCmd)
 }
 
-func hashCommand(ctx *maddycli.CobraContext) error {
-	hashFunc := ctx.String("hash")
+func hashCommand(cmd *cobra.Command, args []string) error {
+	hashFunc, _ := cmd.Flags().GetString("hash")
 	if hashFunc == "" {
 		hashFunc = pass_table.DefaultHash
 	}
@@ -63,7 +60,7 @@ func hashCommand(ctx *maddycli.CobraContext) error {
 			funcs = append(funcs, k)
 		}
 
-		return fmt.Errorf("Error: Unknown hash function, available: %s", strings.Join(funcs, ", "))
+		return fmt.Errorf("unknown hash function, available: %s", strings.Join(funcs, ", "))
 	}
 
 	opts := pass_table.HashOpts{
@@ -72,28 +69,32 @@ func hashCommand(ctx *maddycli.CobraContext) error {
 		Argon2Time:    2,
 		Argon2Threads: 1,
 	}
-	if ctx.IsSet("bcrypt-cost") {
-		if ctx.Int("bcrypt-cost") > bcrypt.MaxCost {
-			return fmt.Errorf("Error: too big bcrypt cost")
+	if cmd.Flags().Changed("bcrypt-cost") {
+		bcryptCost, _ := cmd.Flags().GetInt("bcrypt-cost")
+		if bcryptCost > bcrypt.MaxCost {
+			return fmt.Errorf("bcrypt cost %d exceeds maximum %d", bcryptCost, bcrypt.MaxCost)
 		}
-		if ctx.Int("bcrypt-cost") < bcrypt.MinCost {
-			return fmt.Errorf("Error: too small bcrypt cost")
+		if bcryptCost < bcrypt.MinCost {
+			return fmt.Errorf("bcrypt cost %d is below minimum %d", bcryptCost, bcrypt.MinCost)
 		}
-		opts.BcryptCost = ctx.Int("bcrypt-cost")
+		opts.BcryptCost = bcryptCost
 	}
-	if ctx.IsSet("argon2-memory") {
-		opts.Argon2Memory = uint32(ctx.Int("argon2-memory"))
+	if cmd.Flags().Changed("argon2-memory") {
+		argon2Memory, _ := cmd.Flags().GetInt("argon2-memory")
+		opts.Argon2Memory = uint32(argon2Memory)
 	}
-	if ctx.IsSet("argon2-time") {
-		opts.Argon2Time = uint32(ctx.Int("argon2-time"))
+	if cmd.Flags().Changed("argon2-time") {
+		argon2Time, _ := cmd.Flags().GetInt("argon2-time")
+		opts.Argon2Time = uint32(argon2Time)
 	}
-	if ctx.IsSet("argon2-threads") {
-		opts.Argon2Threads = uint8(ctx.Int("argon2-threads"))
+	if cmd.Flags().Changed("argon2-threads") {
+		argon2Threads, _ := cmd.Flags().GetInt("argon2-threads")
+		opts.Argon2Threads = uint8(argon2Threads)
 	}
 
 	var pass string
-	if ctx.IsSet("password") {
-		pass = ctx.String("password")
+	if cmd.Flags().Changed("password") {
+		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
 		pass, err = clitools2.ReadPassword("Password")
