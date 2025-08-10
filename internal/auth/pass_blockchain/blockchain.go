@@ -55,12 +55,13 @@ func (a *Auth) AuthPlain(username, sign string) error {
 		a.log.Printf("error splitting address: %v", err)
 		return err
 	}
+	a.log.Printf("pk: %s, sign: %s", pk, sign)
 	result, err := a.chain.CheckSign(context.TODO(), pk, sign, strings.ToLower(pk))
 	if err != nil {
 		a.log.Printf("error checking signature: %v", err)
 		return err
 	}
-	if !result {
+	if !result { // signature is not valid
 		return module.ErrUnknownCredentials
 	}
 	// check if the user not exists in the storage and create it

@@ -20,10 +20,10 @@ package main
 
 import (
 	_ "mailcoin"
-	maddycli "mailcoin/internal/cli"
+	mailcoincli "mailcoin/internal/cli"
 	_ "mailcoin/internal/cli/ctl"
 )
 
 func main() {
-	maddycli.Run()
+	mailcoincli.Run()
 }
