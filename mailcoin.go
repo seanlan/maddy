@@ -30,7 +30,7 @@ import (
 	"runtime/debug"
 
 	"github.com/caddyserver/certmagic"
-	"github.com/urfave/cli/v2"
+	"github.com/spf13/cobra"
 	parser "mailcoin/framework/cfgparser"
 	"mailcoin/framework/config"
 	modconfig "mailcoin/framework/config/module"
@@ -102,125 +102,124 @@ default runtime_dir: %s`,
 		DefaultRuntimeDirectory)
 }
 
+var (
+	configPath string
+)
+
 func init() {
-	mailcoincli.AddGlobalFlag(
-		&cli.PathFlag{
-			Name:    "config",
-			Usage:   "Configuration file to use",
-			EnvVars: []string{"MADDY_CONFIG"},
-			Value:   filepath.Join(ConfigDirectory, "mailcoin.conf"),
-		},
+	configPath = filepath.Join(ConfigDirectory, "mailcoin.conf")
+	mailcoincli.AddGlobalStringFlag("config", "Configuration file to use", "MADDY_CONFIG", configPath, &configPath)
+	mailcoincli.AddGlobalBoolFlag("debug", "enable debug logging early", &log.DefaultLogger.Debug)
+	var (
+		logTargets []string
+		showVersion bool
+		debugPprof string
+		debugBlockProfRate int
+		debugMutexProfFract int
 	)
-	mailcoincli.AddGlobalFlag(&cli.BoolFlag{
-		Name:        "debug",
-		Usage:       "enable debug logging early",
-		Destination: &log.DefaultLogger.Debug,
-	})
-	mailcoincli.AddSubcommand(&cli.Command{
-		Name:  "run",
-		Usage: "Start the server",
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:        "libexec",
-				Value:       DefaultLibexecDirectory,
-				Usage:       "path to the libexec directory",
-				Destination: &config.LibexecDirectory,
-			},
-			&cli.StringSliceFlag{
-				Name:  "log",
-				Usage: "default logging target(s)",
-				Value: cli.NewStringSlice("stderr"),
-			},
-			&cli.BoolFlag{
-				Name:   "v",
-				Usage:  "print version and build metadata, then exit",
-				Hidden: true,
-			},
+	config.LibexecDirectory = DefaultLibexecDirectory
+
+	runCmd := &cobra.Command{
+		Use:   "run",
+		Short: "Start the server",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return RunCobra(cmd, args, showVersion, logTargets)
 		},
-		Action: Run,
-	})
-	mailcoincli.AddSubcommand(&cli.Command{
-		Name:  "version",
-		Usage: "Print version and build metadata, then exit",
-		Action: func(c *cli.Context) error {
+	}
+
+	runCmd.Flags().StringVar(&config.LibexecDirectory, "libexec", DefaultLibexecDirectory, "path to the libexec directory")
+	runCmd.Flags().StringSliceVar(&logTargets, "log", []string{"stderr"}, "default logging target(s)")
+	runCmd.Flags().BoolVarP(&showVersion, "v", "v", false, "print version and build metadata, then exit")
+	runCmd.Flags().MarkHidden("v")
+
+	if enableDebugFlags {
+		runCmd.Flags().StringVar(&debugPprof, "debug.pprof", "", "enable live profiler HTTP endpoint and listen on the specified address")
+		runCmd.Flags().IntVar(&debugBlockProfRate, "debug.blockprofrate", 0, "set blocking profile rate")
+		runCmd.Flags().IntVar(&debugMutexProfFract, "debug.mutexproffract", 0, "set mutex profile fraction")
+	}
+
+	mailcoincli.AddSubcommand(runCmd)
+	versionCmd := &cobra.Command{
+		Use:   "version",
+		Short: "Print version and build metadata, then exit",
+		RunE: func(cmd *cobra.Command, args []string) error {
 			fmt.Println(BuildInfo())
 			return nil
 		},
-	})
+	}
+
+	mailcoincli.AddSubcommand(versionCmd)
 
 	if enableDebugFlags {
-		mailcoincli.AddGlobalFlag(&cli.StringFlag{
-			Name:  "debug.pprof",
-			Usage: "enable live profiler HTTP endpoint and listen on the specified address",
-		})
-		mailcoincli.AddGlobalFlag(&cli.IntFlag{
-			Name:  "debug.blockprofrate",
-			Usage: "set blocking profile rate",
-		})
-		mailcoincli.AddGlobalFlag(&cli.IntFlag{
-			Name:  "debug.mutexproffract",
-			Usage: "set mutex profile fraction",
-		})
+		// Debug flags will be added to the run command specifically
+		// since they're only used during server execution
 	}
 }
 
 // Run is the entry point for all server-running code. It takes care of command line arguments processing,
 // logging initialization, directives setup, configuration reading. After all that, it
 // calls moduleMain to initialize and run modules.
-func Run(c *cli.Context) error {
+// Run is the legacy entry point for urfave/cli compatibility
+func Run(c interface{}) error {
+	// This function is kept for backwards compatibility but should not be used
+	return fmt.Errorf("legacy Run function called - use RunCobra instead")
+}
+
+// RunCobra is the entry point for all server-running code with Cobra.
+func RunCobra(cmd *cobra.Command, args []string, showVersion bool, logTargets []string) error {
 	certmagic.UserAgent = "mailcoin/" + Version
 
-	if c.NArg() != 0 {
-		return cli.Exit(fmt.Sprintln("usage:", os.Args[0], "[options]"), 2)
+	if len(args) != 0 {
+		return fmt.Errorf("usage: %s [options]", os.Args[0])
 	}
 
-	if c.Bool("v") {
+	if showVersion {
 		fmt.Println("mailcoin", BuildInfo())
 		return nil
 	}
 
 	var err error
-	log.DefaultLogger.Out, err = LogOutputOption(c.StringSlice("log"))
+	log.DefaultLogger.Out, err = LogOutputOption(logTargets)
 	if err != nil {
 		systemdStatusErr(err)
-		return cli.Exit(err.Error(), 2)
+		return fmt.Errorf("%s", err.Error())
 	}
 
-	initDebug(c)
+	initDebugCobra(cmd)
 
 	os.Setenv("PATH", config.LibexecDirectory+string(filepath.ListSeparator)+os.Getenv("PATH"))
 
 	log.Printf("Starting mailcoin %s \n", Version)
-	f, err := os.Open(c.Path("config"))
+	f, err := os.Open(configPath)
 	if err != nil {
 		systemdStatusErr(err)
-		return cli.Exit(err.Error(), 2)
+		return fmt.Errorf("%s", err.Error())
 	}
 	defer f.Close()
 
-	cfg, err := parser.Read(f, c.Path("config"))
+	cfg, err := parser.Read(f, configPath)
 	if err != nil {
 		systemdStatusErr(err)
-		return cli.Exit(err.Error(), 2)
+		return fmt.Errorf("%s", err.Error())
 	}
 
 	defer log.DefaultLogger.Out.Close()
 
 	if err := moduleMain(cfg); err != nil {
 		systemdStatusErr(err)
-		return cli.Exit(err.Error(), 1)
+		return fmt.Errorf("%s", err.Error())
 	}
 
 	return nil
 }
 
-func initDebug(c *cli.Context) {
+func initDebugCobra(cmd *cobra.Command) {
 	if !enableDebugFlags {
 		return
 	}
 
-	if c.IsSet("debug.pprof") {
-		profileEndpoint := c.String("debug.pprof")
+	if cmd.Flags().Changed("debug.pprof") {
+		profileEndpoint, _ := cmd.Flags().GetString("debug.pprof")
 		go func() {
 			log.Println("listening on", "http://"+profileEndpoint, "for profiler requests")
 			log.Println("failed to listen on profiler endpoint:", http.ListenAndServe(profileEndpoint, nil))
@@ -229,11 +228,13 @@ func initDebug(c *cli.Context) {
 
 	// These values can also be affected by environment so set them
 	// only if argument is specified.
-	if c.IsSet("debug.mutexproffract") {
-		runtime.SetMutexProfileFraction(c.Int("debug.mutexproffract"))
+	if cmd.Flags().Changed("debug.mutexproffract") {
+		mutexProfFract, _ := cmd.Flags().GetInt("debug.mutexproffract")
+		runtime.SetMutexProfileFraction(mutexProfFract)
 	}
-	if c.IsSet("debug.blockprofrate") {
-		runtime.SetBlockProfileRate(c.Int("debug.blockprofrate"))
+	if cmd.Flags().Changed("debug.blockprofrate") {
+		blockProfRate, _ := cmd.Flags().GetInt("debug.blockprofrate")
+		runtime.SetBlockProfileRate(blockProfRate)
 	}
 }
 

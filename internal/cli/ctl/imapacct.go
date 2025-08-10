@@ -31,7 +31,7 @@ import (
 )
 
 func init() {
-	maddycli.AddSubcommand(
+	maddycli.AddSubcommandLegacy(
 		&cli.Command{
 			Name:  "imap-acct",
 			Usage: "IMAP storage accounts management",

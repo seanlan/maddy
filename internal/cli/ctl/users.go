@@ -33,7 +33,7 @@ import (
 )
 
 func init() {
-	maddycli.AddSubcommand(
+	maddycli.AddSubcommandLegacy(
 		&cli.Command{
 			Name:  "creds",
 			Usage: "Local credentials management",

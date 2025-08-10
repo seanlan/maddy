@@ -140,7 +140,6 @@ install() {
 
 	command install -m 0755 -d "${destdir}/${prefix}/bin/"
 	command install -m 0755 "${builddir}/maddy" "${destdir}/${prefix}/bin/"
-	command ln -sf mailcoin "${destdir}/${prefix}/bin/maddyctl"
 	command install -m 0755 -d "${configdir}"
 
 

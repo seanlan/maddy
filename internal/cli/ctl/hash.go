@@ -23,7 +23,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/urfave/cli/v2"
+	"github.com/spf13/cobra"
 	"golang.org/x/crypto/bcrypt"
 	"mailcoin/internal/auth/pass_table"
 	maddycli "mailcoin/internal/cli"
@@ -31,47 +31,26 @@ import (
 )
 
 func init() {
-	maddycli.AddSubcommand(
-		&cli.Command{
-			Name:   "hash",
-			Usage:  "Generate password hashes for use with pass_table",
-			Action: hashCommand,
-			Flags: []cli.Flag{
-				&cli.StringFlag{
-					Name:    "password",
-					Aliases: []string{"p"},
-					Usage:   "Use `PASSWORD instead of reading password from stdin\n\t\tWARNING: Provided only for debugging convenience. Don't leave your passwords in shell history!",
-				},
-				&cli.StringFlag{
-					Name:  "hash",
-					Usage: "Use specified hash algorithm",
-					Value: "bcrypt",
-				},
-				&cli.IntFlag{
-					Name:  "bcrypt-cost",
-					Usage: "Specify bcrypt cost value",
-					Value: bcrypt.DefaultCost,
-				},
-				&cli.IntFlag{
-					Name:  "argon2-time",
-					Usage: "Time factor for Argon2id",
-					Value: 3,
-				},
-				&cli.IntFlag{
-					Name:  "argon2-memory",
-					Usage: "Memory in KiB to use for Argon2id",
-					Value: 1024,
-				},
-				&cli.IntFlag{
-					Name:  "argon2-threads",
-					Usage: "Threads to use for Argon2id",
-					Value: 1,
-				},
-			},
-		})
+	hashCmd := &cobra.Command{
+		Use:   "hash",
+		Short: "Generate password hashes for use with pass_table",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			ctx := maddycli.NewCobraContext(cmd, args)
+			return hashCommand(ctx)
+		},
+	}
+
+	hashCmd.Flags().StringP("password", "p", "", "Use PASSWORD instead of reading password from stdin\n\t\tWARNING: Provided only for debugging convenience. Don't leave your passwords in shell history!")
+	hashCmd.Flags().String("hash", "bcrypt", "Use specified hash algorithm")
+	hashCmd.Flags().Int("bcrypt-cost", bcrypt.DefaultCost, "Specify bcrypt cost value")
+	hashCmd.Flags().Int("argon2-time", 3, "Time factor for Argon2id")
+	hashCmd.Flags().Int("argon2-memory", 1024, "Memory in KiB to use for Argon2id")
+	hashCmd.Flags().Int("argon2-threads", 1, "Threads to use for Argon2id")
+
+	maddycli.AddSubcommand(hashCmd)
 }
 
-func hashCommand(ctx *cli.Context) error {
+func hashCommand(ctx *maddycli.CobraContext) error {
 	hashFunc := ctx.String("hash")
 	if hashFunc == "" {
 		hashFunc = pass_table.DefaultHash
@@ -84,7 +63,7 @@ func hashCommand(ctx *cli.Context) error {
 			funcs = append(funcs, k)
 		}
 
-		return cli.Exit(fmt.Sprintf("Error: Unknown hash function, available: %s", strings.Join(funcs, ", ")), 2)
+		return fmt.Errorf("Error: Unknown hash function, available: %s", strings.Join(funcs, ", "))
 	}
 
 	opts := pass_table.HashOpts{
@@ -95,10 +74,10 @@ func hashCommand(ctx *cli.Context) error {
 	}
 	if ctx.IsSet("bcrypt-cost") {
 		if ctx.Int("bcrypt-cost") > bcrypt.MaxCost {
-			return cli.Exit("Error: too big bcrypt cost", 2)
+			return fmt.Errorf("Error: too big bcrypt cost")
 		}
 		if ctx.Int("bcrypt-cost") < bcrypt.MinCost {
-			return cli.Exit("Error: too small bcrypt cost", 2)
+			return fmt.Errorf("Error: too small bcrypt cost")
 		}
 		opts.BcryptCost = ctx.Int("bcrypt-cost")
 	}

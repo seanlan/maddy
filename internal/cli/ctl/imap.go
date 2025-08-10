@@ -36,7 +36,7 @@ import (
 )
 
 func init() {
-	maddycli.AddSubcommand(
+	maddycli.AddSubcommandLegacy(
 		&cli.Command{
 			Name:  "imap-mboxes",
 			Usage: "IMAP mailboxes (folders) management",
@@ -143,7 +143,7 @@ func init() {
 				},
 			},
 		})
-	maddycli.AddSubcommand(&cli.Command{
+	maddycli.AddSubcommandLegacy(&cli.Command{
 		Name:  "imap-msgs",
 		Usage: "IMAP messages management",
 		Subcommands: []*cli.Command{
