@@ -21,8 +21,8 @@ package tls
 import (
 	"crypto/tls"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 var strVersionsMap = map[string]uint16{

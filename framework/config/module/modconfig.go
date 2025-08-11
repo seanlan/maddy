@@ -32,11 +32,11 @@ import (
 	"reflect"
 	"strings"
 
-	parser "mailcoin/framework/cfgparser"
-	"mailcoin/framework/config"
-	"mailcoin/framework/hooks"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/hooks"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // createInlineModule is a helper function for config matchers that can create inline modules.

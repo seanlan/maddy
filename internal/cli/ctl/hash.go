@@ -25,9 +25,9 @@ import (
 
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/bcrypt"
-	"mailcoin/internal/auth/pass_table"
-	maddycli "mailcoin/internal/cli"
-	clitools2 "mailcoin/internal/cli/clitools"
+	"github.com/dsoftgames/MailChat/internal/auth/pass_table"
+	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	clitools2 "github.com/dsoftgames/MailChat/internal/cli/clitools"
 )
 
 func init() {

@@ -76,15 +76,15 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/dsn"
-	"mailcoin/internal/msgpipeline"
-	"mailcoin/internal/target"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/dsn"
+	"github.com/dsoftgames/MailChat/internal/msgpipeline"
+	"github.com/dsoftgames/MailChat/internal/target"
 )
 
 // partialError describes state of partially successful message delivery.

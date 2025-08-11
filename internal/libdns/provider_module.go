@@ -2,7 +2,7 @@ package libdns
 
 import (
 	"github.com/libdns/libdns"
-	"mailcoin/framework/config"
+	"github.com/dsoftgames/MailChat/framework/config"
 )
 
 type ProviderModule struct {

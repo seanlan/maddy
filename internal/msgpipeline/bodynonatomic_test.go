@@ -22,9 +22,9 @@ import (
 	"errors"
 	"testing"
 
-	"mailcoin/framework/module"
-	"mailcoin/internal/modify"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/modify"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 type multipleErrs map[string]error

@@ -26,9 +26,9 @@ import (
 	"sync"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 const modName = "openmetrics"

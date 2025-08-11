@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 func floodSmtp(c *tests.Conn, commands, expectedPatterns []string, iterations int) {

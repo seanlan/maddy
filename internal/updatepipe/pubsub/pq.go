@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/lib/pq"
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 type Msg struct {

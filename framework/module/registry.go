@@ -21,7 +21,7 @@ package module
 import (
 	"sync"
 
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 var (

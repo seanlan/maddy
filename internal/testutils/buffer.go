@@ -26,7 +26,7 @@ import (
 	"testing"
 
 	"github.com/emersion/go-message/textproto"
-	"mailcoin/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/buffer"
 )
 
 func BodyFromStr(t *testing.T, literal string) (textproto.Header, buffer.MemoryBuffer) {

@@ -23,8 +23,8 @@ import (
 	"reflect"
 	"testing"
 
-	"mailcoin/framework/config"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func testReplaceAddr(t *testing.T, modName string) {

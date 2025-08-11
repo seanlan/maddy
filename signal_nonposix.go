@@ -19,14 +19,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package mailcoin
+package mailchat
 
 import (
 	"os"
 	"os/signal"
 	"syscall"
 
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 func handleSignals() os.Signal {

@@ -19,8 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package modconfig
 
 import (
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func MessageCheck(globals map[string]interface{}, args []string, block config.Node) (module.Check, error) {

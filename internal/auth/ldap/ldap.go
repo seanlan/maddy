@@ -11,10 +11,10 @@ import (
 	"time"
 
 	"github.com/go-ldap/ldap/v3"
-	"mailcoin/framework/config"
-	tls2 "mailcoin/framework/config/tls"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	tls2 "github.com/dsoftgames/MailChat/framework/config/tls"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 const modName = "auth.ldap"

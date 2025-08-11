@@ -25,12 +25,12 @@ import (
 	"net"
 
 	"github.com/emersion/go-sasl"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/auth/sasllogin"
-	"mailcoin/internal/authz"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/auth/sasllogin"
+	"github.com/dsoftgames/MailChat/internal/authz"
 )
 
 var (

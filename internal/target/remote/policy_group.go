@@ -19,9 +19,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package remote
 
 import (
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // PolicyGroup is a module container for a group of Policy implementations.

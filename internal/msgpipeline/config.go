@@ -23,13 +23,13 @@ import (
 	"strconv"
 	"strings"
 
-	"mailcoin/framework/address"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/modify"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/modify"
 )
 
 type sourceIn struct {

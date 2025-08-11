@@ -26,8 +26,8 @@ import (
 	"strings"
 	"testing"
 
-	"mailcoin/internal/testutils"
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/internal/testutils"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 func TestLMTPServer_Is_Actually_LMTP(tt *testing.T) {

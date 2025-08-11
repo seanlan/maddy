@@ -26,8 +26,8 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/google/uuid"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 var (

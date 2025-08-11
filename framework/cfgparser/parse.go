@@ -26,7 +26,7 @@ import (
 	"strings"
 	"unicode"
 
-	"mailcoin/framework/config/lexer"
+	"github.com/dsoftgames/MailChat/framework/config/lexer"
 )
 
 // Node struct describes a parsed configurtion block or a simple directive.

@@ -23,8 +23,8 @@ import (
 	"net"
 	"testing"
 
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 type mockAuth struct {

@@ -22,10 +22,10 @@ import (
 	"context"
 
 	"github.com/emersion/go-message/textproto"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 type (

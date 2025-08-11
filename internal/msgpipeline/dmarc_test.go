@@ -32,10 +32,10 @@ import (
 	"github.com/emersion/go-msgauth/authres"
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func doTestDelivery(t *testing.T, tgt module.DeliveryTarget, from string, to []string, hdr string) (string, error) {

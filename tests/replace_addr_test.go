@@ -24,7 +24,7 @@ package tests_test
 import (
 	"testing"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 func TestReplaceAddr_Rcpt(tt *testing.T) {

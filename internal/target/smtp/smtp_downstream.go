@@ -37,14 +37,14 @@ import (
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
 	"golang.org/x/net/idna"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	tls2 "mailcoin/framework/config/tls"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/smtpconn"
-	"mailcoin/internal/target"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	tls2 "github.com/dsoftgames/MailChat/framework/config/tls"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/smtpconn"
+	"github.com/dsoftgames/MailChat/internal/target"
 )
 
 type Downstream struct {

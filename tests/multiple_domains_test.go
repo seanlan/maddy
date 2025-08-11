@@ -23,7 +23,7 @@ package tests_test
 import (
 	"testing"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 // Test cases based on https://maddy.email/multiple-domains/

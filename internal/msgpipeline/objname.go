@@ -21,7 +21,7 @@ package msgpipeline
 import (
 	"fmt"
 
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // objectName returns a new that is usable to identify the used external

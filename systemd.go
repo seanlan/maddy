@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package mailcoin
+package mailchat
 
 import (
 	"errors"
@@ -30,7 +30,7 @@ import (
 	"strings"
 	"syscall"
 
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 type SDStatus string

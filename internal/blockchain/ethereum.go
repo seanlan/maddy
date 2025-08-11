@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 	"strings"
 )
 

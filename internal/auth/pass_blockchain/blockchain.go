@@ -2,12 +2,12 @@ package pass_blockchain
 
 import (
 	"context"
-	"mailcoin/framework/address"
-	parser "mailcoin/framework/cfgparser"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/address"
+	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 	"strings"
 )
 

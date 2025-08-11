@@ -23,7 +23,7 @@ import (
 	"runtime/debug"
 	"sync"
 
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 // The Future object implements a container for (value, error) pair that "will

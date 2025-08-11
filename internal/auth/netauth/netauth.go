@@ -6,9 +6,9 @@ import (
 
 	"github.com/hashicorp/go-hclog"
 	"github.com/netauth/netauth/pkg/netauth"
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 const modName = "auth.netauth"

@@ -27,10 +27,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/auth/external"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/auth/external"
 )
 
 type Auth struct {

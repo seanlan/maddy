@@ -1,7 +1,7 @@
 //go:build !docker
 // +build !docker
 
-package mailcoin
+package mailchat
 
 import (
 	"os"
@@ -16,7 +16,7 @@ var (
 	// only for purposes of modification using -X linker flag.
 
 	userDir, _ = os.UserHomeDir()
-	workDir    = filepath.Join(userDir, ".mailcoin")
+	workDir    = filepath.Join(userDir, ".mailchat")
 
 	ConfigDirectory = workDir
 
@@ -51,9 +51,9 @@ var (
 	//
 	// It should not be changed and is defined as a variable
 	// only for purposes of modification using -X linker flag.
-	DefaultLibexecDirectory = workDir //"/usr/lib/mailcoin"
+	DefaultLibexecDirectory = workDir //"/usr/lib/mailchat"
 )
 
 func init() {
-	_ = os.Setenv("MAILCOIN_WORK_DIR", workDir)
+	_ = os.Setenv("MAILCHAT_WORK_DIR", workDir)
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// Package tests provides the framework for integration testing of mailcoin.
+// Package tests provides the framework for integration testing of MailChat.
 //
 // The packages core object is tests.T object that encapsulates all test
 // state. It runs the server using test-provided configuration file and acts as
@@ -43,7 +43,7 @@ import (
 )
 
 var (
-	TestBinary  = "./mailcoin"
+	TestBinary  = "./mailchat"
 	CoverageOut string
 	DebugLog    bool
 )
@@ -93,7 +93,7 @@ func (t *T) DNS(zones map[string]mockdns.Zone) {
 		zones = map[string]mockdns.Zone{}
 	}
 	if _, ok := zones["100.97.109.127.in-addr.arpa."]; !ok {
-		zones["100.97.109.127.in-addr.arpa."] = mockdns.Zone{PTR: []string{"client.mailcoin.test."}}
+		zones["100.97.109.127.in-addr.arpa."] = mockdns.Zone{PTR: []string{"client.mailchat.test."}}
 	}
 
 	if t.dnsServ != nil {
@@ -143,7 +143,7 @@ func (t *T) ensureCanRun() {
 		t.DNS(nil)
 
 		t.Cleanup(func() {
-			// Shutdown the DNS server after mailcoin to make sure it will not spend time
+			// Shutdown the DNS server after MailChat to make sure it will not spend time
 			// timing out queries.
 			if err := t.dnsServ.Close(); err != nil {
 				t.Log("Unable to stop the DNS server:", err)
@@ -182,7 +182,7 @@ func (t *T) ensureCanRun() {
 	configPreable := "state_dir " + filepath.Join(t.testDir, "statedir") + "\n" +
 		"runtime_dir " + filepath.Join(t.testDir, "runtimedir") + "\n\n"
 
-	err := os.WriteFile(filepath.Join(t.testDir, "mailcoin.conf"), []byte(configPreable+t.cfg), os.ModePerm)
+	err := os.WriteFile(filepath.Join(t.testDir, "mailchat.conf"), []byte(configPreable+t.cfg), os.ModePerm)
 	if err != nil {
 		t.Fatal("Test configuration failed:", err)
 	}
@@ -195,7 +195,7 @@ func (t *T) buildCmd(additionalArgs ...string) *exec.Cmd {
 		remoteSmtp = strconv.Itoa(int(port))
 	}
 
-	args := []string{"-config", filepath.Join(t.testDir, "mailcoin.conf"),
+	args := []string{"-config", filepath.Join(t.testDir, "mailchat.conf"),
 		"-debug.smtpport", remoteSmtp,
 		"-debug.dnsoverride", t.dnsServ.LocalAddr().String(),
 		"-log", "/tmp/test.log"}

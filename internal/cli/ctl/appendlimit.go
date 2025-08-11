@@ -23,7 +23,7 @@ import (
 
 	imapbackend "github.com/emersion/go-imap/backend"
 	"github.com/urfave/cli/v2"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // Copied from go-imap-backend-tests.

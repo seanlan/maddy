@@ -22,8 +22,8 @@ import (
 	"strconv"
 	"testing"
 
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func BenchmarkMsgPipelineSimple(b *testing.B) {

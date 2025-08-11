@@ -25,7 +25,7 @@ import (
 	"testing"
 
 	"github.com/foxcpp/go-mockdns"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestCheckList(t *testing.T) {

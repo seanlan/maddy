@@ -30,10 +30,10 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 type Msg struct {

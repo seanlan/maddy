@@ -22,7 +22,7 @@ import (
 	"context"
 
 	"github.com/emersion/go-message/textproto"
-	"mailcoin/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/buffer"
 )
 
 // Modifier is the module interface for modules that can mutate the

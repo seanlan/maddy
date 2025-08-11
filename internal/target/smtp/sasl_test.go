@@ -22,9 +22,9 @@ import (
 	"testing"
 
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func testSaslFactory(t *testing.T, args ...string) saslClientFactory {

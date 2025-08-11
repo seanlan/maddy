@@ -21,8 +21,8 @@ package pass_table
 import (
 	"testing"
 
-	"mailcoin/framework/config"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestAuth_AuthPlain(t *testing.T) {

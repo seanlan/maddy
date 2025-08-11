@@ -22,9 +22,9 @@ import (
 	"fmt"
 	"io"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/hooks"
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/hooks"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 var (

@@ -26,7 +26,7 @@ import (
 	"golang.org/x/net/idna"
 	"golang.org/x/text/secure/precis"
 	"golang.org/x/text/unicode/norm"
-	"mailcoin/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/dns"
 )
 
 // ForLookup transforms the local-part of the address into a canonical form

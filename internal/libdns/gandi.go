@@ -7,9 +7,9 @@ import (
 	"fmt"
 
 	"github.com/libdns/gandi"
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func init() {

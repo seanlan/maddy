@@ -31,12 +31,12 @@ import (
 	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/auth"
-	"mailcoin/internal/msgpipeline"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/auth"
+	"github.com/dsoftgames/MailChat/internal/msgpipeline"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 var testPort string

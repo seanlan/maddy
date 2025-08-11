@@ -26,7 +26,7 @@ import (
 	"net"
 
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/future"
+	"github.com/dsoftgames/MailChat/framework/future"
 )
 
 // ConnState structure holds the state information of the protocol used to

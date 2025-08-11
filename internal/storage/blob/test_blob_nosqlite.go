@@ -6,7 +6,7 @@ package blob
 import (
 	"testing"
 
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func TestStore(t *testing.T, newStore func() module.BlobStore, cleanStore func(module.BlobStore)) {

@@ -23,7 +23,7 @@ import (
 	"io"
 	"os/exec"
 
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func AuthUsingHelper(binaryPath, accountName, password string) error {

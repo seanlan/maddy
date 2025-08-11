@@ -25,9 +25,9 @@ import (
 	"strings"
 	"time"
 
-	"mailcoin/framework/address"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func SanitizeForHeader(raw string) string {

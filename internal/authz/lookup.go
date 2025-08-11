@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"mailcoin/framework/address"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func AuthorizeEmailUse(ctx context.Context, username string, addrs []string, mapping module.Table) (bool, error) {

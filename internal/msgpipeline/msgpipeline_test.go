@@ -25,10 +25,10 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/module"
-	"mailcoin/internal/modify"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/modify"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestMsgPipeline_AllToTarget(t *testing.T) {

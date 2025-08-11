@@ -22,7 +22,7 @@ import (
 	"context"
 
 	"github.com/emersion/go-message/textproto"
-	"mailcoin/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/buffer"
 )
 
 // StatusCollector is an object that is passed by message source

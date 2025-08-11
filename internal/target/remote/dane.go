@@ -23,8 +23,8 @@ import (
 	"crypto/x509"
 	"time"
 
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
 )
 
 // Used to override verification time for DANE-TA tests.

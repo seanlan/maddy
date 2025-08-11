@@ -24,9 +24,9 @@ import (
 	"strconv"
 	"strings"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // FailAction specifies actions that messages pipeline should take based on the

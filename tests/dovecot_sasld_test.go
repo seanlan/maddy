@@ -34,7 +34,7 @@ import (
 	"testing"
 	"time"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 var ChasquidExecutable string

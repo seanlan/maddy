@@ -28,10 +28,10 @@ import (
 	"sync"
 	"time"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/hooks"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/hooks"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 const FileModName = "table.file"

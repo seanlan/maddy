@@ -25,9 +25,9 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 	"golang.org/x/text/secure/precis"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 type Auth struct {

@@ -32,9 +32,9 @@ import (
 	"strconv"
 	"time"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
-	"mailcoin/internal/limits/limiters"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/limits/limiters"
 )
 
 type Group struct {

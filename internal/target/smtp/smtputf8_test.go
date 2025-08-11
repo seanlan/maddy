@@ -21,8 +21,8 @@ package smtp_downstream
 import (
 	"testing"
 
-	"mailcoin/framework/config"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestDownstreamDelivery_EHLO_ALabel(t *testing.T) {

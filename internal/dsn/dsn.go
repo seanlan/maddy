@@ -31,8 +31,8 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/address"
-	"mailcoin/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/dns"
 )
 
 type ReportingMTAInfo struct {

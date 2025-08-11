@@ -1,8 +1,8 @@
-Maddy Mail Server
+MailChat Mail Server
 =====================
 > Composable all-in-one mail server.
 
-Maddy Mail Server implements all functionality required to run a e-mail
+MailChat Mail Server implements all functionality required to run a e-mail
 server. It can send messages via SMTP (works as MTA), accept messages via SMTP
 (works as MX) and store messages while providing access to them via IMAP.
 In addition to that it implements auxiliary protocols that are mandatory
@@ -12,11 +12,11 @@ It replaces Postfix, Dovecot, OpenDKIM, OpenSPF, OpenDMARC and more with one
 daemon with uniform configuration and minimal maintenance cost.
 
 **Note:** IMAP storage is "beta". If you are looking for stable and
-feature-packed implementation you may want to use Dovecot instead. maddy still
+feature-packed implementation you may want to use Dovecot instead. MailChat still
 can handle message delivery business.
 
-[![CI status](https://img.shields.io/github/actions/workflow/status/foxcpp/maddy/cicd.yml?style=flat-square)](https://mailcoin/actions/workflows/cicd.yml)
-[![Issues tracker](https://img.shields.io/github/issues/foxcpp/maddy?style=flat-square)](https://mailcoin)
+[![CI status](https://img.shields.io/github/actions/workflow/status/dsoftgames/MailChat/cicd.yml?style=flat-square)](https://github.com/dsoftgames/MailChat/actions/workflows/cicd.yml)
+[![Issues tracker](https://img.shields.io/github/issues/dsoftgames/MailChat?style=flat-square)](https://github.com/dsoftgames/MailChat)
 
 * [Setup tutorial](https://maddy.email/tutorials/setting-up/)
 * [Documentation](https://maddy.email/)

@@ -6,9 +6,9 @@ import (
 
 	"github.com/johannesboyne/gofakes3"
 	"github.com/johannesboyne/gofakes3/backend/s3mem"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
-	"mailcoin/internal/storage/blob"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/storage/blob"
 )
 
 func TestFS(t *testing.T) {

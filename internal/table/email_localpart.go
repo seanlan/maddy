@@ -21,9 +21,9 @@ package table
 import (
 	"context"
 
-	"mailcoin/framework/address"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 type EmailLocalpart struct {

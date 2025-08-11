@@ -27,12 +27,12 @@ import (
 
 	"github.com/emersion/go-sasl"
 	dovecotsasl "github.com/foxcpp/go-dovecot-sasl"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/auth"
-	"mailcoin/internal/authz"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/auth"
+	"github.com/dsoftgames/MailChat/internal/authz"
 )
 
 const modName = "dovecot_sasld"

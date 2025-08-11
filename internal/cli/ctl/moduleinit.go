@@ -25,12 +25,12 @@ import (
 	"os"
 
 	"github.com/urfave/cli/v2"
-	"mailcoin"
-	parser "mailcoin/framework/cfgparser"
-	"mailcoin/framework/config"
-	"mailcoin/framework/hooks"
-	"mailcoin/framework/module"
-	"mailcoin/internal/updatepipe"
+	"github.com/dsoftgames/MailChat"
+	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/hooks"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/updatepipe"
 )
 
 func closeIfNeeded(i interface{}) {
@@ -39,7 +39,7 @@ func closeIfNeeded(i interface{}) {
 	}
 }
 
-func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailcoin.ModInfo, error) {
+func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailchat.ModInfo, error) {
 	cfgPath := ctx.String("config")
 	if cfgPath == "" {
 		return nil, nil, cli.Exit("Error: config is required", 2)
@@ -54,17 +54,17 @@ func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailcoin.ModI
 		return nil, nil, cli.Exit(fmt.Sprintf("Error: failed to parse config: %v", err), 2)
 	}
 
-	globals, cfgNodes, err := mailcoin.ReadGlobals(cfgNodes)
+	globals, cfgNodes, err := mailchat.ReadGlobals(cfgNodes)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	if err := mailcoin.InitDirs(); err != nil {
+	if err := mailchat.InitDirs(); err != nil {
 		return nil, nil, err
 	}
 
 	module.NoRun = true
-	_, mods, err := mailcoin.RegisterModules(globals, cfgNodes)
+	_, mods, err := mailchat.RegisterModules(globals, cfgNodes)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -74,7 +74,7 @@ func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailcoin.ModI
 	if cfgBlock == "" {
 		return nil, nil, cli.Exit("Error: cfg-block is required", 2)
 	}
-	var mod mailcoin.ModInfo
+	var mod mailchat.ModInfo
 	for _, m := range mods {
 		if m.Instance.InstanceName() == cfgBlock {
 			mod = m

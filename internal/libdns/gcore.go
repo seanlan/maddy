@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/libdns/gcore"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func init() {

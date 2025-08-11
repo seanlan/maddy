@@ -1,9 +1,9 @@
-package mailcoincli
+package mailchatcli
 
 import (
 	"os"
 
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
@@ -13,7 +13,7 @@ var rootCmd *cobra.Command
 
 func init() {
 	rootCmd = &cobra.Command{
-		Use:   "mailcoin",
+		Use:   "MailChat",
 		Short: "composable all-in-one mail server",
 		Long: `Maddy is Mail Transfer agent (MTA), Mail Delivery Agent (MDA), Mail Submission
 Agent (MSA), IMAP server and a set of other essential protocols/schemes
@@ -61,14 +61,14 @@ func AddSubcommand(cmd *cobra.Command) {
 	rootCmd.AddCommand(cmd)
 
 	if cmd.Name() == "run" {
-		// Backward compatibility hack to start the server as just ./mailcoin
+		// Backward compatibility hack to start the server as just ./MailChat
 		rootCmd.RunE = cmd.RunE
 	}
 }
 
 
 // RunWithoutExit is like Run but returns exit code instead of calling os.Exit
-// To be used in mailcoin.cover.
+// To be used in MailChat.cover.
 func RunWithoutExit() int {
 	if err := rootCmd.Execute(); err != nil {
 		return 1

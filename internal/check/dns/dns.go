@@ -21,12 +21,12 @@ package dns
 import (
 	"strings"
 
-	"mailcoin/framework/address"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/check"
+	"github.com/dsoftgames/MailChat/framework/address"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/check"
 )
 
 func requireMatchingRDNS(ctx check.StatelessCheckContext) module.CheckResult {

@@ -24,8 +24,8 @@ import (
 	"strconv"
 	"strings"
 
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
 )
 
 type ListedErr struct {

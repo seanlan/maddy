@@ -24,8 +24,8 @@ import (
 	"fmt"
 	"os"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 func TLSClientBlock(_ *config.Map, node config.Node) (interface{}, error) {

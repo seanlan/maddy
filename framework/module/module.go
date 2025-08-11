@@ -34,7 +34,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package module
 
 import (
-	"mailcoin/framework/config"
+	"github.com/dsoftgames/MailChat/framework/config"
 )
 
 // Module is the interface implemented by all mailcoin module instances.

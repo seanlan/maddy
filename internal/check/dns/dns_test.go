@@ -23,10 +23,10 @@ import (
 	"testing"
 
 	"github.com/foxcpp/go-mockdns"
-	"mailcoin/framework/future"
-	"mailcoin/framework/module"
-	"mailcoin/internal/check"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/future"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/check"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestRequireMatchingRDNS(t *testing.T) {

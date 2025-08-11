@@ -25,7 +25,7 @@ import (
 	"testing"
 	"time"
 
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 var (

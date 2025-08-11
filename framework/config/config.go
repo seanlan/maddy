@@ -21,7 +21,7 @@ package config
 import (
 	"fmt"
 
-	parser "mailcoin/framework/cfgparser"
+	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
 )
 
 type (

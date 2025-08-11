@@ -21,8 +21,8 @@ package msgpipeline
 import (
 	"testing"
 
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestMsgPipeline_Issue161(t *testing.T) {

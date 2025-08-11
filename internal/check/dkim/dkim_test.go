@@ -26,11 +26,11 @@ import (
 
 	"github.com/emersion/go-msgauth/authres"
 	"github.com/foxcpp/go-mockdns"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 const unsignedMailString = `From: Joe SixPack <joe@football.example.com>

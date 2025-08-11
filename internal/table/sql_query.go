@@ -25,8 +25,8 @@ import (
 	"strings"
 
 	_ "github.com/lib/pq"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 type SQL struct {

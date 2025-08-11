@@ -23,8 +23,8 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
 )
 
 // Dummy is a struct that implements PlainAuth and DeliveryTarget

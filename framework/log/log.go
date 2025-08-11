@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"go.uber.org/zap"
-	"mailcoin/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
 )
 
 // Logger is the structure that writes formatted output to the underlying

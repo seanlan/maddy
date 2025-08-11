@@ -26,8 +26,8 @@ import (
 	"testing"
 	"time"
 
-	"mailcoin/internal/testutils"
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/internal/testutils"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 func TestIssue327(tt *testing.T) {

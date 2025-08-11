@@ -23,7 +23,7 @@ package dns
 
 import (
 	"github.com/urfave/cli/v2"
-	maddycli "mailcoin/internal/cli"
+	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func init() {

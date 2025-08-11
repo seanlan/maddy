@@ -24,11 +24,11 @@ import (
 
 	"github.com/emersion/go-sasl"
 	dovecotsasl "github.com/foxcpp/go-dovecot-sasl"
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/auth"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/auth"
 )
 
 type Auth struct {

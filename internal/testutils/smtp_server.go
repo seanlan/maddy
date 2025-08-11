@@ -32,7 +32,7 @@ import (
 
 	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
 )
 
 type SMTPMessage struct {

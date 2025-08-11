@@ -27,9 +27,9 @@ import (
 	"testing"
 
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 var testPort string

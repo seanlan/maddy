@@ -27,11 +27,11 @@ import (
 	"sort"
 	"time"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/smtpconn"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/smtpconn"
 )
 
 type mxConn struct {

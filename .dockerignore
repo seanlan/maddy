@@ -1,4 +1,4 @@
 testdata/
-cmd/mailcoin/mailcoin
+cmd/MailChat/mailchat
 mailcoin
 tests/mailcoin.cover

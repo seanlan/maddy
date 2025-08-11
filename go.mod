@@ -1,8 +1,6 @@
-module mailcoin
+module github.com/dsoftgames/MailChat
 
-go 1.23.1
-
-toolchain go1.23.5
+go 1.24.0
 
 require (
 	blitiri.com.ar/go/spf v1.5.1
@@ -191,6 +189,6 @@ require (
 
 replace github.com/emersion/go-imap => github.com/foxcpp/go-imap v1.0.0-beta.1.0.20220623182312-df940c324887
 
-replace github.com/emersion/go-smtp => github.com/foxcpp/go-smtp v1.21.4-0.20250124171104-c8519ae4fb23 // v1.21.3+mailcoin.1
+replace github.com/emersion/go-smtp => github.com/foxcpp/go-smtp v1.21.4-0.20250124171104-c8519ae4fb23 // v1.21.3+MailChat.1
 
-replace github.com/libdns/gandi => github.com/foxcpp/libdns-gandi v1.0.4-0.20240127130558-4782f9d5ce3e // v1.0.3+mailcoin.1
+replace github.com/libdns/gandi => github.com/foxcpp/libdns-gandi v1.0.4-0.20240127130558-4782f9d5ce3e // v1.0.3+MailChat.1

@@ -25,12 +25,12 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-msgauth/authres"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/dmarc"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/dmarc"
 )
 
 // checkRunner runs groups of checks, collects and merges results.

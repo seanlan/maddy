@@ -30,11 +30,11 @@ import (
 	"context"
 
 	"github.com/emersion/go-message/textproto"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/target"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/target"
 )
 
 const modName = "check_things"

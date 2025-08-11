@@ -25,7 +25,7 @@ import (
 	"testing"
 	"time"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 // Smoke test to ensure message delivery is handled correctly.

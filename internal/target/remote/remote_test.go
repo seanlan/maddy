@@ -32,14 +32,14 @@ import (
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
 	"github.com/foxcpp/go-mtasts"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/limits"
-	"mailcoin/internal/smtpconn/pool"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/limits"
+	"github.com/dsoftgames/MailChat/internal/smtpconn/pool"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 // .invalid TLD is used here to make sure if there is something wrong about

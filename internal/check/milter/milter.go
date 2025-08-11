@@ -28,12 +28,12 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-milter"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/target"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/target"
 )
 
 const modName = "check.milter"

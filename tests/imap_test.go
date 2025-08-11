@@ -6,7 +6,7 @@ package tests_test
 import (
 	"testing"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 func TestIMAPEndpointAuthMap(tt *testing.T) {

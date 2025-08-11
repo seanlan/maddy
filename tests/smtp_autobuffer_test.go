@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	"mailcoin/tests"
+	"github.com/dsoftgames/MailChat/tests"
 )
 
 func TestSMTPEndpoint_LargeMessage(tt *testing.T) {

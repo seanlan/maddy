@@ -27,7 +27,7 @@ import (
 	"strings"
 	"testing"
 
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestKeyLoad_new(t *testing.T) {

@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // FSStore struct represents directory on FS used to store blobs.

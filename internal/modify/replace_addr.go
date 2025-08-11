@@ -24,11 +24,11 @@ import (
 	"strings"
 
 	"github.com/emersion/go-message/textproto"
-	"mailcoin/framework/address"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 // replaceAddr is a simple module that replaces matching sender (or recipient) address

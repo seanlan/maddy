@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"mailcoin/framework/address"
+	"github.com/dsoftgames/MailChat/framework/address"
 )
 
 func TestValidMailboxName(t *testing.T) {

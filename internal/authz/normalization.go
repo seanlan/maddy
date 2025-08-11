@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"golang.org/x/text/secure/precis"
-	"mailcoin/framework/address"
+	"github.com/dsoftgames/MailChat/framework/address"
 )
 
 type NormalizeFunc func(string) (string, error)

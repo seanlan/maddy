@@ -26,7 +26,7 @@ import (
 	"os"
 
 	mess "github.com/foxcpp/go-imap-mess"
-	"mailcoin/framework/log"
+	"github.com/dsoftgames/MailChat/framework/log"
 )
 
 // UnixSockPipe implements the UpdatePipe interface by serializating updates

@@ -14,7 +14,7 @@ print_help() {
 Usage:
 	./build.sh [options] {build,install}
 
-Script to build, package or install Maddy Mail Server.
+Script to build, package or install MailChat Mail Server.
 
 Options:
     -h, --help              guess!
@@ -76,7 +76,7 @@ while :; do
 	shift
 done
 
-configdir="${destdir}etc/maddy"
+configdir="${destdir}etc/mailchat"
 
 if [ "$version" = "" ]; then
 	version=unknown
@@ -111,7 +111,7 @@ build() {
 	mkdir -p "${builddir}"
 	echo "-- Version: ${version}" >&2
 	if [ "$(go env CC)" = "" ]; then
-        echo '-- [!] No C compiler available. mailcoin will be built without SQLite3 support and default configuration will be unusable.' >&2
+        echo '-- [!] No C compiler available. MailChat will be built without SQLite3 support and default configuration will be unusable.' >&2
     fi
 
 	if [ "$static" -eq 1 ]; then
@@ -119,11 +119,11 @@ build() {
 		# This is literally impossible to specify this line of arguments as part of ${GOFLAGS}
 		# using only POSIX sh features (and even with Bash extensions I can't figure it out).
 		go build -trimpath -buildmode pie -tags "$tags osusergo netgo static_build" \
-			-ldflags "-extldflags '-fno-PIC -static' -X \"mailcoin.Version=${version}\"" \
-			-o "${builddir}/maddy" ${GOFLAGS} ./cmd/mailcoin
+			-ldflags "-extldflags '-fno-PIC -static' -X \"mailchat.Version=${version}\"" \
+			-o "${builddir}/mailchat" ${GOFLAGS} ./cmd/MailChat
 	else
 		echo "-- Building main server executable..." >&2
-		go build -tags "$tags" -trimpath -ldflags="-X \"mailcoin.Version=${version}\"" -o "${builddir}/maddy" ${GOFLAGS} ./cmd/mailcoin
+		go build -tags "$tags" -trimpath -ldflags="-X \"mailchat.Version=${version}\"" -o "${builddir}/mailchat" ${GOFLAGS} ./cmd/MailChat
 	fi
 
 	build_man_pages
@@ -132,24 +132,24 @@ build() {
 
 	mkdir -p "${builddir}/systemd"
 	cp dist/systemd/*.service "${builddir}/systemd/"
-	cp mailcoin.conf "${builddir}/maddy.conf"
+	cp mailchat.conf "${builddir}/mailchat.conf"
 }
 
 install() {
 	echo "-- Installing built files..." >&2
 
 	command install -m 0755 -d "${destdir}/${prefix}/bin/"
-	command install -m 0755 "${builddir}/maddy" "${destdir}/${prefix}/bin/"
+	command install -m 0755 "${builddir}/mailchat" "${destdir}/${prefix}/bin/"
 	command install -m 0755 -d "${configdir}"
 
 
 	# We do not want to overwrite existing configuration.
 	# If the file exists, then save it with .default suffix and warn user.
-	if [ ! -e "${configdir}/maddy.conf" ]; then
-		command install -m 0644 ./mailcoin.conf "${configdir}/maddy.conf"
+	if [ ! -e "${configdir}/mailchat.conf" ]; then
+		command install -m 0644 ./mailchat.conf "${configdir}/mailchat.conf"
 	else
-		echo "-- [!] Configuration file ${configdir}/maddy.conf exists, saving to ${configdir}/maddy.conf.default" >&2
-		command install -m 0644 ./mailcoin.conf "${configdir}/maddy.conf.default"
+		echo "-- [!] Configuration file ${configdir}/mailchat.conf exists, saving to ${configdir}/mailchat.conf.default" >&2
+		command install -m 0644 ./mailchat.conf "${configdir}/mailchat.conf.default"
 	fi
 
 	# Attempt to install systemd units only for Linux.

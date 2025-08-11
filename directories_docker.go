@@ -1,11 +1,11 @@
 //go:build docker
 // +build docker
 
-package mailcoin
+package mailchat
 
 var (
 	ConfigDirectory         = "/data"
 	DefaultStateDirectory   = "/data"
 	DefaultRuntimeDirectory = "/tmp"
-	DefaultLibexecDirectory = "/usr/lib/mailcoin"
+	DefaultLibexecDirectory = "/usr/lib/mailchat"
 )

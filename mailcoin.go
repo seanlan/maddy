@@ -16,13 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-package mailcoin
+package mailchat
 
 import (
 	"errors"
 	"fmt"
 	"io"
-	mailcoincli "mailcoin/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -31,52 +31,52 @@ import (
 
 	"github.com/caddyserver/certmagic"
 	"github.com/spf13/cobra"
-	parser "mailcoin/framework/cfgparser"
-	"mailcoin/framework/config"
-	modconfig "mailcoin/framework/config/module"
-	"mailcoin/framework/config/tls"
-	"mailcoin/framework/hooks"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/authz"
+	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
+	"github.com/dsoftgames/MailChat/framework/config"
+	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
+	"github.com/dsoftgames/MailChat/framework/config/tls"
+	"github.com/dsoftgames/MailChat/framework/hooks"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/authz"
 	// Import packages for side-effect of module registration.
-	_ "mailcoin/internal/auth/dovecot_sasl"
-	_ "mailcoin/internal/auth/external"
-	_ "mailcoin/internal/auth/ldap"
-	_ "mailcoin/internal/auth/netauth"
-	_ "mailcoin/internal/auth/pam"
-	_ "mailcoin/internal/auth/pass_blockchain"
-	_ "mailcoin/internal/auth/pass_table"
-	_ "mailcoin/internal/auth/plain_separate"
-	_ "mailcoin/internal/auth/shadow"
-	_ "mailcoin/internal/blockchain"
-	_ "mailcoin/internal/check/authorize_sender"
-	_ "mailcoin/internal/check/command"
-	_ "mailcoin/internal/check/dkim"
-	_ "mailcoin/internal/check/dns"
-	_ "mailcoin/internal/check/dnsbl"
-	_ "mailcoin/internal/check/milter"
-	_ "mailcoin/internal/check/requiretls"
-	_ "mailcoin/internal/check/rspamd"
-	_ "mailcoin/internal/check/spf"
-	_ "mailcoin/internal/endpoint/dovecot_sasld"
-	_ "mailcoin/internal/endpoint/imap"
-	_ "mailcoin/internal/endpoint/openmetrics"
-	_ "mailcoin/internal/endpoint/smtp"
-	_ "mailcoin/internal/imap_filter"
-	_ "mailcoin/internal/imap_filter/command"
-	_ "mailcoin/internal/libdns"
-	_ "mailcoin/internal/modify"
-	_ "mailcoin/internal/modify/dkim"
-	_ "mailcoin/internal/storage/blob/fs"
-	_ "mailcoin/internal/storage/blob/s3"
-	_ "mailcoin/internal/storage/imapsql"
-	_ "mailcoin/internal/table"
-	_ "mailcoin/internal/target/queue"
-	_ "mailcoin/internal/target/remote"
-	_ "mailcoin/internal/target/smtp"
-	_ "mailcoin/internal/tls"
-	_ "mailcoin/internal/tls/acme"
+	_ "github.com/dsoftgames/MailChat/internal/auth/dovecot_sasl"
+	_ "github.com/dsoftgames/MailChat/internal/auth/external"
+	_ "github.com/dsoftgames/MailChat/internal/auth/ldap"
+	_ "github.com/dsoftgames/MailChat/internal/auth/netauth"
+	_ "github.com/dsoftgames/MailChat/internal/auth/pam"
+	_ "github.com/dsoftgames/MailChat/internal/auth/pass_blockchain"
+	_ "github.com/dsoftgames/MailChat/internal/auth/pass_table"
+	_ "github.com/dsoftgames/MailChat/internal/auth/plain_separate"
+	_ "github.com/dsoftgames/MailChat/internal/auth/shadow"
+	_ "github.com/dsoftgames/MailChat/internal/blockchain"
+	_ "github.com/dsoftgames/MailChat/internal/check/authorize_sender"
+	_ "github.com/dsoftgames/MailChat/internal/check/command"
+	_ "github.com/dsoftgames/MailChat/internal/check/dkim"
+	_ "github.com/dsoftgames/MailChat/internal/check/dns"
+	_ "github.com/dsoftgames/MailChat/internal/check/dnsbl"
+	_ "github.com/dsoftgames/MailChat/internal/check/milter"
+	_ "github.com/dsoftgames/MailChat/internal/check/requiretls"
+	_ "github.com/dsoftgames/MailChat/internal/check/rspamd"
+	_ "github.com/dsoftgames/MailChat/internal/check/spf"
+	_ "github.com/dsoftgames/MailChat/internal/endpoint/dovecot_sasld"
+	_ "github.com/dsoftgames/MailChat/internal/endpoint/imap"
+	_ "github.com/dsoftgames/MailChat/internal/endpoint/openmetrics"
+	_ "github.com/dsoftgames/MailChat/internal/endpoint/smtp"
+	_ "github.com/dsoftgames/MailChat/internal/imap_filter"
+	_ "github.com/dsoftgames/MailChat/internal/imap_filter/command"
+	_ "github.com/dsoftgames/MailChat/internal/libdns"
+	_ "github.com/dsoftgames/MailChat/internal/modify"
+	_ "github.com/dsoftgames/MailChat/internal/modify/dkim"
+	_ "github.com/dsoftgames/MailChat/internal/storage/blob/fs"
+	_ "github.com/dsoftgames/MailChat/internal/storage/blob/s3"
+	_ "github.com/dsoftgames/MailChat/internal/storage/imapsql"
+	_ "github.com/dsoftgames/MailChat/internal/table"
+	_ "github.com/dsoftgames/MailChat/internal/target/queue"
+	_ "github.com/dsoftgames/MailChat/internal/target/remote"
+	_ "github.com/dsoftgames/MailChat/internal/target/smtp"
+	_ "github.com/dsoftgames/MailChat/internal/tls"
+	_ "github.com/dsoftgames/MailChat/internal/tls/acme"
 )
 
 var (
@@ -97,7 +97,7 @@ default config: %s
 default state_dir: %s
 default runtime_dir: %s`,
 		version, runtime.GOOS, runtime.GOARCH, runtime.Version(),
-		filepath.Join(ConfigDirectory, "mailcoin.conf"),
+		filepath.Join(ConfigDirectory, "mailchat.conf"),
 		DefaultStateDirectory,
 		DefaultRuntimeDirectory)
 }
@@ -107,9 +107,9 @@ var (
 )
 
 func init() {
-	configPath = filepath.Join(ConfigDirectory, "mailcoin.conf")
-	mailcoincli.AddGlobalStringFlag("config", "Configuration file to use", "MADDY_CONFIG", configPath, &configPath)
-	mailcoincli.AddGlobalBoolFlag("debug", "enable debug logging early", &log.DefaultLogger.Debug)
+	configPath = filepath.Join(ConfigDirectory, "mailchat.conf")
+	mailchatcli.AddGlobalStringFlag("config", "Configuration file to use", "MADDY_CONFIG", configPath, &configPath)
+	mailchatcli.AddGlobalBoolFlag("debug", "enable debug logging early", &log.DefaultLogger.Debug)
 	var (
 		logTargets []string
 		showVersion bool
@@ -138,7 +138,7 @@ func init() {
 		runCmd.Flags().IntVar(&debugMutexProfFract, "debug.mutexproffract", 0, "set mutex profile fraction")
 	}
 
-	mailcoincli.AddSubcommand(runCmd)
+	mailchatcli.AddSubcommand(runCmd)
 	versionCmd := &cobra.Command{
 		Use:   "version",
 		Short: "Print version and build metadata, then exit",
@@ -148,7 +148,7 @@ func init() {
 		},
 	}
 
-	mailcoincli.AddSubcommand(versionCmd)
+	mailchatcli.AddSubcommand(versionCmd)
 
 	if enableDebugFlags {
 		// Debug flags will be added to the run command specifically
@@ -167,14 +167,14 @@ func Run(c interface{}) error {
 
 // RunCobra is the entry point for all server-running code with Cobra.
 func RunCobra(cmd *cobra.Command, args []string, showVersion bool, logTargets []string) error {
-	certmagic.UserAgent = "mailcoin/" + Version
+	certmagic.UserAgent = "github.com/dsoftgames/MailChat/" + Version
 
 	if len(args) != 0 {
 		return fmt.Errorf("usage: %s [options]", os.Args[0])
 	}
 
 	if showVersion {
-		fmt.Println("mailcoin", BuildInfo())
+		fmt.Println("MailChat", BuildInfo())
 		return nil
 	}
 
@@ -189,7 +189,7 @@ func RunCobra(cmd *cobra.Command, args []string, showVersion bool, logTargets []
 
 	os.Setenv("PATH", config.LibexecDirectory+string(filepath.ListSeparator)+os.Getenv("PATH"))
 
-	log.Printf("Starting mailcoin %s \n", Version)
+	log.Printf("Starting MailChat %s \n", Version)
 	f, err := os.Open(configPath)
 	if err != nil {
 		systemdStatusErr(err)

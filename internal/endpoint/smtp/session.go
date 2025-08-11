@@ -33,13 +33,13 @@ import (
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/address"
-	"mailcoin/framework/buffer"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/auth"
+	"github.com/dsoftgames/MailChat/framework/address"
+	"github.com/dsoftgames/MailChat/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/auth"
 )
 
 func limitReader(r io.Reader, n int64, err error) *limitedReader {

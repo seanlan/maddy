@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"mailcoin/framework/module"
-	"mailcoin/internal/storage/blob"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/storage/blob"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestFS(t *testing.T) {

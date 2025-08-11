@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/emersion/go-sasl"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 type mockAuth struct {

@@ -27,13 +27,13 @@ import (
 	"time"
 
 	"github.com/foxcpp/go-mtasts"
-	"mailcoin/framework/config"
-	"mailcoin/framework/dns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/future"
-	"mailcoin/framework/log"
-	"mailcoin/framework/module"
-	"mailcoin/internal/target"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/future"
+	"github.com/dsoftgames/MailChat/framework/log"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/target"
 )
 
 type (

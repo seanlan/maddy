@@ -23,7 +23,7 @@ import (
 
 	"github.com/emersion/go-message/textproto"
 	"github.com/emersion/go-smtp"
-	"mailcoin/framework/buffer"
+	"github.com/dsoftgames/MailChat/framework/buffer"
 )
 
 // DeliveryTarget interface represents abstract storage for the message data

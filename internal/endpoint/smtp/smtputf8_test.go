@@ -24,9 +24,9 @@ import (
 
 	"github.com/emersion/go-smtp"
 	"github.com/foxcpp/go-mockdns"
-	"mailcoin/framework/exterrors"
-	"mailcoin/framework/module"
-	"mailcoin/internal/testutils"
+	"github.com/dsoftgames/MailChat/framework/exterrors"
+	"github.com/dsoftgames/MailChat/framework/module"
+	"github.com/dsoftgames/MailChat/internal/testutils"
 )
 
 func TestSMTPUTF8_MangleStatusMessage(t *testing.T) {

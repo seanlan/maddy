@@ -5,8 +5,8 @@ package libdns
 
 import (
 	"github.com/libdns/route53"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func init() {

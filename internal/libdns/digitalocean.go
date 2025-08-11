@@ -5,8 +5,8 @@ package libdns
 
 import (
 	"github.com/libdns/digitalocean"
-	"mailcoin/framework/config"
-	"mailcoin/framework/module"
+	"github.com/dsoftgames/MailChat/framework/config"
+	"github.com/dsoftgames/MailChat/framework/module"
 )
 
 func init() {

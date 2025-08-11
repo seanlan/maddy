@@ -21,7 +21,7 @@ package milter
 import (
 	"testing"
 
-	"mailcoin/framework/config"
+	"github.com/dsoftgames/MailChat/framework/config"
 )
 
 func TestAcceptValidEndpoints(t *testing.T) {

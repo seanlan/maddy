@@ -43,9 +43,9 @@ import (
 	"testing"
 
 	_ "mailcoin"                  // To register run command
-	_ "mailcoin/internal/cli/ctl" // To register other CLI commands.
+	_ "github.com/dsoftgames/MailChat/internal/cli/ctl" // To register other CLI commands.
 
-	maddycli "mailcoin/internal/cli"
+	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func TestMain(m *testing.M) {
