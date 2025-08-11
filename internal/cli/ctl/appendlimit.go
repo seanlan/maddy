@@ -22,7 +22,7 @@ import (
 	"fmt"
 
 	imapbackend "github.com/emersion/go-imap/backend"
-	"github.com/urfave/cli/v2"
+	"github.com/spf13/cobra"
 	"github.com/dsoftgames/MailChat/framework/module"
 )
 
@@ -38,11 +38,11 @@ type AppendLimitUser interface {
 	SetMessageLimit(val *uint32) error
 }
 
-func imapAcctAppendlimit(be module.Storage, ctx *cli.Context) error {
-	username := ctx.Args().First()
-	if username == "" {
-		return cli.Exit("Error: USERNAME is required", 2)
+func imapAcctAppendlimit(be module.Storage, cmd *cobra.Command, args []string) error {
+	if len(args) == 0 {
+		return fmt.Errorf("USERNAME is required")
 	}
+	username := args[0]
 
 	u, err := be.GetIMAPAcct(username)
 	if err != nil {
@@ -50,11 +50,11 @@ func imapAcctAppendlimit(be module.Storage, ctx *cli.Context) error {
 	}
 	userAL, ok := u.(AppendLimitUser)
 	if !ok {
-		return cli.Exit("Error: module.Storage does not support per-user append limit", 2)
+		return fmt.Errorf("module.Storage does not support per-user append limit")
 	}
 
-	if ctx.IsSet("value") {
-		val := ctx.Int("value")
+	if cmd.Flags().Changed("value") {
+		val, _ := cmd.Flags().GetInt("value")
 
 		var err error
 		if val == -1 {

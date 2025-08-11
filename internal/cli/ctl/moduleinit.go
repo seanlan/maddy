@@ -24,7 +24,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/urfave/cli/v2"
+	"github.com/spf13/cobra"
 	"github.com/dsoftgames/MailChat"
 	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
 	"github.com/dsoftgames/MailChat/framework/config"
@@ -39,19 +39,19 @@ func closeIfNeeded(i interface{}) {
 	}
 }
 
-func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailchat.ModInfo, error) {
-	cfgPath := ctx.String("config")
+func getCfgBlockModule(cmd *cobra.Command) (map[string]interface{}, *mailchat.ModInfo, error) {
+	cfgPath, _ := cmd.Flags().GetString("config")
 	if cfgPath == "" {
-		return nil, nil, cli.Exit("Error: config is required", 2)
+		return nil, nil, fmt.Errorf("config is required")
 	}
 	cfgFile, err := os.Open(cfgPath)
 	if err != nil {
-		return nil, nil, cli.Exit(fmt.Sprintf("Error: failed to open config: %v", err), 2)
+		return nil, nil, fmt.Errorf("failed to open config: %w", err)
 	}
 	defer cfgFile.Close()
 	cfgNodes, err := parser.Read(cfgFile, cfgFile.Name())
 	if err != nil {
-		return nil, nil, cli.Exit(fmt.Sprintf("Error: failed to parse config: %v", err), 2)
+		return nil, nil, fmt.Errorf("failed to parse config: %w", err)
 	}
 
 	globals, cfgNodes, err := mailchat.ReadGlobals(cfgNodes)
@@ -70,9 +70,9 @@ func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailchat.ModI
 	}
 	defer hooks.RunHooks(hooks.EventShutdown)
 
-	cfgBlock := ctx.String("cfg-block")
+	cfgBlock, _ := cmd.Flags().GetString("cfg-block")
 	if cfgBlock == "" {
-		return nil, nil, cli.Exit("Error: cfg-block is required", 2)
+		return nil, nil, fmt.Errorf("cfg-block is required")
 	}
 	var mod mailchat.ModInfo
 	for _, m := range mods {
@@ -82,21 +82,22 @@ func getCfgBlockModule(ctx *cli.Context) (map[string]interface{}, *mailchat.ModI
 		}
 	}
 	if mod.Instance == nil {
-		return nil, nil, cli.Exit(fmt.Sprintf("Error: unknown configuration block: %s", cfgBlock), 2)
+		return nil, nil, fmt.Errorf("unknown configuration block: %s", cfgBlock)
 	}
 
 	return globals, &mod, nil
 }
 
-func openStorage(ctx *cli.Context) (module.Storage, error) {
-	globals, mod, err := getCfgBlockModule(ctx)
+func openStorage(cmd *cobra.Command) (module.Storage, error) {
+	globals, mod, err := getCfgBlockModule(cmd)
 	if err != nil {
 		return nil, err
 	}
 
 	storage, ok := mod.Instance.(module.Storage)
 	if !ok {
-		return nil, cli.Exit(fmt.Sprintf("Error: configuration block %s is not an IMAP storage", ctx.String("cfg-block")), 2)
+		cfgBlock, _ := cmd.Flags().GetString("cfg-block")
+		return nil, fmt.Errorf("configuration block %s is not an IMAP storage", cfgBlock)
 	}
 
 	if err := mod.Instance.Init(config.NewMap(globals, mod.Cfg)); err != nil {
@@ -114,15 +115,16 @@ func openStorage(ctx *cli.Context) (module.Storage, error) {
 	return storage, nil
 }
 
-func openUserDB(ctx *cli.Context) (module.PlainUserDB, error) {
-	globals, mod, err := getCfgBlockModule(ctx)
+func openUserDB(cmd *cobra.Command) (module.PlainUserDB, error) {
+	globals, mod, err := getCfgBlockModule(cmd)
 	if err != nil {
 		return nil, err
 	}
 
 	userDB, ok := mod.Instance.(module.PlainUserDB)
 	if !ok {
-		return nil, cli.Exit(fmt.Sprintf("Error: configuration block %s is not a local credentials store", ctx.String("cfg-block")), 2)
+		cfgBlock, _ := cmd.Flags().GetString("cfg-block")
+		return nil, fmt.Errorf("configuration block %s is not a local credentials store", cfgBlock)
 	}
 
 	if err := mod.Instance.Init(config.NewMap(globals, mod.Cfg)); err != nil {

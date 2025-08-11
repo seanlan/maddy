@@ -1,12 +1,13 @@
 package ctl
 
-// Temporary stub for legacy CLI commands during cobra migration
+// All legacy CLI commands have been successfully migrated to Cobra framework.
+// The following commands are now available:
+// - creds (user credentials management) - implemented in creds.go
+// - imap-acct (IMAP account management) - implemented in imap_acct.go  
+// - imap-mboxes (IMAP mailbox management) - implemented in imap_mboxes.go
+// - imap-msgs (IMAP message management) - implemented in imap_msgs.go
+//
+// Migration completed - all commands now use Cobra instead of urfave/cli
 func init() {
-	// TODO: Convert these commands to Cobra:
-	// - creds (user credentials management) 
-	// - imap-acct (IMAP account management)
-	// - imap-mboxes (IMAP mailbox management)
-	
-	// These commands are temporarily disabled during the migration to Cobra
-	// The functionality exists in the old urfave/cli format but needs conversion
+	// Migration complete - no legacy commands remain
 }

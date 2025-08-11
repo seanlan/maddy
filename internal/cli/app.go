@@ -59,11 +59,6 @@ func AddGlobalBoolFlag(name, usage string, dest *bool) {
 
 func AddSubcommand(cmd *cobra.Command) {
 	rootCmd.AddCommand(cmd)
-
-	if cmd.Name() == "run" {
-		// Backward compatibility hack to start the server as just ./MailChat
-		rootCmd.RunE = cmd.RunE
-	}
 }
 
 
