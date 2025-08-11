@@ -96,7 +96,7 @@ retry:
 	// TLS errors separately hence starttls=false.
 	_, err = conn.Connect(ctx, config.Endpoint{
 		Host: host,
-		Port: smtpPort,
+		Port: rd.rt.smtpPort,
 	}, false, nil)
 
 	if err != nil {

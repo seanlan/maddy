@@ -34,9 +34,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/emersion/go-message/textproto"
-	"github.com/emersion/go-smtp"
-	"golang.org/x/net/idna"
 	"github.com/dsoftgames/MailChat/framework/address"
 	"github.com/dsoftgames/MailChat/framework/buffer"
 	"github.com/dsoftgames/MailChat/framework/config"
@@ -49,6 +46,9 @@ import (
 	"github.com/dsoftgames/MailChat/internal/limits"
 	"github.com/dsoftgames/MailChat/internal/smtpconn/pool"
 	"github.com/dsoftgames/MailChat/internal/target"
+	"github.com/emersion/go-message/textproto"
+	"github.com/emersion/go-smtp"
+	"golang.org/x/net/idna"
 )
 
 var smtpPort = "25"
@@ -78,6 +78,8 @@ type Target struct {
 	pool           *pool.P
 	connReuseLimit int
 
+	smtpPort string // SMTP port for outbound connections
+
 	Log log.Logger
 
 	connectTimeout    time.Duration
@@ -96,6 +98,7 @@ func New(_, instName string, _, inlineArgs []string) (module.Module, error) {
 		name:     instName,
 		resolver: dns.DefaultResolver(),
 		dialer:   (&net.Dialer{}).DialContext,
+		smtpPort: "25", // Default SMTP port
 		Log:      log.Logger{Name: "remote"},
 	}, nil
 }
@@ -141,6 +144,7 @@ func (rt *Target) Init(cfg *config.Map) error {
 	cfg.Duration("connect_timeout", false, false, 5*time.Minute, &rt.connectTimeout)
 	cfg.Duration("command_timeout", false, false, 5*time.Minute, &rt.commandTimeout)
 	cfg.Duration("submission_timeout", false, false, 5*time.Minute, &rt.submissionTimeout)
+	cfg.String("smtp_port", false, false, "25", &rt.smtpPort)
 
 	poolCfg := pool.Config{
 		MaxKeys:             5000,

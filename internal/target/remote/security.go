@@ -350,6 +350,7 @@ type (
 		extResolver *dns.ExtResolver
 		log         log.Logger
 		instName    string
+		smtpPort    string
 	}
 	daneDelivery struct {
 		c       *danePolicy
@@ -361,6 +362,7 @@ func NewDANEPolicy(_, instName string, _, _ []string) (module.Module, error) {
 	return &danePolicy{
 		instName: instName,
 		log:      log.Logger{Name: "remote/dane", Debug: log.DefaultLogger.Debug},
+		smtpPort: "25", // Default SMTP port
 	}, nil
 }
 
@@ -384,6 +386,7 @@ func (c *danePolicy) Init(cfg *config.Map) error {
 	}
 
 	cfg.Bool("debug", true, log.DefaultLogger.Debug, &c.log.Debug)
+	cfg.String("smtp_port", false, false, "25", &c.smtpPort)
 
 	_, err = cfg.Process()
 	return err
@@ -438,7 +441,7 @@ func (c *daneDelivery) discoverTLSA(ctx context.Context, mx string) ([]dns.TLSA,
 
 	// If there was a CNAME - try it first.
 	if rname != mx {
-		ad, recs, err := c.c.extResolver.AuthLookupTLSA(ctx, "25", "tcp", rname)
+		ad, recs, err := c.c.extResolver.AuthLookupTLSA(ctx, c.c.smtpPort, "tcp", rname)
 		if err != nil && !dns.IsNotFound(err) {
 			return nil, err
 		}
@@ -455,7 +458,7 @@ func (c *daneDelivery) discoverTLSA(ctx context.Context, mx string) ([]dns.TLSA,
 
 	// If initial name is not a CNAME or final canonical name is not "secure"
 	// - we consider TLSA under the initial name.
-	ad, recs, err := c.c.extResolver.AuthLookupTLSA(ctx, "25", "tcp", mx)
+	ad, recs, err := c.c.extResolver.AuthLookupTLSA(ctx, c.c.smtpPort, "tcp", mx)
 	if err != nil && !dns.IsNotFound(err) {
 		return nil, err
 	}
