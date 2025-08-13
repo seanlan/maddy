@@ -25,7 +25,6 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/dsoftgames/MailChat/internal/auth/pass_table"
-	clitools2 "github.com/dsoftgames/MailChat/internal/cli/clitools"
 	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
@@ -124,7 +123,7 @@ func credsCreate(cmd *cobra.Command, args []string) error {
 		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
-		pass, err = clitools2.ReadPassword("Enter password for new user")
+		pass, err = maddycli.ReadPassword("Enter password for new user")
 		if err != nil {
 			return err
 		}
@@ -154,7 +153,7 @@ func credsRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !clitools2.Confirmation("Are you sure you want to delete this user account?", false) {
+		if !maddycli.Confirmation("Are you sure you want to delete this user account?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}
@@ -176,7 +175,7 @@ func credsPassword(cmd *cobra.Command, args []string) error {
 		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
-		pass, err = clitools2.ReadPassword("Enter new password")
+		pass, err = maddycli.ReadPassword("Enter new password")
 		if err != nil {
 			return err
 		}

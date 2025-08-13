@@ -22,15 +22,15 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
 	"runtime/debug"
 
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
+
 	"github.com/caddyserver/certmagic"
-	"github.com/spf13/cobra"
 	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
 	"github.com/dsoftgames/MailChat/framework/config"
 	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
@@ -39,6 +39,8 @@ import (
 	"github.com/dsoftgames/MailChat/framework/log"
 	"github.com/dsoftgames/MailChat/framework/module"
 	"github.com/dsoftgames/MailChat/internal/authz"
+	"github.com/spf13/cobra"
+
 	// Import packages for side-effect of module registration.
 	_ "github.com/dsoftgames/MailChat/internal/auth/dovecot_sasl"
 	_ "github.com/dsoftgames/MailChat/internal/auth/external"

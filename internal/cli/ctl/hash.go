@@ -27,7 +27,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"github.com/dsoftgames/MailChat/internal/auth/pass_table"
 	maddycli "github.com/dsoftgames/MailChat/internal/cli"
-	clitools2 "github.com/dsoftgames/MailChat/internal/cli/clitools"
 )
 
 func init() {
@@ -97,7 +96,7 @@ func hashCommand(cmd *cobra.Command, args []string) error {
 		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
-		pass, err = clitools2.ReadPassword("Password")
+		pass, err = maddycli.ReadPassword("Password")
 		if err != nil {
 			return err
 		}

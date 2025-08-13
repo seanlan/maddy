@@ -21,10 +21,9 @@ package ctl
 import (
 	"fmt"
 
+	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 	"github.com/emersion/go-imap"
 	"github.com/spf13/cobra"
-	clitools2 "github.com/dsoftgames/MailChat/internal/cli/clitools"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func init() {
@@ -174,7 +173,7 @@ func mboxesRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !clitools2.Confirmation("Are you sure you want to delete that mailbox?", false) {
+		if !maddycli.Confirmation("Are you sure you want to delete that mailbox?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}

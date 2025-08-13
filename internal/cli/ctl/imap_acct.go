@@ -22,11 +22,10 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/dsoftgames/MailChat/framework/module"
+	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 	"github.com/emersion/go-imap"
 	"github.com/spf13/cobra"
-	"github.com/dsoftgames/MailChat/framework/module"
-	clitools2 "github.com/dsoftgames/MailChat/internal/cli/clitools"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 type SpecialUseUser interface {
@@ -223,7 +222,7 @@ func imapAcctRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !clitools2.Confirmation("Are you sure you want to delete this user account?", false) {
+		if !maddycli.Confirmation("Are you sure you want to delete this user account?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}

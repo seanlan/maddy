@@ -28,7 +28,6 @@ import (
 	"github.com/emersion/go-imap"
 	imapsql "github.com/foxcpp/go-imap-sql"
 	"github.com/spf13/cobra"
-	clitools2 "github.com/dsoftgames/MailChat/internal/cli/clitools"
 	maddycli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
@@ -304,7 +303,7 @@ func msgsRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !clitools2.Confirmation("Are you sure you want to delete these messages?", false) {
+		if !maddycli.Confirmation("Are you sure you want to delete these messages?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}
