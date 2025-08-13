@@ -45,7 +45,7 @@ import (
 	_ "mailcoin"                  // To register run command
 	_ "github.com/dsoftgames/MailChat/internal/cli/ctl" // To register other CLI commands.
 
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func TestMain(m *testing.M) {
@@ -65,7 +65,7 @@ func TestMain(m *testing.M) {
 	flag.Parse()
 	os.Args = args
 
-	code := maddycli.RunWithoutExit()
+	code := mailchatcli.RunWithoutExit()
 
 	if err := os.Chdir(wd); err != nil {
 		panic(err)

@@ -21,7 +21,7 @@ package ctl
 import (
 	"fmt"
 
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 	"github.com/emersion/go-imap"
 	"github.com/spf13/cobra"
 )
@@ -74,7 +74,7 @@ func init() {
 	renameCmd.Flags().String("cfg-block", "local_mailboxes", "Module configuration block to use")
 
 	imapMboxesCmd.AddCommand(listCmd, createCmd, removeCmd, renameCmd)
-	maddycli.AddSubcommand(imapMboxesCmd)
+	mailchatcli.AddSubcommand(imapMboxesCmd)
 }
 
 func mboxesList(cmd *cobra.Command, args []string) error {
@@ -173,7 +173,7 @@ func mboxesRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !maddycli.Confirmation("Are you sure you want to delete that mailbox?", false) {
+		if !mailchatcli.Confirmation("Are you sure you want to delete that mailbox?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}

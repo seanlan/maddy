@@ -25,7 +25,7 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/dsoftgames/MailChat/internal/auth/pass_table"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func init() {
@@ -83,7 +83,7 @@ flag for subcommands.`,
 	passwordCmd.Flags().StringP("password", "p", "", "Use PASSWORD instead of reading password from stdin")
 
 	credsCmd.AddCommand(listCmd, createCmd, removeCmd, passwordCmd)
-	maddycli.AddSubcommand(credsCmd)
+	mailchatcli.AddSubcommand(credsCmd)
 }
 
 func credsList(cmd *cobra.Command, args []string) error {
@@ -123,7 +123,7 @@ func credsCreate(cmd *cobra.Command, args []string) error {
 		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
-		pass, err = maddycli.ReadPassword("Enter password for new user")
+		pass, err = mailchatcli.ReadPassword("Enter password for new user")
 		if err != nil {
 			return err
 		}
@@ -153,7 +153,7 @@ func credsRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !maddycli.Confirmation("Are you sure you want to delete this user account?", false) {
+		if !mailchatcli.Confirmation("Are you sure you want to delete this user account?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}
@@ -175,7 +175,7 @@ func credsPassword(cmd *cobra.Command, args []string) error {
 		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
-		pass, err = maddycli.ReadPassword("Enter new password")
+		pass, err = mailchatcli.ReadPassword("Enter new password")
 		if err != nil {
 			return err
 		}

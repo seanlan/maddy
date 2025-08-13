@@ -26,7 +26,7 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/dsoftgames/MailChat/internal/auth/pass_table"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func init() {
@@ -43,7 +43,7 @@ func init() {
 	hashCmd.Flags().Int("argon2-memory", 1024, "Memory in KiB to use for Argon2id")
 	hashCmd.Flags().Int("argon2-threads", 1, "Threads to use for Argon2id")
 
-	maddycli.AddSubcommand(hashCmd)
+	mailchatcli.AddSubcommand(hashCmd)
 }
 
 func hashCommand(cmd *cobra.Command, args []string) error {
@@ -96,7 +96,7 @@ func hashCommand(cmd *cobra.Command, args []string) error {
 		pass, _ = cmd.Flags().GetString("password")
 	} else {
 		var err error
-		pass, err = maddycli.ReadPassword("Password")
+		pass, err = mailchatcli.ReadPassword("Password")
 		if err != nil {
 			return err
 		}

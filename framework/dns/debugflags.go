@@ -23,11 +23,11 @@ package dns
 
 import (
 	"github.com/urfave/cli/v2"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func init() {
-	maddycli.AddGlobalFlag(&cli.StringFlag{
+	mailchatcli.AddGlobalFlag(&cli.StringFlag{
 		Name:        "debug.dnsoverride",
 		Usage:       "replace the DNS resolver address",
 		Value:       "system-default",

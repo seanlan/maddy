@@ -23,7 +23,7 @@ import (
 	"os"
 
 	"github.com/dsoftgames/MailChat/framework/module"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 	"github.com/emersion/go-imap"
 	"github.com/spf13/cobra"
 )
@@ -107,7 +107,7 @@ APPENDLIMIT value (either global or per-account) cannot be larger than
 	appendlimitCmd.Flags().IntP("value", "v", 0, "Set APPENDLIMIT to specified value (in bytes)")
 
 	imapAcctCmd.AddCommand(listCmd, createCmd, removeCmd, appendlimitCmd)
-	maddycli.AddSubcommand(imapAcctCmd)
+	mailchatcli.AddSubcommand(imapAcctCmd)
 }
 
 func imapAcctList(cmd *cobra.Command, args []string) error {
@@ -222,7 +222,7 @@ func imapAcctRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !maddycli.Confirmation("Are you sure you want to delete this user account?", false) {
+		if !mailchatcli.Confirmation("Are you sure you want to delete this user account?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}

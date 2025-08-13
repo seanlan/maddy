@@ -28,7 +28,7 @@ import (
 	"github.com/emersion/go-imap"
 	imapsql "github.com/foxcpp/go-imap-sql"
 	"github.com/spf13/cobra"
-	maddycli "github.com/dsoftgames/MailChat/internal/cli"
+	mailchatcli "github.com/dsoftgames/MailChat/internal/cli"
 )
 
 func init() {
@@ -91,7 +91,7 @@ func init() {
 	removeCmd.Flags().BoolP("yes", "y", false, "Don't ask for confirmation")
 
 	imapMsgsCmd.AddCommand(addCmd, addFlagsCmd, removeFlagsCmd, listCmd, removeCmd)
-	maddycli.AddSubcommand(imapMsgsCmd)
+	mailchatcli.AddSubcommand(imapMsgsCmd)
 }
 
 func msgsAdd(cmd *cobra.Command, args []string) error {
@@ -303,7 +303,7 @@ func msgsRemove(cmd *cobra.Command, args []string) error {
 
 	yes, _ := cmd.Flags().GetBool("yes")
 	if !yes {
-		if !maddycli.Confirmation("Are you sure you want to delete these messages?", false) {
+		if !mailchatcli.Confirmation("Are you sure you want to delete these messages?", false) {
 			return fmt.Errorf("cancelled")
 		}
 	}
