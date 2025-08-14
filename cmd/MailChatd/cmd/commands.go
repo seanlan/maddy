@@ -375,9 +375,9 @@ func createMailChatConfig(cmd *cobra.Command, args []string) error {
 	}
 	
 	// Create the default mailchat.conf content based on the existing template
-	configContent := `## Maddy Mail Server - default configuration file (2022-06-18)
+	configContent := `## MailChat - default configuration file (2022-06-18)
 # Suitable for small-scale deployments. Uses its own format for local users DB,
-# should be managed via maddy subcommands.
+# should be managed via mailchatd subcommands.
 #
 # See tutorials at https://maddy.email for guidance on typical
 # configuration changes.
@@ -418,7 +418,7 @@ blockchain.ethereum amoy {
 # also by SMTP & Submission endpoints for delivery of local messages.
 #
 # IMAP accounts, mailboxes and all message metadata can be inspected using
-# imap-* subcommands of maddy.
+# imap-* subcommands of mailchatd.
 
 storage.imapsql local_mailboxes {
     driver sqlite3
@@ -433,7 +433,7 @@ storage.imapsql local_mailboxes {
 # PAM, /etc/shadow file).
 #
 # If table module supports it (sql_table does) - credentials can be managed
-# using 'maddy creds' command.
+# using 'mailchatd creds' command.
 
 # auth.pass_table local_authdb {
 #     table sql_table {

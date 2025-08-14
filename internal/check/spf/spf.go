@@ -1,6 +1,6 @@
 /*
-Maddy Mail Server - Composable all-in-one email server.
-Copyright © 2019-2020 Max Mazurov <fox.cpp@disroot.org>, Maddy Mail Server contributors
+MailChat - Composable all-in-one email server.
+Copyright © 2019-2020 Max Mazurov <fox.cpp@disroot.org>, MailChat contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ import (
 	"github.com/dsoftgames/MailChat/framework/exterrors"
 	"github.com/dsoftgames/MailChat/framework/log"
 	"github.com/dsoftgames/MailChat/framework/module"
-	maddydmarc "github.com/dsoftgames/MailChat/internal/dmarc"
+	mailchatdmarc "github.com/dsoftgames/MailChat/internal/dmarc"
 	"github.com/dsoftgames/MailChat/internal/target"
 )
 
@@ -239,13 +239,13 @@ func (s *state) spfResult(res spf.Result, err error) module.CheckResult {
 }
 
 func (s *state) relyOnDMARC(ctx context.Context, hdr textproto.Header) bool {
-	fromDomain, err := maddydmarc.ExtractFromDomain(hdr)
+	fromDomain, err := mailchatdmarc.ExtractFromDomain(hdr)
 	if err != nil {
 		s.log.Error("DMARC domains extract", err)
 		return false
 	}
 
-	policyDomain, record, err := maddydmarc.FetchRecord(ctx, s.c.resolver, fromDomain)
+	policyDomain, record, err := mailchatdmarc.FetchRecord(ctx, s.c.resolver, fromDomain)
 	if err != nil {
 		s.log.Error("DMARC fetch", err, "from_domain", fromDomain)
 		return false

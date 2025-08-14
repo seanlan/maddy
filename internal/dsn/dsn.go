@@ -1,6 +1,6 @@
 /*
-Maddy Mail Server - Composable all-in-one email server.
-Copyright © 2019-2020 Max Mazurov <fox.cpp@disroot.org>, Maddy Mail Server contributors
+MailChat - Composable all-in-one email server.
+Copyright © 2019-2020 Max Mazurov <fox.cpp@disroot.org>, MailChat contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/emersion/go-message/textproto"
-	"github.com/emersion/go-smtp"
 	"github.com/dsoftgames/MailChat/framework/address"
 	"github.com/dsoftgames/MailChat/framework/dns"
+	"github.com/emersion/go-message/textproto"
+	"github.com/emersion/go-smtp"
 )
 
 type ReportingMTAInfo struct {
