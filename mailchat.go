@@ -47,7 +47,7 @@ import (
 	_ "github.com/dsoftgames/MailChat/internal/auth/ldap"
 	_ "github.com/dsoftgames/MailChat/internal/auth/netauth"
 	_ "github.com/dsoftgames/MailChat/internal/auth/pam"
-	_ "github.com/dsoftgames/MailChat/internal/auth/pass_evm"
+	_ "github.com/dsoftgames/MailChat/internal/auth/pass_blockchain"
 	_ "github.com/dsoftgames/MailChat/internal/auth/pass_table"
 	_ "github.com/dsoftgames/MailChat/internal/auth/plain_separate"
 	_ "github.com/dsoftgames/MailChat/internal/auth/shadow"

@@ -1,4 +1,4 @@
-package pass_evm
+package pass_blockchain
 
 import (
 	"context"
