@@ -2,13 +2,14 @@ package pass_blockchain
 
 import (
 	"context"
+	"strings"
+
 	"github.com/dsoftgames/MailChat/framework/address"
 	parser "github.com/dsoftgames/MailChat/framework/cfgparser"
 	"github.com/dsoftgames/MailChat/framework/config"
 	modconfig "github.com/dsoftgames/MailChat/framework/config/module"
 	"github.com/dsoftgames/MailChat/framework/log"
 	"github.com/dsoftgames/MailChat/framework/module"
-	"strings"
 )
 
 type Auth struct {
@@ -105,5 +106,5 @@ func (a *Auth) DeleteUser(username string) error {
 }
 
 func init() {
-	module.Register("auth.pass_blockchain", New)
+	module.Register("auth.pass_evm", New)
 }
