@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-测试 auth.pass_blockchain 邮箱登录验证
+测试 auth.pass_evm 邮箱登录验证
 模拟以太坊签名验证过程
 """
 

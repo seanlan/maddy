@@ -1,4 +1,4 @@
-package pass_blockchain
+package pass_evm
 
 import (
 	"context"
@@ -28,7 +28,7 @@ func New(modName, instName string, _, inlineArgs []string) (module.Module, error
 		modName:    modName,
 		instName:   instName,
 		inlineArgs: inlineArgs,
-		log:        log.Logger{Name: "auth.pass_blockchain"},
+		log:        log.Logger{Name: "auth.pass_evm"},
 	}, nil
 }
 

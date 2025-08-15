@@ -27,9 +27,10 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 
-	"github.com/dsoftgames/MailChat/app"
 	mailchat "github.com/dsoftgames/MailChat"
+	"github.com/dsoftgames/MailChat/app"
 	mailchatlog "github.com/dsoftgames/MailChat/framework/log"
+
 	// Import for side-effect of registering CLI commands
 	_ "github.com/dsoftgames/MailChat/internal/cli/ctl"
 )
@@ -444,7 +445,7 @@ storage.imapsql local_mailboxes {
 # }
 
 # pass blockchain module provides authentication using blockchain wallets.
-auth.pass_blockchain blockchain_atuh {
+auth.pass_evm blockchain_atuh {
     blockchain &amoy
     storage &local_mailboxes
 }
